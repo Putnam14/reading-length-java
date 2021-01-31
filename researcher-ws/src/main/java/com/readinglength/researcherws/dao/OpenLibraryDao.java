@@ -8,7 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component
@@ -27,8 +27,8 @@ public class OpenLibraryDao {
     }
 
     public ResponseEntity<String> queryTitle(String title) {
-        Map<String, String> queryParams = new HashMap<>();
-        queryParams.put("title", title.replace(' ','+'));
+        Map<String, String> queryParams = new LinkedHashMap<>();
+        queryParams.put("title", title);
         queryParams.put("limit","1");
         return new ResponseEntity<>(restClient.get(queryParams), headers, HttpStatus.ACCEPTED);
     }

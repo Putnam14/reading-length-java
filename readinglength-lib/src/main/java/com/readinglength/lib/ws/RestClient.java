@@ -5,6 +5,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class RestClient {
@@ -33,12 +35,11 @@ public class RestClient {
         StringBuilder queryString = new StringBuilder(serverBaseUri);
 
         queryString.append('?');
-        queryParams.forEach((k, v) -> {
-            queryString.append(k);
-            queryString.append('=');
-            queryString.append(v);
-            queryString.append('&');
-        });
+        queryParams.forEach((k, v) -> queryString
+                    .append(URLEncoder.encode(k, StandardCharsets.UTF_8))
+                    .append('=')
+                    .append(URLEncoder.encode(v, StandardCharsets.UTF_8))
+                    .append('&'));
         queryString.deleteCharAt(queryString.length() - 1);
 
         return queryString.toString();

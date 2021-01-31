@@ -4,8 +4,6 @@ package com.readinglength.lib.ws;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 

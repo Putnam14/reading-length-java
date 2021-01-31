@@ -17,6 +17,7 @@
 
     <properties>
         <revision>0.1.1</revision>
+        <java.version>11</java.version>
     </properties>
 
     <modules>

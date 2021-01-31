@@ -17,15 +17,6 @@ public class RestClient {
         this.httpEntity = httpEntity;
     }
 
-
-//    RestClient() {
-//        rest = new RestTemplate();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.setAccept(List.of(MediaType.APPLICATION_JSON));
-//        defaultEntity = new HttpEntity<>("", headers);
-//    }
-
     public void setServerBaseUri(String serverBaseUri) {
         this.serverBaseUri = serverBaseUri;
     }

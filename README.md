@@ -1,0 +1,2 @@
+# reading-length-java
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3c2929ad15344b5eb43119f0c997771c)](https://app.codacy.com/gh/Putnam14/reading-length-java?utm_source=github.com&utm_medium=referral&utm_content=Putnam14/reading-length-java&utm_campaign=Badge_Grade)

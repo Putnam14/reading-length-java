@@ -1,7 +1,7 @@
 package com.readinglength.lib;
 
 public abstract class Isbn {
-    static String INVALID_ISBN = "Provided Isbn is invalid for %s: %s";
+    static String INVALID_ISBN = "Provided Isbn is invalid for %s: %s"; // NOPMD
 
     public abstract String getIsbn();
 
@@ -23,7 +23,7 @@ public abstract class Isbn {
     }
 
 
-    static String cleanIsbnString(String isbn) {
+    static String cleanIsbnString(String isbn) { // NOPMD
         if (isbn == null) throw new IllegalArgumentException("Null ISBN entered.");
         return isbn
                 .trim()

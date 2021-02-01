@@ -1,7 +1,7 @@
 package com.readinglength.lib;
 
 public abstract class Isbn {
-    abstract String getIsbn();
+    public abstract String getIsbn();
 
     public static Isbn of(String isbn) {
         if (Isbn10.validate(isbn)) {

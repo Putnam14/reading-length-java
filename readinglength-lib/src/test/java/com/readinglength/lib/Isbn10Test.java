@@ -7,7 +7,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class Isbn10Test {
@@ -18,7 +20,7 @@ class Isbn10Test {
         assertEquals(expected, Isbn10.validate(isbn));
     }
 
-    static Stream<Arguments> isbnProvider() {
+    private static Stream<Arguments> isbnProvider() {
         return Stream.of(
                 arguments(null, false),
                 arguments("", false),
@@ -39,7 +41,7 @@ class Isbn10Test {
     }
 
     @Test
-    void testISBN10_valid() {
+    void testISBN10Valid() {
         String input = "0132350882";
 
         Isbn10 isbn = new Isbn10(input);
@@ -48,7 +50,7 @@ class Isbn10Test {
     }
 
     @Test
-    void testISBN10_invalid() {
+    void testISBN10Invalid() {
         assertThrows(IllegalArgumentException.class, () -> new Isbn10("1234567890"));
     }
 

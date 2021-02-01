@@ -14,7 +14,7 @@ public class Isbn13 extends Isbn {
         }
     }
 
-    static Isbn13 convert(Isbn10 isbn10) {
+    public static Isbn13 convert(Isbn10 isbn10) {
         StringBuilder isbnBuilder = new StringBuilder(isbn10.getIsbn().substring(0,9));
         isbnBuilder.insert(0, "978");
         isbnBuilder.append(calcCheckSum(isbnBuilder.toString()));
@@ -25,18 +25,18 @@ public class Isbn13 extends Isbn {
         return isbn;
     }
 
-    static boolean validate(String isbn) {
+    public static boolean validate(String isbn) {
         if (!StringUtils.hasLength(isbn)) return false;
 
-        isbn = isbn
+        String temp = isbn
                 .trim()
                 .replaceAll("-","");
 
-        if (isbn.length() != 13) return false;
+        if (temp.length() != 13) return false;
 
         try {
-            int checkSum = calcCheckSum(isbn);
-            return checkSum == Integer.parseInt(isbn.substring(12));
+            int checkSum = calcCheckSum(temp);
+            return checkSum == Integer.parseInt(temp.substring(12));
         } catch (NumberFormatException e) {
             return false;
         }

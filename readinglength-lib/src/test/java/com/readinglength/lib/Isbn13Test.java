@@ -16,11 +16,11 @@ class Isbn13Test {
 
     @ParameterizedTest
     @MethodSource("isbnProvider")
-    void validate(String isbn, boolean expected) {
+    public void validate(String isbn, boolean expected) {
         assertEquals(expected, Isbn13.validate(isbn));
     }
 
-    static Stream<Arguments> isbnProvider() {
+    private static Stream<Arguments> isbnProvider() {
         return Stream.of(
                 arguments(null, false),
                 arguments("", false),
@@ -36,7 +36,7 @@ class Isbn13Test {
     }
 
     @Test
-    void testISBN13_valid() {
+    void testISBN13Valid() {
         String input = "9780679732761";
 
         Isbn13 isbn = new Isbn13(input);
@@ -45,7 +45,7 @@ class Isbn13Test {
     }
 
     @Test
-    void testISBN10_invalid() {
+    void testISBN10Invalid() {
         assertThrows(IllegalArgumentException.class, () -> new Isbn13("9780679732762"));
     }
 

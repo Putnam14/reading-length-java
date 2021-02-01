@@ -16,7 +16,7 @@ class Isbn13Test {
 
     @ParameterizedTest
     @MethodSource("isbnProvider")
-    public void validate(String isbn, boolean expected) {
+    void validate(String isbn, boolean expected) {
         assertEquals(expected, Isbn13.validate(isbn));
     }
 

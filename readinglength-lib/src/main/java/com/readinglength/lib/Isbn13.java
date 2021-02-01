@@ -6,12 +6,17 @@ public class Isbn13 extends Isbn {
     private String isbn;
 
     Isbn13(String isbn) {
-        boolean isValid = validate(isbn);
+        String temp = cleanIsbnString(isbn);
+        boolean isValid = validate(temp);
         if (isValid) {
-            this.isbn = isbn;
+            this.isbn = temp;
         } else {
-            throw new IllegalArgumentException(String.format("Provided Isbn is invalid for %s: %s", this.getClass().toString(), isbn));
+            throw new IllegalArgumentException(String.format(INVALID_ISBN, this.getClass(), isbn));
         }
+    }
+
+    public String getIsbn() {
+        return isbn;
     }
 
     public static Isbn13 convert(Isbn10 isbn10) {
@@ -21,18 +26,10 @@ public class Isbn13 extends Isbn {
         return new Isbn13(isbnBuilder.toString());
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
     public static boolean validate(String isbn) {
         if (!StringUtils.hasLength(isbn)) return false;
-
-        String temp = isbn
-                .trim()
-                .replaceAll("-","");
-
-        if (temp.length() != 13) return false;
+        String temp = isbn.length() == 13 ? isbn : cleanIsbnString(isbn);
+        if(temp.length() != 13) return false;
 
         try {
             int checkSum = calcCheckSum(temp);

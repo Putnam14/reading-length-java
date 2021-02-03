@@ -29,4 +29,14 @@ public abstract class Isbn {
                 .trim()
                 .replaceAll("-", "");
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj instanceof Isbn) {
+            Isbn anIsbn = (Isbn) obj;
+            return this.getIsbn().equals(anIsbn.getIsbn());
+        }
+        return false;
+    }
 }

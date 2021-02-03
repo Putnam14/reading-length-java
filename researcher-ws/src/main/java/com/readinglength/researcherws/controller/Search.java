@@ -1,7 +1,6 @@
 package com.readinglength.researcherws.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryDao;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 import static com.readinglength.lib.ws.RestClient.JSON_HEADERS;
 

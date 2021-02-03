@@ -39,4 +39,9 @@ public abstract class Isbn {
         }
         return false;
     }
+
+    @Override
+    public int hashCode() {
+        return this.getIsbn().hashCode();
+    }
 }

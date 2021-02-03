@@ -4,11 +4,7 @@ package com.readinglength.lib.ws;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.LinkedHashMap;
@@ -46,25 +42,40 @@ class RestClientTest {
 
     @Test
     void testIllegalState() {
-        assertThrows(IllegalStateException.class, () -> restClient.get(Map.of()));
+        assertThrows(IllegalStateException.class, () -> restClient.get("/", Map.of()));
     }
 
     @Test
     void testQueryParams() {
         when(mockRestTemplate
                 .exchange(
-                    "test?key1=value1&key2=value2+is+a+sentence",
-                    HttpMethod.GET,
-                    httpEntity,
-                    String.class))
+                        "example.com/test?key1=value1&key2=value2+is+a+sentence",
+                        HttpMethod.GET,
+                        httpEntity,
+                        String.class))
                 .thenReturn(mockResponse);
-        restClient.setServerBaseUri("test");
-        
+        restClient.setServerBaseUri("example.com/");
+
         Map<String, String> queryParams = new LinkedHashMap<>();
         queryParams.put("key1","value1");
         queryParams.put("key2","value2 is a sentence");
 
-        assertEquals(mockResponse.getBody(), restClient.get(queryParams));
+        assertEquals(mockResponse.getBody(), restClient.get("test", queryParams));
+    }
+
+    @Test
+    void testGetEndpoint() {
+        when(mockRestTemplate
+                .exchange(
+                        "example.com/test/value.json",
+                        HttpMethod.GET,
+                        httpEntity,
+                        String.class))
+                .thenReturn(mockResponse);
+
+        restClient.setServerBaseUri("example.com/");
+
+        assertEquals(mockResponse.getBody(), restClient.get("test/", "value.json"));
     }
 
 

@@ -1,6 +1,6 @@
 package com.readinglength.researcherws;
 
-import com.readinglength.researcherws.dao.OpenLibraryDao;
+import com.readinglength.researcherws.dao.openlibrary.OpenLibraryDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

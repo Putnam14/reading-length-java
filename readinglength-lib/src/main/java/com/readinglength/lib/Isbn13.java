@@ -5,7 +5,7 @@ import org.springframework.util.StringUtils;
 public class Isbn13 extends Isbn {
     private String isbn;
 
-    Isbn13(String isbn) {
+    public Isbn13(String isbn) {
         String temp = cleanIsbnString(isbn);
         boolean isValid = validate(temp);
         if (isValid) {

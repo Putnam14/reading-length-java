@@ -1,7 +1,9 @@
 package com.readinglength.researcherws.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryDao;
+import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,8 @@ class SearchTest {
     @BeforeAll
     static void setUp() throws IOException {
         OpenLibraryDao openLibraryDaoMock = mock(OpenLibraryDao.class);
-        instance = new Search(openLibraryDaoMock);
+        OpenLibraryService openLibraryService = new OpenLibraryService(openLibraryDaoMock, new ObjectMapper());
+        instance = new Search(openLibraryService);
 
         when(openLibraryDaoMock.queryTitle("War and peace")).thenReturn(
                 ResponseEntity.accepted().body(Files.readString(Path.of(
@@ -32,14 +35,14 @@ class SearchTest {
     }
 
     @Test
-    void byTitle() throws IOException {
+    void byTitle() {
         ResponseEntity<Isbn> res = instance.byTitle("War and peace");
 
         assertEquals("0061434531", res.getBody().getIsbn());
     }
 
     @Test
-    void byIsbn() throws IOException {
+    void byIsbn() {
         ResponseEntity<Isbn> res = instance.byIsbn(Isbn.of("0061434531"));
 
         assertEquals("0061434531", res.getBody().getIsbn());

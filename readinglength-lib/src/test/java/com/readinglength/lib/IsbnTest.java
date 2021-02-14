@@ -29,7 +29,7 @@ class IsbnTest {
 
     @Test
     void validate() {
-        assertThrows(IllegalStateException.class, () -> Isbn.validate("0132350882"));
+        assertTrue(Isbn.validate("0132350882"));
     }
 
     @Test

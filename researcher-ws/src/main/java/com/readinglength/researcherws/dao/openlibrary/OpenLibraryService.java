@@ -3,6 +3,7 @@ package com.readinglength.researcherws.dao.openlibrary;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Isbn;
+import com.readinglength.lib.Isbn10;
 import com.readinglength.researcherws.lib.BookNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,8 +15,8 @@ import java.util.List;
 
 @Component
 public class OpenLibraryService {
-    private OpenLibraryDao openLibraryDao;
-    private ObjectMapper objectMapper;
+    private final OpenLibraryDao openLibraryDao;
+    private final ObjectMapper objectMapper;
 
     @Autowired
     public OpenLibraryService(OpenLibraryDao openLibraryDao, ObjectMapper objectMapper) {
@@ -58,7 +59,13 @@ public class OpenLibraryService {
             throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary_Edition_JSON");
         }
 
-        return edition.getIsbn_10().get(0);
+        Isbn result = null;
+        if (edition.getIsbn_10() != null && edition.getIsbn_10().size() > 0) {
+            result = edition.getIsbn_10().get(0);
+        } else if (edition.getIsbn_13() != null && edition.getIsbn_13().size() > 0) {
+            result = Isbn10.convert(edition.getIsbn_13().get(0));
+        }
+        return result;
 
     }
 }

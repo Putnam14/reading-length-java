@@ -1,8 +1,7 @@
 package com.readinglength.researcherws.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.readinglength.lib.Isbn;
-import com.readinglength.researcherws.dao.openlibrary.OpenLibraryEdition;
+import com.readinglength.researcherws.dao.amazon.AmazonService;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
 import com.readinglength.researcherws.lib.BookNotFoundException;
 import org.slf4j.Logger;
@@ -23,11 +22,13 @@ import static com.readinglength.lib.ws.RestClient.JSON_HEADERS;
 class Search {
     private static Logger LOG = LoggerFactory.getLogger(Search.class);
 
-    private OpenLibraryService openLibraryService;
+    private final OpenLibraryService openLibraryService;
+    private final AmazonService amazonService;
 
     @Autowired
-    Search(OpenLibraryService openLibraryService) {
+    Search(OpenLibraryService openLibraryService, AmazonService amazonService) {
         this.openLibraryService = openLibraryService;
+        this.amazonService = amazonService;
     }
 
     @GetMapping("/search/byTitle")
@@ -41,10 +42,10 @@ class Search {
                 isbn = isbns.get(0);
             } else {
                 //QUERY AMAZON OR GOOGLE HERE
-                isbn = isbns.get(0);
+                isbn = amazonService.queryTitle(title);
             }
         } catch (BookNotFoundException e) {
-            LOG.info(String.format("%s found in OpenLibrary: %s", title, e.getMessage()));
+            LOG.info(String.format("%s not found in OpenLibrary: %s", title, e.getMessage()));
         }
 
 

@@ -1,9 +1,12 @@
 package com.readinglength.researcherws.dao.openlibrary;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.readinglength.lib.Isbn10;
+import com.readinglength.lib.Isbn13;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenLibraryEdition {
@@ -14,11 +17,11 @@ public class OpenLibraryEdition {
     private List<String> source_records;
     private String title;
     private Map<String,List<Integer>> identifiers;
-    private List<String> isbn_13;
+    private List<Isbn13> isbn_13;
     private List<Integer> covers;
     private Map<String, String> created;
     private String physical_format;
-    private List<String> isbn_10;
+    private List<Isbn10> isbn_10;
     private String publish_date;
     private String key;
     private List<Map<String, String>> authors;
@@ -92,12 +95,14 @@ public class OpenLibraryEdition {
         this.identifiers = identifiers;
     }
 
-    public List<String> getIsbn_13() {
+    public List<Isbn13> getIsbn_13() {
         return isbn_13;
     }
 
     public void setIsbn_13(List<String> isbn_13) {
-        this.isbn_13 = isbn_13;
+        this.isbn_13 = isbn_13.stream()
+            .map(Isbn13::new)
+            .collect(Collectors.toList());
     }
 
     public List<Integer> getCovers() {
@@ -124,12 +129,14 @@ public class OpenLibraryEdition {
         this.physical_format = physical_format;
     }
 
-    public List<String> getIsbn_10() {
+    public List<Isbn10> getIsbn_10() {
         return isbn_10;
     }
 
     public void setIsbn_10(List<String> isbn_10) {
-        this.isbn_10 = isbn_10;
+        this.isbn_10 = isbn_10.stream()
+        .map(Isbn10::new)
+        .collect(Collectors.toList());
     }
 
     public String getPublish_date() {

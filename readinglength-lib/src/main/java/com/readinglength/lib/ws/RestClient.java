@@ -1,37 +1,26 @@
 package com.readinglength.lib.ws;
 
+import io.micronaut.http.client.RxHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.client.RestTemplate;
 
+import javax.inject.Singleton;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+@Singleton
 public class RestClient {
-    private String serverBaseUri;
-    private RestTemplate restTemplate;
-    private HttpEntity<String> httpEntity;
-    public static HttpHeaders JSON_HEADERS = new HttpHeaders();
+    private RxHttpClient httpClient;
     private static Logger LOG = LoggerFactory.getLogger(RestClient.class);
 
-    static {
-        JSON_HEADERS.setContentType(MediaType.APPLICATION_JSON);
+    public RestClient() { }
+
+    public void setClient(URL serverBaseUri) {
+        this.httpClient = RxHttpClient.create(serverBaseUri);
     }
 
-    public RestClient(RestTemplate restTemplate, HttpEntity<String> httpEntity) {
-        this.restTemplate = restTemplate;
-        this.httpEntity = httpEntity;
-    }
-
-    public void setServerBaseUri(String serverBaseUri) {
-        this.serverBaseUri = serverBaseUri;
-    }
 
     public String get(String endpoint, Map<String, String> queryParams) {
         String requestString = queryParamsToRequestString(endpoint, queryParams);
@@ -39,21 +28,18 @@ public class RestClient {
     }
 
     public String get(String endpoint, String request) {
-        String requestString = serverBaseUri + endpoint + request;
+        String requestString = endpoint + request;
         return makeGetRequest(requestString);
     }
 
     private String makeGetRequest(String requestString) {
-        if(serverBaseUri == null) throw new IllegalStateException("Server URI is null.");
         LOG.info(String.format("Making GET request to: %s", requestString));
-        ResponseEntity<String> responseEntity = restTemplate.exchange(requestString, HttpMethod.GET, httpEntity, String.class);
-        return responseEntity.getBody();
+        return httpClient.retrieve(requestString).blockingSingle();
 
     }
 
     private String queryParamsToRequestString(String endpoint, Map<String, String> queryParams) {
-        if(serverBaseUri == null) throw new IllegalStateException("Server URI is null.");
-        StringBuilder queryString = new StringBuilder(serverBaseUri);
+        StringBuilder queryString = new StringBuilder();
 
         queryString.append(String.format("%s?", endpoint));
         queryParams.forEach((k, v) -> queryString

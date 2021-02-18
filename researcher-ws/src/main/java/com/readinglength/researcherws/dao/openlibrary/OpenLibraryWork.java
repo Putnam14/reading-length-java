@@ -1,8 +1,10 @@
 package com.readinglength.researcherws.dao.openlibrary;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.readinglength.lib.Isbn;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class OpenLibraryWork {
@@ -16,7 +18,7 @@ public class OpenLibraryWork {
     private List<String> author_name;
     private List<Integer> publish_year;
     private List<String> subject;
-    private List<String> isbn;
+    private List<Isbn> isbn;
     private List<String> edition_key;
     private List<String> language;
     private List<String> id_librarything;
@@ -116,12 +118,14 @@ public class OpenLibraryWork {
         this.subject = subject;
     }
 
-    public List<String> getIsbn() {
+    public List<Isbn> getIsbn() {
         return isbn;
     }
 
     public void setIsbn(List<String> isbn) {
-        this.isbn = isbn;
+        this.isbn = isbn.stream()
+                .map(Isbn::of)
+                .collect(Collectors.toList());
     }
 
     public List<String> getEdition_key() {

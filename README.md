@@ -13,4 +13,13 @@ Feel free to open up an issue, or a pull request for an existing issue!
 
 ## Running the webservices
 You can run the webservices locally by using maven goals.
-`mvn install && mvn spring-boot:start -pl <WEBSERVICE NAME>`
+`mvn clean mn:run -pl <WEBSERVICE NAME>`
+
+## Deploying to GCP
+Reading Length is built to run on Google Cloud Platform.
+
+To deploy the webservices to Google Cloud Run, run the following command in the webservice's folder:
+`mvn com.google.cloud.tools:jib-maven-plugin:1.8.0:build \
+     -Dimage=gcr.io/<PROJECT>/<IMAGE>`
+     
+The above command will package the webservice using JIB and push it to your GCP image repository. Run it on Cloud Run by creating a new service referencing that image.

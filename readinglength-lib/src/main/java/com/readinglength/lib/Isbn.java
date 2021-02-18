@@ -19,7 +19,7 @@ public abstract class Isbn {
     }
 
     public static boolean validate(String isbn) {
-        throw new IllegalStateException("Validate has not been set up.");
+        return Isbn10.validate(isbn) || Isbn13.validate(isbn);
     }
 
 

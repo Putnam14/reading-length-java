@@ -1,11 +1,10 @@
 package com.readinglength.lib;
 
-import org.springframework.util.StringUtils;
 
 public class Isbn10 extends Isbn {
     private String isbn;
 
-    Isbn10(String isbn) {
+    public Isbn10(String isbn) {
         String temp = cleanIsbnString(isbn);
         boolean isValid = validate(temp);
         if (isValid) {
@@ -26,7 +25,7 @@ public class Isbn10 extends Isbn {
     }
 
     public static boolean validate(String isbn) {
-        if(!StringUtils.hasLength(isbn)) return false;
+        if(isbn == null || isbn.isEmpty()) return false;
         String temp = isbn.length() == 10 ? isbn : cleanIsbnString(isbn);
         if (temp.length() != 10) return false;
 

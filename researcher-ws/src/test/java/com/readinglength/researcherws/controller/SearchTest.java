@@ -14,7 +14,6 @@ import com.readinglength.researcherws.dao.openlibrary.OpenLibraryDao;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -37,8 +36,8 @@ class SearchTest {
         instance = new Search(openLibraryService, amazonService);
 
         when(openLibraryDaoMock.queryTitle("War and peace")).thenReturn(
-                ResponseEntity.accepted().body(Files.readString(Path.of(
-                        SearchTest.class.getResource("/test/work.json").getPath()))));
+                Files.readString(Path.of(
+                        SearchTest.class.getResource("/test/work.json").getPath())));
 
 
         Item result = new Item().itemInfo(new ItemInfo().externalIds(new ExternalIds().isBNs(new MultiValuedAttribute().addDisplayValuesItem("0061434531"))));
@@ -46,21 +45,21 @@ class SearchTest {
         when(amazonDao.queryTitle("War and peace")).thenReturn(new SearchItemsResponse().searchResult(new SearchResult().items(List.of(result))));
 
         when(openLibraryDaoMock.queryIsbn(Isbn.of("0061434531"))).thenReturn(
-                ResponseEntity.accepted().body(Files.readString(Path.of(
-                        SearchTest.class.getResource("/test/edition.json").getPath()))));
+                Files.readString(Path.of(
+                        SearchTest.class.getResource("/test/edition.json").getPath())));
     }
 
     @Test
     void byTitle() {
-        ResponseEntity<Isbn> res = instance.byTitle("War and peace");
+        Isbn res = instance.byTitle("War and peace").block();
 
-        assertEquals("0061434531", res.getBody().getIsbn());
+        assertEquals("0061434531", res.getIsbn());
     }
 
     @Test
     void byIsbn() {
-        ResponseEntity<Isbn> res = instance.byIsbn(Isbn.of("0061434531"));
+        Isbn res = instance.byIsbn(Isbn.of("0061434531")).block();
 
-        assertEquals("0061434531", res.getBody().getIsbn());
+        assertEquals("0061434531", res.getIsbn());
     }
 }

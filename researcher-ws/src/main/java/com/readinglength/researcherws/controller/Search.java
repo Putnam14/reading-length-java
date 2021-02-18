@@ -4,36 +4,40 @@ import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.dao.amazon.AmazonService;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
 import com.readinglength.researcherws.lib.BookNotFoundException;
+import io.micronaut.http.MediaType;
+import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
+import io.micronaut.http.annotation.Produces;
+import io.micronaut.http.annotation.QueryValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import reactor.core.publisher.Mono;
 
+import javax.inject.Inject;
 import java.util.List;
 
-import static com.readinglength.lib.ws.RestClient.JSON_HEADERS;
-
-@RestController
+@Controller("/search")
 class Search {
     private static Logger LOG = LoggerFactory.getLogger(Search.class);
 
     private final OpenLibraryService openLibraryService;
     private final AmazonService amazonService;
 
-    @Autowired
+    @Inject
     Search(OpenLibraryService openLibraryService, AmazonService amazonService) {
         this.openLibraryService = openLibraryService;
         this.amazonService = amazonService;
     }
 
-    @GetMapping("/search/byTitle")
-    @ResponseBody
-    public ResponseEntity<Isbn> byTitle(@RequestParam(name="title") String title) {
+    @Get
+    @Produces(MediaType.TEXT_PLAIN)
+    public String index() {
+        return "Hi";
+    }
+
+
+    @Get("/byTitle")
+    public Mono<Isbn> byTitle(@QueryValue String title) {
         Isbn isbn = null;
 
         try {
@@ -53,26 +57,25 @@ class Search {
     }
 
 
-    @GetMapping("/search/byIsbn")
-    @ResponseBody
-    public ResponseEntity<Isbn> byIsbn(@RequestParam(name="isbn") Isbn isbnQuery) {
+    @Get("/byIsbn")
+    public Mono<Isbn> byIsbn(Isbn isbn) {
         // DataStoreResult = dataStoreDao.query(isbnQuery, indexTable);
         // if (DataStoreResult.getResultSet() > 0) return DataStoreResult.getIsbn();
         // Isbn isbn = Isbn.of(isbnQuery);
         // Book book = openLibraryDao.queryIsbn(isbn);
         // dataStoreDao.put(Book);
         // return ResponseEntity.ok(Book.getIsbn());
-        LOG.info(String.format("Received query for isbn: %s", isbnQuery));
-        Isbn isbn = null;
+        LOG.info(String.format("Received query for isbn: %s", isbn.getIsbn()));
+        Isbn isbnRes = null;
 
         try {
             // IF NOT IN DATABASE
-            isbn = openLibraryService.queryIsbn(isbnQuery);
+            isbnRes = openLibraryService.queryIsbn(isbn);
             // If no page count, then ?
         }catch (BookNotFoundException e) {
-            LOG.info(String.format("%s not found on OpenLibrary: %s", isbnQuery.getIsbn(), e.getMessage()));
+            LOG.info(String.format("%s not found on OpenLibrary: %s", isbn.getIsbn(), e.getMessage()));
         }
 
-        return new ResponseEntity<>(isbn, JSON_HEADERS, HttpStatus.OK);
+        return Mono.justOrEmpty(isbnRes);
     }
 }

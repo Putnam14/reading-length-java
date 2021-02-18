@@ -5,20 +5,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 import com.readinglength.researcherws.lib.BookNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
+import javax.inject.Inject;
 import java.util.List;
 
-@Component
 public class OpenLibraryService {
     private final OpenLibraryDao openLibraryDao;
     private final ObjectMapper objectMapper;
 
-    @Autowired
+    @Inject
     public OpenLibraryService(OpenLibraryDao openLibraryDao, ObjectMapper objectMapper) {
         this.openLibraryDao = openLibraryDao;
         this.objectMapper = objectMapper;
@@ -27,14 +22,13 @@ public class OpenLibraryService {
     public List<Isbn> queryTitle(String title) throws BookNotFoundException {
         OpenLibraryWork work;
 
-        ResponseEntity<String> openLibraryResponse = openLibraryDao.queryTitle(title);
+        String openLibraryResponse = openLibraryDao.queryTitle(title);
 
-        if (openLibraryResponse.getStatusCode() != HttpStatus.ACCEPTED) throw new BookNotFoundException(title, "OpenLibrary"); // Move this into OpenLibraryDao
-        String jsonBody = openLibraryResponse.getBody();
-        if (!StringUtils.hasLength(jsonBody) || "{}".equals(jsonBody)) throw new BookNotFoundException(title, "OpenLibrary");
+        if (openLibraryResponse == null) throw new BookNotFoundException(title, "OpenLibrary"); // Move this into OpenLibraryDao
+        if ("{}".equals(openLibraryResponse)) throw new BookNotFoundException(title, "OpenLibrary");
 
         try {
-            OpenLibraryTitleResponse response = objectMapper.readValue(jsonBody, OpenLibraryTitleResponse.class);
+            OpenLibraryTitleResponse response = objectMapper.readValue(openLibraryResponse, OpenLibraryTitleResponse.class);
             work = response.getDocs().get(0);
         } catch(JsonProcessingException e) {
             throw new BookNotFoundException(title, "OpenLibrary_JSON");
@@ -47,14 +41,13 @@ public class OpenLibraryService {
     public Isbn queryIsbn(Isbn isbn) throws BookNotFoundException {
         OpenLibraryEdition edition;
 
-        ResponseEntity<String> openLibraryResponse = openLibraryDao.queryIsbn(isbn);
+        String openLibraryResponse = openLibraryDao.queryIsbn(isbn);
 
-        if (openLibraryResponse.getStatusCode() != HttpStatus.ACCEPTED) throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
-        String jsonBody = openLibraryResponse.getBody();
-        if (!StringUtils.hasLength(jsonBody) || "{}".equals(jsonBody)) throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
+        if (openLibraryResponse == null) throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
+        if ("{}".equals(openLibraryResponse)) throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
 
         try {
-            edition = objectMapper.readValue(jsonBody, OpenLibraryEdition.class);
+            edition = objectMapper.readValue(openLibraryResponse, OpenLibraryEdition.class);
         } catch(JsonProcessingException e) {
             throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary_Edition_JSON");
         }

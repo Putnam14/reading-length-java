@@ -1,5 +1,6 @@
 package com.readinglength.researcherws.dao.amazon;
 
+import com.amazon.paapi5.v1.ApiClient;
 import com.amazon.paapi5.v1.ApiException;
 import com.amazon.paapi5.v1.PartnerType;
 import com.amazon.paapi5.v1.SearchItemsRequest;
@@ -9,13 +10,12 @@ import com.amazon.paapi5.v1.api.DefaultApi;
 import com.readinglength.researcherws.dao.gcp.SecretsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Singleton
 public class AmazonDao {
     private DefaultApi api;
     private static String partnerTag = "readleng-20";
@@ -29,7 +29,22 @@ public class AmazonDao {
         }
     }
 
-    @Autowired
+    public AmazonDao() {
+        this(null);
+        try {
+            ApiClient client = new ApiClient();
+            String accessKey = SecretsDao.getSecret("AMAZON_API_KEY");
+            String privateKey = SecretsDao.getSecret("AMAZON_API_SECRET");
+            client.setAccessKey(accessKey);
+            client.setSecretKey(privateKey);
+            client.setHost("webservices.amazon.com");
+            client.setRegion("us-east-1");
+            this.api = new DefaultApi(client);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public AmazonDao(DefaultApi amazonApi) {
         this.api = amazonApi;
     }

@@ -4,18 +4,16 @@ import com.amazon.paapi5.v1.Item;
 import com.amazon.paapi5.v1.SearchItemsResponse;
 import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.lib.BookNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
 public class AmazonService {
 
     private final AmazonDao amazonDao;
 
-    @Autowired
+    @Inject
     public AmazonService(AmazonDao amazonDao) {
         this.amazonDao = amazonDao;
     }

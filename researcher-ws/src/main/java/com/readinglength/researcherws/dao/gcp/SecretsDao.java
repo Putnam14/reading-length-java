@@ -9,8 +9,6 @@ import java.io.IOException;
 
 public class SecretsDao {
 
-
-
     public static String getSecret(String secretId) throws Exception {
         String projectId = "reading-length";
         return quickstart(projectId, secretId);

@@ -1,0 +1,819 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 2021,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "-xyzCwAAQBAJ",
+      "etag": "DoIP8eOFUEo",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/-xyzCwAAQBAJ",
+      "volumeInfo": {
+        "title": "The Invisible Man",
+        "authors": [
+          "H.G. Wells"
+        ],
+        "publisher": "Gateway",
+        "publishedDate": "2017-01-01",
+        "description": "THE INVISIBLE MAN tells the story of Griffin, a brilliant and obsessed scientist dedicated to achieving invisibility. Taking whatever action is necessary to keep his incredible discovery safe, he terrorises the local village where he has sought refuge. Wells skilfully weaves the themes of science, terror and pride as the invisible Griffin gradually loses his sanity and, ultimately, his humanity.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781473216846"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1473216842"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": false
+        },
+        "pageCount": 160,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "1.3.3.0.preview.2",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=-xyzCwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=-xyzCwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=-xyzCwAAQBAJ&printsec=frontcover&dq=invisible+man&hl=&cd=1&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=-xyzCwAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=-xyzCwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 3.99,
+          "currencyCode": "USD"
+        },
+        "retailPrice": {
+          "amount": 3.99,
+          "currencyCode": "USD"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=-xyzCwAAQBAJ&rdid=book--xyzCwAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 3990000,
+              "currencyCode": "USD"
+            },
+            "retailPrice": {
+              "amountInMicros": 3990000,
+              "currencyCode": "USD"
+            },
+            "giftable": true
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.com/books/download/The_Invisible_Man-sample-epub.acsm?id=-xyzCwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=-xyzCwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "THE INVISIBLE MAN tells the story of Griffin, a brilliant and obsessed scientist dedicated to achieving invisibility."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "eouNhf6NqrsC",
+      "etag": "dGMWaRfULj0",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/eouNhf6NqrsC",
+      "volumeInfo": {
+        "title": "Invisible Men",
+        "subtitle": "Men's Inner Lives and the Consequences of Silence",
+        "authors": [
+          "Michael Addis"
+        ],
+        "publisher": "Macmillan",
+        "publishedDate": "2011-12-20",
+        "description": "Award-winning research psychologist Michael E. Addis identifies and provides answers surrounding the long-unspoken epidemic of silence and vulnerability in men Drawing on scientific research, as well as his own personal and clinical experience, award-winning research psychologist Michael E. Addis describes in this book an epidemic of personal, relational, and societal problems that are caused by the widespread invisibility of men's vulnerabilities. From increasing rates of suicide among men, to alcohol abuse, to violence and school shootings, his research reveals the continued cost of staying silent when emotional, physical, or spiritual pain enters men's lives. In the spirit of such bestsellers as William Pollack's Real Boys, Addis identifies the specific problems that result from men's silence and invisibility, what causes them, and how they can be changed. Addis provides readers with compelling stories of the causes and consequences of silence and invisibility in real men's lives. Invisible Men shows both male and female readers how they can break through the gauntlets that appear to protect men, but in reality cause severe harm to men, women, and families.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781429974066"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1429974060"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": false
+        },
+        "pageCount": 304,
+        "printType": "BOOK",
+        "categories": [
+          "Psychology"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": true,
+        "contentVersion": "0.3.2.0.preview.2",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=eouNhf6NqrsC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=eouNhf6NqrsC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=eouNhf6NqrsC&printsec=frontcover&dq=invisible+man&hl=&cd=2&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=eouNhf6NqrsC&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=eouNhf6NqrsC"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 11.99,
+          "currencyCode": "USD"
+        },
+        "retailPrice": {
+          "amount": 11.99,
+          "currencyCode": "USD"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=eouNhf6NqrsC&rdid=book-eouNhf6NqrsC&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 11990000,
+              "currencyCode": "USD"
+            },
+            "retailPrice": {
+              "amountInMicros": 11990000,
+              "currencyCode": "USD"
+            },
+            "giftable": true
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.com/books/download/Invisible_Men-sample-epub.acsm?id=eouNhf6NqrsC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=eouNhf6NqrsC&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Award-winning research psychologist Michael E. Addis identifies and provides answers surrounding the long-unspoken epidemic of silence and vulnerability in men Drawing on scientific research, as well as his own personal and clinical ..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "iSrI-BQqFf0C",
+      "etag": "oxq1kP++YnA",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/iSrI-BQqFf0C",
+      "volumeInfo": {
+        "title": "Invisible Man",
+        "authors": [
+          "Ralph Ellison"
+        ],
+        "publisher": "Vintage",
+        "publishedDate": "2010-09-29",
+        "description": "Invisible Man is a milestone in American literature, a book that has continued to engage readers since its appearance in 1952. A first novel by an unknown writer, it remained on the bestseller list for sixteen weeks, won the National Book Award for fiction, and established Ralph Ellison as one of the key writers of the century. The nameless narrator of the novel describes growing up in a black community in the South, attending a Negro college from which he is expelled, moving to New York and becoming the chief spokesman of the Harlem branch of \"the Brotherhood\", and retreating amid violence and confusion to the basement lair of the Invisible Man he imagines himself to be. The book is a passionate and witty tour de force of style, strongly influenced by T.S. Eliot's The Waste Land, Joyce, and Dostoevsky. From the Trade Paperback edition.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780307743992"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "0307743993"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": false
+        },
+        "pageCount": 608,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "averageRating": 3.5,
+        "ratingsCount": 6,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": true,
+        "contentVersion": "2.8.10.0.preview.2",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=iSrI-BQqFf0C&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=iSrI-BQqFf0C&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=iSrI-BQqFf0C&printsec=frontcover&dq=invisible+man&hl=&cd=3&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=iSrI-BQqFf0C&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=iSrI-BQqFf0C"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 11.99,
+          "currencyCode": "USD"
+        },
+        "retailPrice": {
+          "amount": 11.99,
+          "currencyCode": "USD"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=iSrI-BQqFf0C&rdid=book-iSrI-BQqFf0C&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 11990000,
+              "currencyCode": "USD"
+            },
+            "retailPrice": {
+              "amountInMicros": 11990000,
+              "currencyCode": "USD"
+            },
+            "giftable": true
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.com/books/download/Invisible_Man-sample-epub.acsm?id=iSrI-BQqFf0C&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=iSrI-BQqFf0C&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "The book&#39;s nameless narrator describes growing up in a black community in the South, attending a Negro college from which he is expelled, moving to New York and becoming the chief spokesman of the Harlem branch of &quot;the Brotherhood&quot;, before ..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "fcSJDwAAQBAJ",
+      "etag": "NhuMt6Ijr9A",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/fcSJDwAAQBAJ",
+      "volumeInfo": {
+        "title": "The Invisible Man",
+        "authors": [
+          "H. G. Wells"
+        ],
+        "publisher": "",
+        "publishedDate": "2018-05-09",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9782291018636"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "2291018639"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "printType": "BOOK",
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=fcSJDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=fcSJDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=fcSJDwAAQBAJ&printsec=frontcover&dq=invisible+man&hl=&cd=4&source=gbs_api",
+        "infoLink": "http://books.google.com/books?id=fcSJDwAAQBAJ&dq=invisible+man&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Invisible_Man.html?hl=&id=fcSJDwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.com/books/download/The_Invisible_Man-sample-epub.acsm?id=fcSJDwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.com/books/download/The_Invisible_Man-sample-pdf.acsm?id=fcSJDwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=fcSJDwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Book description * The Invisible Man is an 1897 science fiction novella by H.G. Wells. Wells&#39; novel was originally serialised in Pearson&#39;s Magazine in 1897, and published as a novel the same year."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "AcRvDwAAQBAJ",
+      "etag": "YkjZeXp0KS0",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/AcRvDwAAQBAJ",
+      "volumeInfo": {
+        "title": "The Invisible Man",
+        "authors": [
+          "H. G. Wells"
+        ],
+        "publisher": "Melville House Pub",
+        "publishedDate": "2014",
+        "description": "Griffin is a young scientist who through long experiments has finally discovered the secret of invisibility. Holed up in a small English town, he initially feels great joy at his newfound freedoms and abilities. He recruits a tramp named Marvel to act as his assistant in his experiments and track down his notebooks where he listed his formulas. However after a burglary, Marvel betrays him to the police. As Griffin travels across England, attempting to seek revenge on those who betrayed him, his euphoria at his powers turns to despair when he realises what he has sacrificed.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781612193229"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1612193226"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 193,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=AcRvDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=AcRvDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=AcRvDwAAQBAJ&pg=PA100&dq=invisible+man&hl=&cd=5&source=gbs_api",
+        "infoLink": "http://books.google.com/books?id=AcRvDwAAQBAJ&dq=invisible+man&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Invisible_Man.html?hl=&id=AcRvDwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=AcRvDwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "The \u003cb\u003eInvisible Man\u003c/b\u003e had him down grimly, but his arms were free and he struck and \u003cbr\u003e\ntried to kick savagely. “Listen to reason, will you?” said the \u003cb\u003eInvisible Man\u003c/b\u003e, sticking \u003cbr\u003e\nto him in spite of a pounding in the ribs. “By Heaven!you&#39;ll madden me in a&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "Y5FKzQEACAAJ",
+      "etag": "hsrtq5lGXMA",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/Y5FKzQEACAAJ",
+      "volumeInfo": {
+        "title": "Invisible Man",
+        "authors": [
+          "Ralph Ellison"
+        ],
+        "publishedDate": "2018",
+        "industryIdentifiers": [
+          {
+            "type": "OTHER",
+            "identifier": "OCLC:1057321923"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "printType": "BOOK",
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=Y5FKzQEACAAJ&dq=invisible+man&hl=&cd=6&source=gbs_api",
+        "infoLink": "http://books.google.com/books?id=Y5FKzQEACAAJ&dq=invisible+man&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Invisible_Man.html?hl=&id=Y5FKzQEACAAJ"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=Y5FKzQEACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "HfPsDwAAQBAJ",
+      "etag": "UjwHy7D8aPY",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/HfPsDwAAQBAJ",
+      "volumeInfo": {
+        "title": "The Invisible Man (Movie Tie-In)",
+        "authors": [
+          "H. G. Wells"
+        ],
+        "publisher": "Anchor Books",
+        "publishedDate": "2020-02-04",
+        "description": "The tale of a scientist who discovers how to make his body become invisible, but, when he can't make himself visible again, becomes violently insane.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780593082942"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "059308294X"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 160,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=HfPsDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=HfPsDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=HfPsDwAAQBAJ&pg=PA122&dq=invisible+man&hl=&cd=7&source=gbs_api",
+        "infoLink": "http://books.google.com/books?id=HfPsDwAAQBAJ&dq=invisible+man&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Invisible_Man_Movie_Tie_In.html?hl=&id=HfPsDwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=HfPsDwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "The point is, they know there is an \u003cb\u003eInvisible Man\u003c/b\u003e – as well as we know there is an \u003cbr\u003e\n\u003cb\u003eInvisible Man\u003c/b\u003e. And that \u003cb\u003eInvisible Man\u003c/b\u003e, Kemp, must now establish a Reign of \u003cbr\u003e\nTerror. Yes-no doubt it&#39;s startling. But I mean it. A Reign of Terror. He must take \u003cbr\u003e\nsome&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "SCHqme8AluYC",
+      "etag": "jQGuEpzh864",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/SCHqme8AluYC",
+      "volumeInfo": {
+        "title": "The Invisible Man",
+        "authors": [
+          "Len Jenkin",
+          "Herbert George Wells"
+        ],
+        "publisher": "Dramatic Publishing",
+        "publishedDate": "2000",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "0871299844"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9780871299840"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": true
+        },
+        "pageCount": 68,
+        "printType": "BOOK",
+        "categories": [
+          "Mystery"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.2.4.0.preview.1",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=SCHqme8AluYC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=SCHqme8AluYC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=SCHqme8AluYC&pg=PT8&dq=invisible+man&hl=&cd=8&source=gbs_api",
+        "infoLink": "http://books.google.com/books?id=SCHqme8AluYC&dq=invisible+man&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Invisible_Man.html?hl=&id=SCHqme8AluYC"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=SCHqme8AluYC&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "The \u003cb\u003eInvisible Man\u003c/b\u003e Mystery / Drama . By Len Jenkin . Adapted from the classic by \u003cbr\u003e\nH. G. Wells . Cast 5m . , 3w . , plus extras . In this updated version of the H.G. \u003cbr\u003e\nWells classic , a family running a quiet motel confronts a mysterious scientist who \u003cbr\u003e\nhas&nbsp;..."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "vdAOAAAAIAAJ",
+      "etag": "19MSgSU6F7c",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/vdAOAAAAIAAJ",
+      "volumeInfo": {
+        "title": "The Invisible Man",
+        "authors": [
+          "Herbert George Wells"
+        ],
+        "publisher": "Createspace Independent Pub",
+        "publishedDate": "1897",
+        "description": "In this renowned novel by H.G. Wells, a heavily disguised man takes up residence at a rural English inn and begins performing secret experiments, leading to intense curiosity from the locals. Eventually, the mysterious man, a scientist who has discovered the key to invisibility, clashes with the villagers and progressively becomes more unhinged and dangerous as he uses his powers for self-serving purposes. Published and set at the turn of the 20th century, the book highlights the perils of unchecked scientific hubris.",
+        "industryIdentifiers": [
+          {
+            "type": "OTHER",
+            "identifier": "STANFORD:36105004541905"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "pageCount": 279,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "averageRating": 4,
+        "ratingsCount": 15,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "1.4.6.0.full.3",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=vdAOAAAAIAAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=vdAOAAAAIAAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=vdAOAAAAIAAJ&pg=PP1&dq=invisible+man&hl=&cd=9&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=vdAOAAAAIAAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=vdAOAAAAIAAJ"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "FREE",
+        "isEbook": true,
+        "buyLink": "https://play.google.com/store/books/details?id=vdAOAAAAIAAJ&rdid=book-vdAOAAAAIAAJ&rdot=1&source=gbs_api"
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "ALL_PAGES",
+        "embeddable": true,
+        "publicDomain": true,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "downloadLink": "http://books.google.com/books/download/The_Invisible_Man.epub?id=vdAOAAAAIAAJ&hl=&output=epub&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": true,
+          "downloadLink": "http://books.google.com/books/download/The_Invisible_Man.pdf?id=vdAOAAAAIAAJ&hl=&output=pdf&sig=ACfU3U0yS33iaUouZejtrIXQDRB3Pyyv3g&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=vdAOAAAAIAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "FULL_PUBLIC_DOMAIN",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "In this renowned novel by H.G. Wells, a heavily disguised man takes up residence at a rural English inn and begins performing secret experiments, leading to intense curiosity from the locals."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "x4m0CwAAQBAJ",
+      "etag": "fgr+hY5b6uk",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/x4m0CwAAQBAJ",
+      "volumeInfo": {
+        "title": "Invisible Man, Got the Whole World Watching",
+        "subtitle": "A Young Black Man's Education",
+        "authors": [
+          "Mychal Denzel Smith"
+        ],
+        "publisher": "Bold Type Books",
+        "publishedDate": "2016-06-14",
+        "description": "A New York Times Bestseller An unflinching account of what it means to be a young black man in America today, and how the existing script for black manhood is being rewritten in one of the most fascinating periods of American history. How do you learn to be a black man in America? For young black men today, it means coming of age during the presidency of Barack Obama. It means witnessing the deaths of Oscar Grant, Trayvon Martin, Michael Brown, Akai Gurley, and too many more. It means celebrating powerful moments of black self-determination for LeBron James, Dave Chappelle, and Frank Ocean. In Invisible Man, Got the Whole World Watching, Mychal Denzel Smith chronicles his own personal and political education during these tumultuous years, describing his efforts to come into his own in a world that denied his humanity. Smith unapologetically upends reigning assumptions about black masculinity, rewriting the script for black manhood so that depression and anxiety aren't considered taboo, and feminism and LGBTQ rights become part of the fight. The questions Smith asks in this book are urgent--for him, for the martyrs and the tokens, and for the Trayvons that could have been and are still waiting.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9781568585291"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "1568585292"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": false
+        },
+        "pageCount": 240,
+        "printType": "BOOK",
+        "categories": [
+          "Social Science"
+        ],
+        "averageRating": 4.5,
+        "ratingsCount": 61,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": true,
+        "contentVersion": "2.6.7.0.preview.2",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=x4m0CwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=x4m0CwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.com/books?id=x4m0CwAAQBAJ&printsec=frontcover&dq=invisible+man&hl=&cd=10&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=x4m0CwAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=x4m0CwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "US",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 9.99,
+          "currencyCode": "USD"
+        },
+        "retailPrice": {
+          "amount": 9.99,
+          "currencyCode": "USD"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=x4m0CwAAQBAJ&rdid=book-x4m0CwAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 9990000,
+              "currencyCode": "USD"
+            },
+            "retailPrice": {
+              "amountInMicros": 9990000,
+              "currencyCode": "USD"
+            },
+            "giftable": true
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "US",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.com/books/download/Invisible_Man_Got_the_Whole_World_Watchi-sample-epub.acsm?id=x4m0CwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=x4m0CwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "The questions Smith asks in this book are urgent -- for him, for the martyrs and the tokens, and for the Trayvons that could have been and are still waiting."
+      }
+    }
+  ]
+}

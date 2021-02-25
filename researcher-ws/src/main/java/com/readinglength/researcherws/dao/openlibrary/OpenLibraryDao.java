@@ -13,7 +13,8 @@ import java.util.Map;
 public class OpenLibraryDao {
     private RestClient restClient;
 
-    OpenLibraryDao(RestClient restClient) throws MalformedURLException {
+    OpenLibraryDao() throws MalformedURLException {
+        RestClient restClient = new RestClient();
         restClient.setClient(new URL("http://openlibrary.org/"));
         this.restClient = restClient;
     }

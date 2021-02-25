@@ -10,6 +10,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.dao.amazon.AmazonDao;
 import com.readinglength.researcherws.dao.amazon.AmazonService;
+import com.readinglength.researcherws.dao.google.GoogleBooksDao;
+import com.readinglength.researcherws.dao.google.GoogleBooksService;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryDao;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
 import org.junit.jupiter.api.BeforeAll;
@@ -33,7 +35,9 @@ class SearchTest {
         AmazonDao amazonDao = mock(AmazonDao.class);
         OpenLibraryService openLibraryService = new OpenLibraryService(openLibraryDaoMock, new ObjectMapper());
         AmazonService amazonService = new AmazonService(amazonDao);
-        instance = new Search(openLibraryService, amazonService);
+        GoogleBooksDao googleBooksDao = mock(GoogleBooksDao.class);
+        GoogleBooksService googleBooksService = new GoogleBooksService(googleBooksDao, new ObjectMapper());
+        instance = new Search(openLibraryService, amazonService, googleBooksService);
 
         when(openLibraryDaoMock.queryTitle("War and peace")).thenReturn(
                 Files.readString(Path.of(

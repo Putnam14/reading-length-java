@@ -1,6 +1,5 @@
 package com.readinglength.researcherws.dao.amazon;
 
-import com.amazon.paapi5.v1.ApiClient;
 import com.amazon.paapi5.v1.ApiException;
 import com.amazon.paapi5.v1.PartnerType;
 import com.amazon.paapi5.v1.SearchItemsRequest;
@@ -11,6 +10,7 @@ import com.readinglength.researcherws.dao.gcp.SecretsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,24 +29,9 @@ public class AmazonDao {
         }
     }
 
-    public AmazonDao() {
-        this(null);
-        try {
-            ApiClient client = new ApiClient();
-            String accessKey = SecretsDao.getSecret("AMAZON_API_KEY");
-            String privateKey = SecretsDao.getSecret("AMAZON_API_SECRET");
-            client.setAccessKey(accessKey);
-            client.setSecretKey(privateKey);
-            client.setHost("webservices.amazon.com");
-            client.setRegion("us-east-1");
-            this.api = new DefaultApi(client);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public AmazonDao(DefaultApi amazonApi) {
-        this.api = amazonApi;
+    @Inject
+    public AmazonDao(AmazonApiWrapper amazonApiWrapper) {
+        this.api = amazonApiWrapper.getApi();
     }
 
     public SearchItemsResponse queryTitle(String title) {

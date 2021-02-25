@@ -8,7 +8,6 @@ import java.util.List;
 public class OpenLibraryTitleResponse {
     private List<OpenLibraryWork> docs;
 
-
     public List<OpenLibraryWork> getDocs() {
         return docs;
     }

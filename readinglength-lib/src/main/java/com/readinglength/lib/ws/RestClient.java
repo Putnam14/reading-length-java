@@ -4,13 +4,11 @@ import io.micronaut.http.client.RxHttpClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.inject.Singleton;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-@Singleton
 public class RestClient {
     private RxHttpClient httpClient;
     private static Logger LOG = LoggerFactory.getLogger(RestClient.class);
@@ -34,7 +32,7 @@ public class RestClient {
 
     private String makeGetRequest(String requestString) {
         LOG.info(String.format("Making GET request to: %s", requestString));
-        return httpClient.retrieve(requestString).blockingSingle();
+        return httpClient.retrieve(requestString).onErrorReturnItem("{}").blockingSingle();
 
     }
 

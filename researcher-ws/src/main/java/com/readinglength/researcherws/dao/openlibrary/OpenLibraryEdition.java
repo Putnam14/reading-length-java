@@ -30,6 +30,25 @@ public class OpenLibraryEdition {
     private Map<String, String> type;
     private Integer revision;
     private List<Map<String, String>> languages;
+    private String description;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getEdition() {
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+    private String edition;
 
     public Integer getNumber_of_pages() {
         return number_of_pages;

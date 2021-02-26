@@ -26,19 +26,19 @@ public class GoogleBooksService {
         this.objectMapper = objectMapper;
     }
 
-    public void queryTitle(String title, Book book) throws BookNotFoundException {
-        processResponse(googleBooksDao.queryTitle(title), title, book);
-
-
+    public Book queryTitle(String title) throws BookNotFoundException {
+        return processResponse(googleBooksDao.queryTitle(title), title);
     }
 
-    public void queryIsbn(Isbn isbn, Book book) throws BookNotFoundException {
-        processResponse(googleBooksDao.queryIsbn(isbn), isbn.getIsbn(), book);
+    public Book queryIsbn(Isbn isbn) throws BookNotFoundException {
+        return processResponse(googleBooksDao.queryIsbn(isbn), isbn.getIsbn());
     }
 
-    private void processResponse(String googleBooksResponse, String title, Book book) throws BookNotFoundException  {
+    private Book processResponse(String googleBooksResponse, String title) throws BookNotFoundException  {
         if (googleBooksResponse == null) throw new BookNotFoundException(title, "Google");
         if ("{}".equals(googleBooksResponse)) throw new BookNotFoundException(title, "Google");
+
+        Book book = new Book();
 
         try {
             GoogleBooksVolumesResult response = objectMapper.readValue(googleBooksResponse, GoogleBooksVolumesResult.class);
@@ -49,20 +49,20 @@ public class GoogleBooksService {
                     .map(id -> id.get("identifier"))
                     .collect(Collectors.toList());
             if (ids.size() > 0) {
-                if (book.getIsbn10() == null) book.setIsbn10(Isbn10.convert(Isbn.of(ids.get(0))));
+                book.setIsbn10(Isbn10.convert(Isbn.of(ids.get(0))));
             }
             if (edition.getAuthors().size() > 0) {
-                if (book.getAuthor() == null) book.setAuthor(edition.getAuthors().get(0));
+                book.setAuthor(edition.getAuthors().get(0));
             }
             if (edition.getDescription() != null && !edition.getDescription().isEmpty()) {
                 book.setDescription(edition.getDescription()); // Google has good descriptions
             }
-            if (edition.getTitle() != null) {
-                if (book.getTitle() == null) book.setTitle(edition.getTitle());
-            }
+            book.setTitle(edition.getTitle());
+
         } catch(JsonProcessingException e) {
             throw new BookNotFoundException(title, "Google_JSON");
         }
 
+        return book;
     }
 }

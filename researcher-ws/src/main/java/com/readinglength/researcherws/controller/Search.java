@@ -43,34 +43,35 @@ class Search {
 
 
     @Get("/byTitle")
-    public Mono<Isbn> byTitle(@QueryValue String title) {
+    public Mono<Book> byTitle(@QueryValue String title) {
+        long startTime = System.currentTimeMillis();
         Book book = new Book();
         try {
             LOG.info(String.format("Querying OL for %s", title));
             List<Isbn> isbns = openLibraryService.queryTitle(title);
             if (isbns.size() == 1) {
-                openLibraryService.queryIsbn(isbns.get(0), book);
+                book.merge(openLibraryService.queryIsbn(isbns.get(0)));
             }
         } catch (BookNotFoundException e) {
             LOG.info(String.format("OL search failed: %s", e.getMessage()));
         }
         if (book.getIsbn10() == null) {
             LOG.info(String.format("Querying Amazon for %s", title));
-            amazonService.queryTitle(title, book);
+            book.merge(amazonService.queryTitle(title));
         }
         if (book.getIsbn10() == null) {
             LOG.info(String.format("Querying Google for %s", title));
             try {
-                googleBooksService.queryTitle(title, book);
+                book.merge(googleBooksService.queryTitle(title));
             } catch (BookNotFoundException e) {
                 LOG.info(String.format("Google search failed: %s", e.getMessage()));
             }
         }
         if (book.isMissingInfo()) {
             try {
-                openLibraryService.queryIsbn(book.getIsbn10(), book);
+                book.merge(openLibraryService.queryIsbn(book.getIsbn10()));
                 if (book.isMissingInfo()) {
-                    googleBooksService.queryIsbn(book.getIsbn10(), book);
+                    book.merge(googleBooksService.queryIsbn(book.getIsbn10()));
                 }
             } catch (BookNotFoundException e) {
                 LOG.info(String.format("Search failed: %s", e.getMessage()));
@@ -82,13 +83,15 @@ class Search {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
+        long endTime = System.currentTimeMillis();
+        LOG.info(String.format("GET took %d ms to process", endTime - startTime));
 
-        return Mono.justOrEmpty(book.getIsbn10());
+        return Mono.justOrEmpty(book);
     }
 
 
     @Get("/byIsbn")
-    public Mono<Isbn> byIsbn(Isbn isbn) {
+    public Mono<Book> byIsbn(Isbn isbn) {
         // DataStoreResult = dataStoreDao.query(isbnQuery, indexTable);
         // if (DataStoreResult.getResultSet() > 0) return DataStoreResult.getIsbn();
         // Isbn isbn = Isbn.of(isbnQuery);
@@ -100,12 +103,12 @@ class Search {
 
         try {
             // IF NOT IN DATABASE
-            openLibraryService.queryIsbn(isbn, book);
+            book.merge(openLibraryService.queryIsbn(isbn));
             // If no page count, then ?
         }catch (BookNotFoundException e) {
             LOG.info(String.format("%s not found on OpenLibrary: %s", isbn.getIsbn(), e.getMessage()));
         }
 
-        return Mono.justOrEmpty(book.getIsbn10());
+        return Mono.justOrEmpty(book);
     }
 }

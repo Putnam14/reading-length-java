@@ -42,8 +42,9 @@ public class OpenLibraryService {
 
     }
 
-    public Book queryIsbn(Isbn isbn, Book book) throws BookNotFoundException {
+    public Book queryIsbn(Isbn isbn) throws BookNotFoundException {
         OpenLibraryEdition edition;
+        Book book = new Book();
 
         String openLibraryResponse = openLibraryDao.queryIsbn(isbn);
 
@@ -58,20 +59,14 @@ public class OpenLibraryService {
         }
 
         if (edition.getIsbn_10() != null && edition.getIsbn_10().size() > 0) {
-            if (book.getIsbn10() == null) book.setIsbn10(edition.getIsbn_10().get(0));
+            book.setIsbn10(edition.getIsbn_10().get(0));
         } else if (edition.getIsbn_13() != null && edition.getIsbn_13().size() > 0) {
             if (book.getIsbn13() == null) book.setIsbn13(edition.getIsbn_13().get(0));
         }
-        if (edition.getTitle() != null) {
-            LOG.info("Setting title");
-            if (book.getTitle() == null) book.setTitle(edition.getTitle());
-        }
-        if (edition.getNumber_of_pages() != null) {
-            if (book.getPagecount() == null) book.setPagecount(edition.getNumber_of_pages());
-        }
-        if (edition.getDescription() != null) {
-            if (book.getDescription() == null) book.setDescription(edition.getDescription());
-        }
+        book.setTitle(edition.getTitle());
+        book.setPagecount(edition.getNumber_of_pages());
+        book.setDescription(edition.getDescription());
+
         return book;
 
     }

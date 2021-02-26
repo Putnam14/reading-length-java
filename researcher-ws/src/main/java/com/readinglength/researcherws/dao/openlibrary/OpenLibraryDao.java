@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Singleton
 public class OpenLibraryDao {
-    private RestClient restClient;
+    private final RestClient restClient;
 
     OpenLibraryDao() throws MalformedURLException {
         RestClient restClient = new RestClient();
@@ -23,11 +23,15 @@ public class OpenLibraryDao {
         Map<String, String> queryParams = new LinkedHashMap<>();
         queryParams.put("title", title);
         queryParams.put("limit","1");
-        return restClient.get("search.json", queryParams);
+        synchronized (restClient) {
+            return restClient.get("search.json", queryParams);
+        }
     }
 
     public String queryIsbn(Isbn isbn) {
         String requestString = String.format("%s.json", isbn.getIsbn());
-        return restClient.get("isbn/", requestString );
+        synchronized (restClient) {
+            return restClient.get("isbn/", requestString);
+        }
     }
 }

@@ -1,6 +1,41 @@
 package com.readinglength.lib;
 
 public class Book {
+    private String title;
+    private String author;
+    private String description;
+    private Isbn10 isbn10;
+    private Isbn13 isbn13;
+    private Integer pagecount;
+    private String coverImage;
+    private String publisher;
+    private String publishDate;
+    private Wordcount wordcount;
+
+    public boolean isMissingInfo() {
+        return title == null || author == null || description == null || isbn10 == null || pagecount == null;
+    }
+
+    public void merge(Book toMerge) {
+        if (title == null) setTitle(toMerge.getTitle());
+        if (author == null) setAuthor(toMerge.getAuthor());
+        if (description == null) setDescription(toMerge.getDescription());
+        if (isbn10 == null && toMerge.getIsbn10() != null) setIsbn10(toMerge.getIsbn10());
+        if (pagecount == null) setPagecount(toMerge.getPagecount());
+        if (coverImage == null) setCoverImage(toMerge.getCoverImage());
+        if (publisher == null) setPublisher(toMerge.getPublisher());
+        if (publishDate == null) setPublishDate(toMerge.getPublishDate());
+        if (wordcount == null) setWordcount(toMerge.getWordcount());
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -73,19 +108,5 @@ public class Book {
 
     public void setWordcount(Wordcount wordcount) {
         this.wordcount = wordcount;
-    }
-
-    private String title;
-    private String author;
-    private String description;
-    private Isbn10 isbn10;
-    private Isbn13 isbn13;
-    private Integer pagecount;
-    private String coverImage;
-    private String publishDate;
-    private Wordcount wordcount;
-
-    public boolean isMissingInfo() {
-        return title == null || author == null || description == null || isbn10 == null || pagecount == null;
     }
 }

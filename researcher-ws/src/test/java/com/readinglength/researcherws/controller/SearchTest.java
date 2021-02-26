@@ -4,9 +4,11 @@ import com.amazon.paapi5.v1.ExternalIds;
 import com.amazon.paapi5.v1.Item;
 import com.amazon.paapi5.v1.ItemInfo;
 import com.amazon.paapi5.v1.MultiValuedAttribute;
+import com.amazon.paapi5.v1.SearchItemsResource;
 import com.amazon.paapi5.v1.SearchItemsResponse;
 import com.amazon.paapi5.v1.SearchResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.dao.amazon.AmazonDao;
 import com.readinglength.researcherws.dao.amazon.AmazonService;
@@ -46,7 +48,12 @@ class SearchTest {
 
         Item result = new Item().itemInfo(new ItemInfo().externalIds(new ExternalIds().isBNs(new MultiValuedAttribute().addDisplayValuesItem("0061434531"))));
 
-        when(amazonDao.queryTitle("War and peace")).thenReturn(new SearchItemsResponse().searchResult(new SearchResult().items(List.of(result))));
+        when(amazonDao.queryTitle("War and peace", List.of(
+                    SearchItemsResource.ITEMINFO_EXTERNALIDS,
+                    SearchItemsResource.ITEMINFO_TITLE,
+                    SearchItemsResource.ITEMINFO_BYLINEINFO,
+                    SearchItemsResource.ITEMINFO_CONTENTINFO)))
+                .thenReturn(new SearchItemsResponse().searchResult(new SearchResult().items(List.of(result))));
 
         when(openLibraryDaoMock.queryIsbn(Isbn.of("0061434531"))).thenReturn(
                 Files.readString(Path.of(
@@ -55,15 +62,15 @@ class SearchTest {
 
     @Test
     void byTitle() {
-        Isbn res = instance.byTitle("War and peace").block();
+        Book res = instance.byTitle("War and peace").block();
 
-        assertEquals("0061434531", res.getIsbn());
+        assertEquals("0061434531", res.getIsbn10());
     }
 
     @Test
     void byIsbn() {
-        Isbn res = instance.byIsbn(Isbn.of("0061434531")).block();
+        Book res = instance.byIsbn(Isbn.of("0061434531")).block();
 
-        assertEquals("0061434531", res.getIsbn());
+        assertEquals("0061434531", res.getIsbn10());
     }
 }

@@ -38,10 +38,9 @@ public class AmazonService {
                 SearchItemsResource.ITEMINFO_CONTENTINFO));
         Book book = new Book();
 
-        if (response == null) {
+        if (response == null)
             LOG.info("Not found on Amazon");
-        }
-        if (response != null && response.getSearchResult() != null) {
+        else if (response.getSearchResult() != null) {
             Item item = response.getSearchResult().getItems().get(0);
             if (item != null) {
                 try {
@@ -51,24 +50,29 @@ public class AmazonService {
                     e.printStackTrace();
                 }
                 ItemInfo info = item.getItemInfo();
-                List<String> externalIds = info.getExternalIds().getIsBNs().getDisplayValues();
-                List<Isbn> isbns = externalIds.stream()
-                        .filter(Isbn::validate)
-                        .map(Isbn::of)
-                        .collect(Collectors.toList());
+
+                if (info.getExternalIds() != null) {
+                    List<String> externalIds = info.getExternalIds().getIsBNs().getDisplayValues();
+                    List<Isbn> isbns = externalIds.stream()
+                            .filter(Isbn::validate)
+                            .map(Isbn::of)
+                            .collect(Collectors.toList());
+                    book.setIsbn10(Isbn10.convert(isbns.get(0)));
+                }
+
                 Contributor author = info.getByLineInfo().getContributors().stream()
                         .filter(c -> "author".equals(c.getRoleType()))
                         .findFirst()
                         .orElse(null);
 
-                if (isbns.size() > 0) {
-                    book.setIsbn10(Isbn10.convert(isbns.get(0)));
-                    book.setTitle(info.getTitle().getDisplayValue());
-                    book.setAuthor(author != null ? author.getName() : null);
-                    book.setPublishDate(info.getContentInfo().getPublicationDate().getDisplayValue());
-                    book.setPublisher(info.getByLineInfo().getBrand().getDisplayValue());
-                    book.setPagecount(info.getContentInfo().getPagesCount().getDisplayValue());
-                }
+                if (book.getIsbn10() == null)
+                    book.setIsbn10(new Isbn10(item.getASIN()));
+
+                book.setTitle(info.getTitle().getDisplayValue());
+                book.setAuthor(author != null ? author.getName() : null);
+                book.setPublishDate(info.getContentInfo().getPublicationDate().getDisplayValue());
+                book.setPublisher(info.getByLineInfo().getBrand().getDisplayValue());
+                book.setPagecount(info.getContentInfo().getPagesCount().getDisplayValue());
             }
         }
         return book;

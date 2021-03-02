@@ -10,12 +10,14 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class RestClient {
+    private String baseUri;
     private RxHttpClient httpClient;
     private static Logger LOG = LoggerFactory.getLogger(RestClient.class);
 
     public RestClient() { }
 
     public void setClient(URL serverBaseUri) {
+        this.baseUri = serverBaseUri.toString();
         this.httpClient = RxHttpClient.create(serverBaseUri);
     }
 
@@ -31,7 +33,7 @@ public class RestClient {
     }
 
     private String makeGetRequest(String requestString) {
-        LOG.info(String.format("Making GET request to: %s", requestString));
+        LOG.info(String.format("Making GET request to: %s", baseUri + requestString));
         return httpClient.retrieve(requestString).onErrorReturnItem("{}").blockingSingle();
 
     }

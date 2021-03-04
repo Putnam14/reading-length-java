@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
+import com.readinglength.lib.Isbn10;
 import com.readinglength.researcherws.dao.amazon.AmazonService;
 import com.readinglength.researcherws.dao.google.GoogleBooksService;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
@@ -20,7 +21,7 @@ import reactor.core.publisher.Mono;
 import javax.inject.Inject;
 import java.util.List;
 
-@Controller("/search")
+@Controller
 class Search {
     private static Logger LOG = LoggerFactory.getLogger(Search.class);
 
@@ -53,7 +54,7 @@ class Search {
                 book.merge(openLibraryService.queryIsbn(isbns.get(0)));
             }
         } catch (BookNotFoundException e) {
-            LOG.info(String.format("OL search failed: %s", e.getMessage()));
+            LOG.warn(String.format("OL search failed: %s", e.getMessage()));
         }
         if (book.getIsbn10() == null) {
             LOG.info(String.format("Querying Amazon for %s", title));
@@ -64,18 +65,11 @@ class Search {
             try {
                 book.merge(googleBooksService.queryTitle(title));
             } catch (BookNotFoundException e) {
-                LOG.info(String.format("Google search failed: %s", e.getMessage()));
+                LOG.warn(String.format("Google search failed: %s", e.getMessage()));
             }
         }
-        if (book.isMissingInfo()) {
-            try {
-                book.merge(openLibraryService.queryIsbn(book.getIsbn10()));
-                if (book.isMissingInfo()) {
-                    book.merge(googleBooksService.queryIsbn(book.getIsbn10()));
-                }
-            } catch (BookNotFoundException e) {
-                LOG.info(String.format("Search failed: %s", e.getMessage()));
-            }
+        if (bookIsMissingInfo(book)) {
+            book.merge(queryByIsbn(book));
         }
 
         try {
@@ -92,23 +86,37 @@ class Search {
 
     @Get("/byIsbn")
     public Mono<Book> byIsbn(Isbn isbn) {
-        // DataStoreResult = dataStoreDao.query(isbnQuery, indexTable);
-        // if (DataStoreResult.getResultSet() > 0) return DataStoreResult.getIsbn();
-        // Isbn isbn = Isbn.of(isbnQuery);
-        // Book book = openLibraryDao.queryIsbn(isbn);
-        // dataStoreDao.put(Book);
-        // return ResponseEntity.ok(Book.getIsbn());
         LOG.info(String.format("Received query for isbn: %s", isbn.getIsbn()));
         Book book = new Book();
+        book.setIsbn10(Isbn10.convert(isbn));
 
-        try {
-            // IF NOT IN DATABASE
-            book.merge(openLibraryService.queryIsbn(isbn));
-            // If no page count, then ?
-        }catch (BookNotFoundException e) {
-            LOG.info(String.format("%s not found on OpenLibrary: %s", isbn.getIsbn(), e.getMessage()));
-        }
+        book.merge(queryByIsbn(book));
 
         return Mono.justOrEmpty(book);
+    }
+
+    private Book queryByIsbn(Book book) {
+        // Query database here first?
+        try {
+            book.merge(openLibraryService.queryIsbn(book.getIsbn10()));
+        } catch (BookNotFoundException e) {
+            LOG.warn(String.format("Search failed: %s", e.getMessage()));
+        }
+        if (bookIsMissingInfo(book)) {
+            try {
+                book.merge(googleBooksService.queryIsbn(book.getIsbn10()));
+            } catch (BookNotFoundException e) {
+                LOG.warn(String.format("Search failed: %s", e.getMessage()));
+            }
+        }
+        return book;
+    }
+
+    private boolean bookIsMissingInfo(Book book) {
+        return book.getTitle() == null
+                || book.getAuthor() == null
+                || book.getDescription() == null
+                || book.getIsbn10() == null
+                || book.getPagecount() == null;
     }
 }

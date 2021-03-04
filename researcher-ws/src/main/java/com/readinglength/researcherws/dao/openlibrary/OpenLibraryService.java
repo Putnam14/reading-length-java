@@ -27,19 +27,19 @@ public class OpenLibraryService {
 
         String openLibraryResponse = openLibraryDao.queryTitle(title);
 
-        if (openLibraryResponse == null) throw new BookNotFoundException(title, "OpenLibrary");
-        if ("{}".equals(openLibraryResponse)) throw new BookNotFoundException(title, "OpenLibrary");
+        if (openLibraryResponse == null || "{}".equals(openLibraryResponse))
+            throw new BookNotFoundException(title, "OpenLibrary");
 
         try {
             OpenLibraryTitleResponse response = objectMapper.readValue(openLibraryResponse, OpenLibraryTitleResponse.class);
-            if (response.getDocs().size() == 0) throw new BookNotFoundException(title, "OpenLibrary_NotFound");
+            if (response.getDocs().size() == 0)
+                throw new BookNotFoundException(title, "OpenLibrary_NotFound");
             work = response.getDocs().get(0);
         } catch(JsonProcessingException e) {
             throw new BookNotFoundException(title, "OpenLibrary_JSON");
         }
 
         return work.getIsbn();
-
     }
 
     public Book queryIsbn(Isbn isbn) throws BookNotFoundException {
@@ -48,8 +48,8 @@ public class OpenLibraryService {
 
         String openLibraryResponse = openLibraryDao.queryIsbn(isbn);
 
-        if (openLibraryResponse == null) throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
-        if ("{}".equals(openLibraryResponse)) throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
+        if (openLibraryResponse == null || "{}".equals(openLibraryResponse))
+            throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
 
         try {
             edition = objectMapper.readValue(openLibraryResponse, OpenLibraryEdition.class);
@@ -58,16 +58,18 @@ public class OpenLibraryService {
             throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary_Edition_JSON");
         }
 
-        if (edition.getIsbn_10() != null && edition.getIsbn_10().size() > 0) {
+        if (edition.getIsbn_10() != null && edition.getIsbn_10().size() > 0)
             book.setIsbn10(edition.getIsbn_10().get(0));
-        } else if (edition.getIsbn_13() != null && edition.getIsbn_13().size() > 0) {
-            if (book.getIsbn13() == null) book.setIsbn13(edition.getIsbn_13().get(0));
-        }
+        else if (edition.getIsbn_13() != null && edition.getIsbn_13().size() > 0)
+            book.setIsbn13(edition.getIsbn_13().get(0));
         book.setTitle(edition.getTitle());
         book.setPagecount(edition.getNumber_of_pages());
         book.setDescription(edition.getDescription());
+        book.setPublishDate(edition.getPublish_date());
+        book.setPublisher(edition.getPublishers().get(0));
+        if (book.getIsbn13() != null)
+            book.setCoverImage("http://covers.openlibrary.org/b/isbn/" + book.getIsbn13().getIsbn() + "-L.jpg");
 
         return book;
-
     }
 }

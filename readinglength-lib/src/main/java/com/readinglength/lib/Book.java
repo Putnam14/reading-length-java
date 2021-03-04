@@ -12,10 +12,6 @@ public class Book {
     private String publishDate;
     private Wordcount wordcount;
 
-    public boolean isMissingInfo() {
-        return title == null || author == null || description == null || isbn10 == null || pagecount == null;
-    }
-
     public void merge(Book toMerge) {
         if (title == null) setTitle(toMerge.getTitle());
         if (author == null) setAuthor(toMerge.getAuthor());

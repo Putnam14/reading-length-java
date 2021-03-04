@@ -30,6 +30,7 @@
     <modules>
         <module>readinglength-lib</module>
         <module>researcher-ws</module>
+        <module>archivist-ws</module>
     </modules>
 
     <dependencies>

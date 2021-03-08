@@ -3,7 +3,11 @@ package com.readinglength.lib;
 public class Isbn13 extends Isbn {
     private String isbn;
 
+    private Isbn13() {
+    }
+
     public Isbn13(String isbn) {
+        this();
         String temp = cleanIsbnString(isbn);
         boolean isValid = validate(temp);
         if (isValid) {
@@ -50,4 +54,8 @@ public class Isbn13 extends Isbn {
         return total == 10 ? 0 : total;
     }
 
+    @Override
+    public String toString() {
+        return isbn;
+    }
 }

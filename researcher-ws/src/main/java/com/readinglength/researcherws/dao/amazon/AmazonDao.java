@@ -6,7 +6,7 @@ import com.amazon.paapi5.v1.SearchItemsRequest;
 import com.amazon.paapi5.v1.SearchItemsResource;
 import com.amazon.paapi5.v1.SearchItemsResponse;
 import com.amazon.paapi5.v1.api.DefaultApi;
-import com.readinglength.researcherws.dao.gcp.SecretsDao;
+import com.readinglength.lib.dao.gcp.SecretsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

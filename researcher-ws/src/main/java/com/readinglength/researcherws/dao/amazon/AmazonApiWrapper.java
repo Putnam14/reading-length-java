@@ -2,7 +2,7 @@ package com.readinglength.researcherws.dao.amazon;
 
 import com.amazon.paapi5.v1.ApiClient;
 import com.amazon.paapi5.v1.api.DefaultApi;
-import com.readinglength.researcherws.dao.gcp.SecretsDao;
+import com.readinglength.lib.dao.gcp.SecretsDao;
 
 import javax.inject.Singleton;
 

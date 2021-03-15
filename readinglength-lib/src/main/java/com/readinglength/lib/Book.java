@@ -1,5 +1,10 @@
 package com.readinglength.lib;
 
+import com.github.sisyphsu.dateparser.DateParserUtils;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 public class Book {
     private String title;
     private String author;
@@ -9,7 +14,7 @@ public class Book {
     private Integer pagecount;
     private String coverImage;
     private String publisher;
-    private String publishDate;
+    private LocalDate publishDate;
     private Wordcount wordcount;
 
     public void merge(Book toMerge) {
@@ -91,11 +96,11 @@ public class Book {
     }
 
     public String getPublishDate() {
-        return publishDate;
+        return publishDate.toString();
     }
 
     public void setPublishDate(String publishDate) {
-        this.publishDate = publishDate;
+        this.publishDate = DateParserUtils.parseDateTime(publishDate).toLocalDate();
     }
 
     public Wordcount getWordcount() {

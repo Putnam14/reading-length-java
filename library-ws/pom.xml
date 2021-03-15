@@ -5,21 +5,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.readinglength</groupId>
         <artifactId>readinglength</artifactId>
+        <groupId>com.readinglength</groupId>
         <version>0.1.2</version>
     </parent>
 
-    <artifactId>readinglength-lib</artifactId>
+    <artifactId>library-ws</artifactId>
     <version>0.1.2</version>
-    <name>readinglength-lib</name>
-    <description>Common classes for Reading Length projects</description>
+    <name>library-ws</name>
+    <description>Readinglength backend coordination webservice and main entry.</description>
+    <properties>
+        <exec.mainClass>com.readinglength.libraryws.LibraryWsApplication</exec.mainClass>
+    </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.github.sisyphsu</groupId>
-            <artifactId>dateparser</artifactId>
+            <groupId>com.readinglength</groupId>
+            <artifactId>readinglength-lib</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>

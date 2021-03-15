@@ -2,7 +2,7 @@ package com.readinglength.researcherws.dao.google;
 
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.ws.RestClient;
-import com.readinglength.researcherws.dao.gcp.SecretsDao;
+import com.readinglength.lib.dao.gcp.SecretsDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

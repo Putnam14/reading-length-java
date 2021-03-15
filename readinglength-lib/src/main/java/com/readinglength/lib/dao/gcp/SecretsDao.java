@@ -1,4 +1,4 @@
-package com.readinglength.researcherws.dao.gcp;
+package com.readinglength.lib.dao.gcp;
 
 import com.google.cloud.secretmanager.v1.AccessSecretVersionResponse;
 import com.google.cloud.secretmanager.v1.SecretManagerServiceClient;

@@ -21,8 +21,13 @@ public class Isbn13 extends Isbn {
         return isbn;
     }
 
+    public static Isbn13 convert(Isbn isbn) {
+        if (isbn instanceof Isbn13) return (Isbn13) isbn;
+        return convert((Isbn10) isbn);
+    }
+
     public static Isbn13 convert(Isbn10 isbn10) {
-        StringBuilder isbnBuilder = new StringBuilder(isbn10.getIsbn().substring(0,9));
+        StringBuilder isbnBuilder = new StringBuilder(isbn10.toString().substring(0,9));
         isbnBuilder.insert(0, "978");
         isbnBuilder.append(calcCheckSum(isbnBuilder.toString()));
         return new Isbn13(isbnBuilder.toString());

@@ -45,7 +45,7 @@ public class GoogleBooksDao {
 
     public String queryIsbn(Isbn isbn) {
         Map<String, String> queryParams = new LinkedHashMap<>();
-        queryParams.put("q", String.format("isbn:%s", isbn.getIsbn()));
+        queryParams.put("q", String.format("isbn:%s", isbn.toString()));
         queryParams.put("key", apiKey);
         synchronized (restClient) {
             return restClient.get("volumes", queryParams);

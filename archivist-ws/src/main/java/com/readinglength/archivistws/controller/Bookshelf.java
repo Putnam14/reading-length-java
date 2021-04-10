@@ -3,7 +3,6 @@ package com.readinglength.archivistws.controller;
 import com.readinglength.archivistws.dao.BookshelfDao;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
-import com.readinglength.lib.Isbn13;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
@@ -12,7 +11,6 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Produces;
-import io.micronaut.http.annotation.QueryValue;
 import reactor.core.publisher.Mono;
 
 import javax.inject.Inject;

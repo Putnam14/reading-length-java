@@ -24,7 +24,12 @@ public class Isbn10 extends Isbn {
 
     public static Isbn10 convert(Isbn isbn) {
         if (isbn instanceof Isbn10) return (Isbn10) isbn;
-        StringBuilder isbnBuilder = new StringBuilder(isbn.getIsbn().substring(3,12));
+        return convert((Isbn13) isbn);
+    }
+
+
+    public static Isbn10 convert(Isbn13 isbn) {
+        StringBuilder isbnBuilder = new StringBuilder(isbn.toString().substring(3,12));
         isbnBuilder.append(calcCheckSum(isbnBuilder.toString()));
         return new Isbn10(isbnBuilder.toString());
     }

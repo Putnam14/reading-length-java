@@ -85,7 +85,9 @@ class Search {
 
 
     @Get("/byIsbn")
-    public Mono<Book> byIsbn(Isbn isbn) {
+    public Mono<Book> byIsbn(String isbnString) {
+        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid"));
+        Isbn isbn = Isbn.of(isbnString);
         LOG.info(String.format("Received query for isbn: %s", isbn.getIsbn()));
         Book book = new Book();
         book.setIsbn10(Isbn10.convert(isbn));

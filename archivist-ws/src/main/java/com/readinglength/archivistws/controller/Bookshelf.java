@@ -2,6 +2,8 @@ package com.readinglength.archivistws.controller;
 
 import com.readinglength.archivistws.dao.BookshelfDao;
 import com.readinglength.lib.Book;
+import com.readinglength.lib.Isbn;
+import com.readinglength.lib.Isbn13;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
@@ -10,6 +12,8 @@ import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Produces;
+import io.micronaut.http.annotation.QueryValue;
+import reactor.core.publisher.Mono;
 
 import javax.inject.Inject;
 import java.sql.SQLException;
@@ -37,8 +41,18 @@ public class Bookshelf {
         try {
             bookshelfDao.insertBook(book);
         } catch (SQLException e) {
-           return HttpResponse.serverError(e.getMessage());
+            return HttpResponse.serverError(e.getMessage());
         }
         return HttpResponse.ok();
+    }
+
+    @Get("/byIsbn")
+    public Mono<Book> queryIsbn(String isbnString) {
+        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid"));
+        try {
+            return Mono.justOrEmpty(bookshelfDao.queryBook(Isbn.of(isbnString)));
+        } catch (SQLException e) {
+            return Mono.error(e);
+        }
     }
 }

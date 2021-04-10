@@ -69,7 +69,7 @@ class SearchTest {
 
     @Test
     void byIsbn() {
-        Book res = instance.byIsbn(Isbn.of("0061434531")).block();
+        Book res = instance.byIsbn("0061434531").block();
 
         assertEquals("0061434531", res.getIsbn10());
     }

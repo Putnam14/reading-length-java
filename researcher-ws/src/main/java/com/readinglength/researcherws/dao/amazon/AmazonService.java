@@ -1,79 +1,51 @@
 package com.readinglength.researcherws.dao.amazon;
 
-import com.amazon.paapi5.v1.Contributor;
-import com.amazon.paapi5.v1.Item;
-import com.amazon.paapi5.v1.ItemInfo;
-import com.amazon.paapi5.v1.SearchItemsResource;
-import com.amazon.paapi5.v1.SearchItemsResponse;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.JsonPath;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Singleton
 public class AmazonService {
-
-    private static Logger LOG = LoggerFactory.getLogger(AmazonService.class);
-
-    private final AmazonDao amazonDao;
+    private AmazonDao api;
 
     @Inject
     public AmazonService(AmazonDao amazonDao) {
-        this.amazonDao = amazonDao;
+        this.api = amazonDao;
     }
 
-    public Book queryTitle(String query) {
-        SearchItemsResponse response = amazonDao.queryTitle(query, List.of(
-                SearchItemsResource.ITEMINFO_EXTERNALIDS,
-                SearchItemsResource.ITEMINFO_TITLE,
-                SearchItemsResource.ITEMINFO_BYLINEINFO,
-                SearchItemsResource.ITEMINFO_CONTENTINFO));
+    public AmazonService() {
+        this.api = new AmazonDao();
+    }
+
+    public Book searchKeyword(String keyword) {
         Book book = new Book();
-
-        if (response == null)
-            LOG.info("Not found on Amazon");
-        else if (response.getSearchResult() != null) {
-            Item item = response.getSearchResult().getItems().get(0);
-            if (item != null) {
-                try {
-                    LOG.info("Amazon result");
-                    LOG.info(new ObjectMapper().writeValueAsString(item));
-                } catch (JsonProcessingException e) {
-                    e.printStackTrace();
-                }
-                ItemInfo info = item.getItemInfo();
-
-                if (info.getExternalIds() != null) {
-                    List<String> externalIds = info.getExternalIds().getIsBNs().getDisplayValues();
-                    List<Isbn> isbns = externalIds.stream()
-                            .filter(Isbn::validate)
-                            .map(Isbn::of)
-                            .collect(Collectors.toList());
-                    book.setIsbn10(Isbn10.convert(isbns.get(0)));
-                }
-
-                Contributor author = info.getByLineInfo().getContributors().stream()
-                        .filter(c -> "author".equals(c.getRoleType()))
-                        .findFirst()
-                        .orElse(null);
-
-                if (book.getIsbn10() == null)
-                    book.setIsbn10(new Isbn10(item.getASIN()));
-
-                book.setTitle(info.getTitle().getDisplayValue());
-                book.setAuthor(author != null ? author.getName() : null);
-                book.setPublishDate(info.getContentInfo().getPublicationDate().getDisplayValue());
-                book.setPublisher(info.getByLineInfo().getBrand().getDisplayValue());
-                book.setPagecount(info.getContentInfo().getPagesCount().getDisplayValue());
+        try {
+            String apiResponse = api.searchItems(keyword);
+            Object document = Configuration.defaultConfiguration().jsonProvider().parse(apiResponse);
+            List<Object> candidates = JsonPath.read(document, "$.SearchResult.Items[?(@.ItemInfo.ExternalIds.ISBNs)]");
+            if (candidates.size() > 0) {
+                Object result = candidates.get(0);
+                Isbn isbn = Isbn.of(JsonPath.read(result, "$.ItemInfo.ExternalIds.ISBNs.DisplayValues[0]"));
+                List<String> title = JsonPath.read(result, "$.[?(@.ItemInfo.Title)].ItemInfo.Title.DisplayValue");
+                List<String> author = JsonPath.read(result, "$.[?(@.ItemInfo.ByLineInfo.Contributors[?(@.RoleType =~ /.author/i)])].ItemInfo.ByLineInfo.Contributors[0].Name");
+                List<String> publishDate = JsonPath.read(result, "$.[?(@.ItemInfo.ContentInfo.PublicationDate)].ItemInfo.ContentInfo.PublicationDate.DisplayValue");
+                List<String> publisher = JsonPath.read(result, "$.[?(@.ItemInfo.ByLineInfo.Brand)].ItemInfo.ByLineInfo.Brand.DisplayValue");
+                List<Integer> pagesCount = JsonPath.read(result, "$.[?(@.ItemInfo.ContentInfo.PagesCount)].ItemInfo.ContentInfo.PagesCount.DisplayValue");
+                book.setIsbn10(Isbn10.convert(isbn));
+                if (title.size() > 0) book.setTitle(title.get(0));
+                if (author.size() > 0) book.setAuthor(author.get(0));
+                if (publishDate.size() > 0) book.setPublishDate(publishDate.get(0));
+                if (publisher.size() > 0) book.setPublisher(publisher.get(0));
+                if (pagesCount.size() > 0) book.setPagecount(pagesCount.get(0));
             }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
         return book;
     }

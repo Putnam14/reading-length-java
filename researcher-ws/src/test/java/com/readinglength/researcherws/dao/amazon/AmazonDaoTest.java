@@ -1,13 +1,16 @@
 package com.readinglength.researcherws.dao.amazon;
 
+import com.readinglength.lib.dao.gcp.SecretsDao;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AmazonDaoTest {
 
-    @Test
-    void queryTite() throws Exception {
-        assertTrue(true);
+    //@Test
+    void test() throws Exception {
+        String accessKey = SecretsDao.getSecret("AMAZON_API_KEY");
+        String privateKey = SecretsDao.getSecret("AMAZON_API_SECRET");
+        AmazonDao instance = new AmazonDao(accessKey, privateKey);
+        instance.searchItems("the color of law");
     }
 }

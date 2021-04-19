@@ -58,7 +58,7 @@ class Search {
         }
         if (book.getIsbn10() == null) {
             LOG.info(String.format("Querying Amazon for %s", title));
-            book.merge(amazonService.queryTitle(title));
+            book.merge(amazonService.searchKeyword(title));
         }
         if (book.getIsbn10() == null) {
             LOG.info(String.format("Querying Google for %s", title));

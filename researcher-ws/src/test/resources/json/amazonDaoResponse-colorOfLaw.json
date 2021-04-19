@@ -1,0 +1,1126 @@
+{
+  "SearchResult": {
+    "Items": [
+      {
+        "ASIN": "1631494538",
+        "DetailPageURL": "https://www.amazon.com/dp/1631494538?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "Liveright Publishing Corporation",
+              "Label": "Brand",
+              "Locale": "en_US"
+            },
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Rothstein, Richard",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Liveright",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "Reprint",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 368,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2018-05-01T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9781631494536"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "9781631494536",
+                "1631494538"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "The Color of Law: A Forgotten History of How Our Government Segregated America",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGD3Gp7eud9B0khozLrh7Y%2F4VO7FtKo10Fr8BquBiQLY3Tg2s7VCpPYC7Jry2C2UuPFBTKUSKM7DS7K36fmrHk7n8OJkVR7PyVUUVNfRVust6g%3D%3D",
+              "Price": {
+                "Amount": 12.53,
+                "Currency": "USD",
+                "DisplayAmount": "$12.53",
+                "Savings": {
+                  "Amount": 5.42,
+                  "Currency": "USD",
+                  "DisplayAmount": "$5.42 (30%)",
+                  "Percentage": 30
+                }
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 6.0,
+                "Currency": "USD",
+                "DisplayAmount": "$6.00"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 7.5,
+                "Currency": "USD",
+                "DisplayAmount": "$7.50"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "1847925995",
+        "DetailPageURL": "https://www.amazon.com/dp/1847925995?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Kendi, Ibram X.",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Bodley Head",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 320,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2019-08-15T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9781847925992"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "1847925995"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "How To Be an Antiracist",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGAedil%2FI3mMZhU0DkTnG1qR0E8TttLiyCM7n6828dr5Ii9XCJMNSOhanyACRq2PbnkDIxNE0dDBramPsj5NRIfSXKNLmeZFNGe77e%2FxPo0Cjg%3D%3D",
+              "Price": {
+                "Amount": 25.63,
+                "Currency": "USD",
+                "DisplayAmount": "$25.63"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 17.79,
+                "Currency": "USD",
+                "DisplayAmount": "$17.79"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 20.2,
+                "Currency": "USD",
+                "DisplayAmount": "$20.20"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "0674237471",
+        "DetailPageURL": "https://www.amazon.com/dp/0674237471?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "Belknap Press",
+              "Label": "Brand",
+              "Locale": "en_US"
+            },
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Baradaran, Mehrsa",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Belknap Press: An Imprint of Harvard University Press",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "Reprint",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 384,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2019-03-11T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780674237476"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "0674237471"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "The Color of Money: Black Banks and the Racial Wealth Gap",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGDBLPsjWwXMLJwLuUTJCaT6H5S8S%2BvPxZ2sw5SJ%2BJSGttGkCFE2l72BNjqKruR2zfdICmU7zh%2Fu37rk1xkQwWy%2B9eTciRx4%2BPbTO0fj1VjRtw%3D%3D",
+              "Price": {
+                "Amount": 14.3,
+                "Currency": "USD",
+                "DisplayAmount": "$14.30",
+                "Savings": {
+                  "Amount": 3.65,
+                  "Currency": "USD",
+                  "DisplayAmount": "$3.65 (20%)",
+                  "Percentage": 20
+                }
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 13.4,
+                "Currency": "USD",
+                "DisplayAmount": "$13.40"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 13.25,
+                "Currency": "USD",
+                "DisplayAmount": "$13.25"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "B08KQBYRQG",
+        "DetailPageURL": "https://www.amazon.com/dp/B08KQBYRQG?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "SuperSummary",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Independently published",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 60,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2020-10-07T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9798694644150"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Study Guide: The Color of Law by Richard Rothstein (SuperSummary)",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGDnC%2FolWp5kXVwRCJF4YU2daiDNRmqEnxZb1iFDXZe8Ya9ss73KSSxEgoNsZS5V8TYis0KjGbknQHaQLC70Shj%2FU0ajJGkzH52o06z3jrlGOg%3D%3D",
+              "Price": {
+                "Amount": 11.95,
+                "Currency": "USD",
+                "DisplayAmount": "$11.95"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 11.95,
+                "Currency": "USD",
+                "DisplayAmount": "$11.95"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "0451410440",
+        "DetailPageURL": "https://www.amazon.com/dp/0451410440?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "Dutton",
+              "Label": "Brand",
+              "Locale": "en_US"
+            },
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "McGarrity, Michael",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Dutton",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "Reissue",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 400,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2002-07-01T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780451410443"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "0451410440"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Under the Color of Law (Kevin Kerney)",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGD4zcFM7KXcYl85qC%2BjlFNBPJrxoU4AoL%2B9ry4hXpeorgDXYIkpNV2dPY3oeDEfxdoB5vsVSqjxy1NAF7NGsRFcUBdb1O7lyPI%3D",
+              "Price": {
+                "Amount": 8.99,
+                "Currency": "USD",
+                "DisplayAmount": "$8.99"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "Collectible"
+              },
+              "LowestPrice": {
+                "Amount": 6.95,
+                "Currency": "USD",
+                "DisplayAmount": "$6.95"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 7.3,
+                "Currency": "USD",
+                "DisplayAmount": "$7.30"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 1.64,
+                "Currency": "USD",
+                "DisplayAmount": "$1.64"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "B084FLWDQG",
+        "DetailPageURL": "https://www.amazon.com/dp/B084FLWDQG?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Wilkerson, Isabel",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Random House",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 447,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2020-08-04T00:00:00.000Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "Caste (Oprah's Book Club): The Origins of Our Discontents",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGD6bcNAQxiZGuSK72fK77IbizCuz%2BvwKRj3ElSKRme7XtJENiJr01%2Fpko3xfqPXXkP3KKctsWIlZ8zIq1gxTlUzHQKpm3jkz80Usqexjy%2BiCsRneDIkAkM%2BTQadYCmACZdGitUVbh5EeGR2YX%2BGNAH9O5m4HIqHzfqQkwSQlLCG5A%3D%3D",
+              "Price": {
+                "Amount": 14.99,
+                "Currency": "USD",
+                "DisplayAmount": "$14.99"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 14.99,
+                "Currency": "USD",
+                "DisplayAmount": "$14.99"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "082035063X",
+        "DetailPageURL": "https://www.amazon.com/dp/082035063X?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "University of Georgia Press",
+              "Label": "Brand",
+              "Locale": "en_US"
+            },
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Murray, Pauli",
+                "Role": "Editor",
+                "RoleType": "editor"
+              },
+              {
+                "Locale": "en_US",
+                "Name": "Douglas, Davison",
+                "Role": "Introduction",
+                "RoleType": "introduction"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "University of Georgia Press",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "Reprint",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 776,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2016-06-02T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780820350639"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "082035063X"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "States' Laws on Race and Color (Studies in the Legal History of the South Ser.)",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGA9Lp49y9BEujIsCggetoxgCxa8VmzQTwwy9%2Br0JEfuB2TUBeCas2s%2Fv8KLADqO8UqOLR9Px7zAamw8DXnYDIZ0XYCt6jOkkU74ytPQHU0AVA%3D%3D",
+              "Price": {
+                "Amount": 44.95,
+                "Currency": "USD",
+                "DisplayAmount": "$44.95"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 44.95,
+                "Currency": "USD",
+                "DisplayAmount": "$44.95"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 44.95,
+                "Currency": "USD",
+                "DisplayAmount": "$44.95"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "0307275000",
+        "DetailPageURL": "https://www.amazon.com/dp/0307275000?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "Anchor",
+              "Label": "Brand",
+              "Locale": "en_US"
+            },
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Gimenez, Mark",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Anchor",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "1st Printing",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 432,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2006-08-29T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780307275004"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "0307275000"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "The Color of Law: A Novel",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGCB1QACdl%2FWtwufsTKa4BXXoZwe%2FtCSpHMbDW6mMUG55KOThtiL9B3xbFgiJ3VCm%2FaNnOEG%2BY1G%2BCxlar7BxVxIJO%2F2MyXvmFbhAdM8NpwXGg%3D%3D",
+              "Price": {
+                "Amount": 8.99,
+                "Currency": "USD",
+                "DisplayAmount": "$8.99"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "Collectible"
+              },
+              "LowestPrice": {
+                "Amount": 3.39,
+                "Currency": "USD",
+                "DisplayAmount": "$3.39"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 7.3,
+                "Currency": "USD",
+                "DisplayAmount": "$7.30"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 0.25,
+                "Currency": "USD",
+                "DisplayAmount": "$0.25"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "0988280817",
+        "DetailPageURL": "https://www.amazon.com/dp/0988280817?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "M.E. Chevreul",
+                "Role": "Author",
+                "RoleType": "author"
+              },
+              {
+                "Locale": "en_US",
+                "Name": "Dan Margulis",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "MCW Publishing",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "1st",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 342,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2020-01-10T00:00:00.000Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780988280816"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "0988280817"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "On the Law of Simultaneous Contrast of Colors",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGChfxqjEO9F7mSRwdx9q%2FfH5BQBGaKiuysnOjjj%2FDzOgpJh0Rf%2B7lODLPn92w%2FMY0yv7zJ853ZmV1PWHrnqiooxwuWy1nmNbQPpsGt7tVPhyj9%2B5O012%2BVpnlL2SwKuWz%2BRFa33inyinQy%2FPMCypCRN",
+              "Price": {
+                "Amount": 69.95,
+                "Currency": "USD",
+                "DisplayAmount": "$69.95"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 69.95,
+                "Currency": "USD",
+                "DisplayAmount": "$69.95"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 90.5,
+                "Currency": "USD",
+                "DisplayAmount": "$90.50"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "ASIN": "0807848026",
+        "DetailPageURL": "https://www.amazon.com/dp/0807848026?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Brand": {
+              "DisplayValue": "The University of North Carolina Press",
+              "Label": "Brand",
+              "Locale": "en_US"
+            },
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "O'Brien, Gail Williams",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "University of North Carolina Press",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Edition": {
+              "DisplayValue": "New edition",
+              "Label": "Edition",
+              "Locale": "en_US"
+            },
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 352,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "1999-05-31T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780807848029"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "0807848026",
+                "9780807848029"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "The Color of the Law: Race, Violence, and Justice in the Post-World War II South (The John Hope Franklin Series in African American History and Culture)",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "QC9KMH%2B9wGD7ff2IXvMfmIjSfW8etd77Y3uMJHYXvETzgCYX5DaApxH67zIahiJXZmqjzCfjMB4cjnxQ6ZPvFU%2Fjdledbnratp%2FW5Hi8Sh0%3D",
+              "Price": {
+                "Amount": 39.95,
+                "Currency": "USD",
+                "DisplayAmount": "$39.95"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 7.45,
+                "Currency": "USD",
+                "DisplayAmount": "$7.45"
+              }
+            },
+            {
+              "Condition": {
+                "Value": "New"
+              },
+              "LowestPrice": {
+                "Amount": 39.95,
+                "Currency": "USD",
+                "DisplayAmount": "$39.95"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "SearchURL": "https://www.amazon.com/s?k=the+color+of+law&i=stripbooks&rh=p_n_availability%3A-1&tag=readleng-20&linkCode=osi",
+    "TotalResultCount": 1200
+  }
+}

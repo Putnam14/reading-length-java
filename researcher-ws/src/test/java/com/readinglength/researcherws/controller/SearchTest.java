@@ -1,12 +1,5 @@
 package com.readinglength.researcherws.controller;
 
-import com.amazon.paapi5.v1.ExternalIds;
-import com.amazon.paapi5.v1.Item;
-import com.amazon.paapi5.v1.ItemInfo;
-import com.amazon.paapi5.v1.MultiValuedAttribute;
-import com.amazon.paapi5.v1.SearchItemsResource;
-import com.amazon.paapi5.v1.SearchItemsResponse;
-import com.amazon.paapi5.v1.SearchResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
@@ -22,7 +15,6 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -41,36 +33,32 @@ class SearchTest {
         GoogleBooksService googleBooksService = new GoogleBooksService(googleBooksDao, new ObjectMapper());
         instance = new Search(openLibraryService, amazonService, googleBooksService);
 
-        when(openLibraryDaoMock.queryTitle("War and peace")).thenReturn(
-                Files.readString(Path.of(
-                        SearchTest.class.getResource("/test/work.json").getPath())));
-
-
-        Item result = new Item().itemInfo(new ItemInfo().externalIds(new ExternalIds().isBNs(new MultiValuedAttribute().addDisplayValuesItem("0061434531"))));
-
-        when(amazonDao.queryTitle("War and peace", List.of(
-                    SearchItemsResource.ITEMINFO_EXTERNALIDS,
-                    SearchItemsResource.ITEMINFO_TITLE,
-                    SearchItemsResource.ITEMINFO_BYLINEINFO,
-                    SearchItemsResource.ITEMINFO_CONTENTINFO)))
-                .thenReturn(new SearchItemsResponse().searchResult(new SearchResult().items(List.of(result))));
-
-        when(openLibraryDaoMock.queryIsbn(Isbn.of("0061434531"))).thenReturn(
-                Files.readString(Path.of(
-                        SearchTest.class.getResource("/test/edition.json").getPath())));
+        when(openLibraryDaoMock.queryTitle("War and peace")).thenReturn(loadJson("json/work.json"));
+        when(amazonDao.searchItems("War and peace")).thenReturn(loadJson("json/amazonDaoResponse-warAndPeace.json"));
+        when(openLibraryDaoMock.queryIsbn(Isbn.of("0061434531"))).thenReturn(loadJson("json/edition.json"));
     }
 
     @Test
     void byTitle() {
         Book res = instance.byTitle("War and peace").block();
 
-        assertEquals("0061434531", res.getIsbn10());
+        assertEquals("0061434531", res.getIsbn10().toString());
     }
 
     @Test
     void byIsbn() {
         Book res = instance.byIsbn("0061434531").block();
 
-        assertEquals("0061434531", res.getIsbn10());
+        assertEquals("0061434531", res.getIsbn10().toString());
+    }
+
+    private static String loadJson(String path) {
+        try {
+            return Files.readString(Path.of(
+                            SearchTest.class.getClassLoader().getResource(path).getPath()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

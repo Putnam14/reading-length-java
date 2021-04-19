@@ -27,7 +27,7 @@ class GoogleBooksServiceTest {
     @Test
     void queryTitle() throws IOException, BookNotFoundException {
         when(dao.queryTitle("invisible man")).thenReturn(Files.readString(Path.of(
-                this.getClass().getResource("/test/googleBooksResponse.json").getPath())));
+                this.getClass().getResource("/src/test/resources/json/googleBooksResponse.json").getPath())));
 
         Book book = instance.queryTitle("invisible man");
 

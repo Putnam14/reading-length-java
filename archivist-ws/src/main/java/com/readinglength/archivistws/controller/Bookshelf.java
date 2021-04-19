@@ -3,6 +3,7 @@ package com.readinglength.archivistws.controller;
 import com.readinglength.archivistws.dao.BookshelfDao;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
+import com.readinglength.lib.Isbn13;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.Body;
@@ -45,10 +46,30 @@ public class Bookshelf {
     }
 
     @Get("/byIsbn")
-    public Mono<Book> queryIsbn(String isbnString) {
-        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid"));
+    public Mono<Book> queryBook(String isbnString) {
+        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid."));
         try {
             return Mono.justOrEmpty(bookshelfDao.queryBook(Isbn.of(isbnString)));
+        } catch (SQLException e) {
+            return Mono.error(e);
+        }
+    }
+
+    @Get("/byTitle")
+    public Mono<Isbn13> queryIsbn(String titleString) {
+        if (titleString.isEmpty()) return Mono.error(new Throwable("Title was blank."));
+        try {
+            return Mono.justOrEmpty(bookshelfDao.queryIsbn(titleString));
+        } catch (SQLException e) {
+            return Mono.error(e);
+        }
+    }
+
+    @Get("/isbn")
+    public Mono<Isbn13> getIsbn(String isbnString) {
+        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid."));
+        try {
+            return Mono.justOrEmpty(bookshelfDao.queryForIsbn(Isbn.of(isbnString)));
         } catch (SQLException e) {
             return Mono.error(e);
         }

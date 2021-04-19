@@ -100,7 +100,7 @@ public class Book {
     }
 
     public void setPublishDate(String publishDate) {
-        this.publishDate = DateParserUtils.parseDateTime(publishDate).toLocalDate();
+        if (publishDate != null) this.publishDate = DateParserUtils.parseDateTime(publishDate).toLocalDate();
     }
 
     public Wordcount getWordcount() {

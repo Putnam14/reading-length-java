@@ -4,8 +4,6 @@ import com.readinglength.archivistws.lib.HikariDataSourceFactory;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn13;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,7 +16,6 @@ import java.sql.SQLException;
 
 @Singleton
 public class BookshelfDao {
-    private static Logger LOG = LoggerFactory.getLogger(BookshelfDao.class);
     private DataSource connectionPool;
 
     @Inject
@@ -48,17 +45,13 @@ public class BookshelfDao {
     }
 
     public Book queryBook(Isbn isbn) throws SQLException {
-        LOG.info(String.format("Querying db for ISBN %s", isbn));
         try (Connection conn = connectionPool.getConnection()) {
-            LOG.info("Got connection");
             String stmt = "SELECT * FROM books WHERE isbn = ?";
             try (PreparedStatement queryStmt = conn.prepareStatement(stmt)) {
                 queryStmt.setQueryTimeout(10);
                 queryStmt.setString(1, Isbn13.convert(isbn).toString());
                 ResultSet rs = queryStmt.executeQuery();
                 if (rs.next()) {
-                    LOG.info("Data found in db");
-                    LOG.info(rs.toString());
                     Book result = new Book();
                     result.setIsbn13(new Isbn13(rs.getString("isbn")));
                     result.setTitle(rs.getString("title"));
@@ -69,6 +62,36 @@ public class BookshelfDao {
                     result.setPublisher(rs.getString("publisher"));
                     result.setPublishDate(rs.getDate("publishDate").toString());
                     return result;
+                }
+            }
+        }
+        return null;
+    }
+
+    public Isbn13 queryIsbn(String title) throws SQLException {
+        try (Connection conn = connectionPool.getConnection()) {
+            String stmt = "SELECT isbn FROM books WHERE title = ?";
+            try (PreparedStatement queryStmt = conn.prepareStatement(stmt)) {
+                queryStmt.setQueryTimeout(10);
+                queryStmt.setString(1, title);
+                ResultSet rs = queryStmt.executeQuery();
+                if (rs.next()) {
+                    return new Isbn13(rs.getString("isbn"));
+                }
+            }
+        }
+        return null;
+    }
+
+    public Isbn13 queryForIsbn(Isbn isbn) throws SQLException {
+        try (Connection conn = connectionPool.getConnection()) {
+            String stmt = "SELECT isbn FROM books WHERE isbn = ? LIMIT 1";
+            try (PreparedStatement queryStmt = conn.prepareStatement(stmt)) {
+                queryStmt.setQueryTimeout(10);
+                queryStmt.setString(1, Isbn13.convert(isbn).toString());
+                ResultSet rs = queryStmt.executeQuery();
+                if (rs.next()) {
+                    return new Isbn13(rs.getString("isbn"));
                 }
             }
         }

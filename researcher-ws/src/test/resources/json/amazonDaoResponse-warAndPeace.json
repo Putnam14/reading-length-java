@@ -1,0 +1,111 @@
+{
+  "SearchResult": {
+    "Items": [
+      {
+        "ASIN": "0061434531",
+        "DetailPageURL": "https://www.amazon.com/dp/0061434531?tag=readleng-20&linkCode=osi&th=1&psc=1",
+        "ItemInfo": {
+          "ByLineInfo": {
+            "Contributors": [
+              {
+                "Locale": "en_US",
+                "Name": "Tolstoy, Leo",
+                "Role": "Author",
+                "RoleType": "author"
+              },
+              {
+                "Locale": "en_US",
+                "Name": "Bromfield, Andrew",
+                "Role": "Author",
+                "RoleType": "author"
+              }
+            ],
+            "Manufacturer": {
+              "DisplayValue": "Ecco",
+              "Label": "Manufacturer",
+              "Locale": "en_US"
+            }
+          },
+          "ContentInfo": {
+            "Languages": {
+              "DisplayValues": [
+                {
+                  "DisplayValue": "English",
+                  "Type": "Published"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Original Language"
+                },
+                {
+                  "DisplayValue": "English",
+                  "Type": "Unknown"
+                }
+              ],
+              "Label": "Language",
+              "Locale": "en_US"
+            },
+            "PagesCount": {
+              "DisplayValue": 1400,
+              "Label": "NumberOfPages",
+              "Locale": "en_US"
+            },
+            "PublicationDate": {
+              "DisplayValue": "2018-01-15T00:00:01Z",
+              "Label": "PublicationDate",
+              "Locale": "en_US"
+            }
+          },
+          "ExternalIds": {
+            "EANs": {
+              "DisplayValues": [
+                "9780061434532"
+              ],
+              "Label": "EAN",
+              "Locale": "en_US"
+            },
+            "ISBNs": {
+              "DisplayValues": [
+                "0061434531"
+              ],
+              "Label": "ISBN",
+              "Locale": "en_US"
+            }
+          },
+          "Title": {
+            "DisplayValue": "War and Peace: The Canonical Edition",
+            "Label": "Title",
+            "Locale": "en_US"
+          }
+        },
+        "Offers": {
+          "Listings": [
+            {
+              "Id": "nTECf1h4oM7XNhpAgD0XVwqrABrgPDv0fAJyyV28x2p3N7XzeLqgFWAw7deEMXLNhn6UGf9C2I6zr0oMOkI1vnP7HEypqnq7gC092G%2FS5lk37X12b%2FvfnNrV8S6szV%2F20EkNY4nhkj8JKzClvVyKW6YsSOsuVzgU",
+              "Price": {
+                "Amount": 1079.65,
+                "Currency": "USD",
+                "DisplayAmount": "$1,079.65"
+              },
+              "ViolatesMAP": false
+            }
+          ],
+          "Summaries": [
+            {
+              "Condition": {
+                "Value": "Used"
+              },
+              "LowestPrice": {
+                "Amount": 1079.65,
+                "Currency": "USD",
+                "DisplayAmount": "$1,079.65"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "SearchURL": "https://www.amazon.com/s?k=0061434531&i=stripbooks&rh=p_n_availability%3A-1&tag=readleng-20&linkCode=osi",
+    "TotalResultCount": 1
+  }
+}

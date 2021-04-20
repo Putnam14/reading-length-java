@@ -20,16 +20,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.readinglength</groupId>
             <artifactId>readinglength-lib</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-validation</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut.configuration</groupId>
-            <artifactId>micronaut-hibernate-validator</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.cloud.sql</groupId>
@@ -39,7 +35,6 @@
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
         </dependency>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -90,7 +85,6 @@
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>2.7.1</version>
-
                 <dependencies>
                     <dependency>
                         <groupId>com.google.cloud.tools</groupId>
@@ -98,7 +92,6 @@
                         <version>0.1.0</version>
                     </dependency>
                 </dependencies>
-
                 <configuration>
                     <container>
                         <mainClass>${exec.mainClass}</mainClass>

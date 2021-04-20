@@ -83,7 +83,7 @@ public class BookshelfDao {
         return null;
     }
 
-    public Isbn13 queryForIsbn(Isbn isbn) throws SQLException {
+    public boolean queryForIsbn(Isbn isbn) throws SQLException {
         try (Connection conn = connectionPool.getConnection()) {
             String stmt = "SELECT isbn FROM books WHERE isbn = ? LIMIT 1";
             try (PreparedStatement queryStmt = conn.prepareStatement(stmt)) {
@@ -91,10 +91,10 @@ public class BookshelfDao {
                 queryStmt.setString(1, Isbn13.convert(isbn).toString());
                 ResultSet rs = queryStmt.executeQuery();
                 if (rs.next()) {
-                    return new Isbn13(rs.getString("isbn"));
+                    return true;
                 }
             }
         }
-        return null;
+        return false;
     }
 }

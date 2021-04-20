@@ -5,7 +5,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import javax.inject.Singleton;
-import java.util.Properties;
+import javax.sql.DataSource;
 
 @Singleton
 public class HikariDataSourceFactory {
@@ -15,30 +15,28 @@ public class HikariDataSourceFactory {
     private static final String DB_USER = System.getenv("MYSQL_USER");
     private static final String DB_PASS_SECRET = System.getenv("MYSQL_PASS_SECRET");
 
-    private HikariDataSource connectionPool;
+    private DataSource connectionPool;
 
 
-    HikariDataSourceFactory() throws Exception {
-        Class.forName("com.mysql.jdbc.Driver");
-
-        // Set up URL parameters
-        String jdbcURL = String.format("jdbc:mysql:///%s", DB_NAME);
-        Properties connProps = new Properties();
-        connProps.setProperty("user", DB_USER);
-        connProps.setProperty("password", SecretsDao.getSecret(DB_PASS_SECRET));
-        connProps.setProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
-        connProps.setProperty("cloudSqlInstance", CONNECTION_NAME);
-
-        // Initialize connection pool
+    public HikariDataSourceFactory() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl(jdbcURL);
-        config.setDataSourceProperties(connProps);
+
+        config.setJdbcUrl(String.format("jdbc:mysql:///%s", DB_NAME));
+        config.setUsername(DB_USER);
+        try {
+            config.setPassword(SecretsDao.getSecret(DB_PASS_SECRET));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        config.addDataSourceProperty("socketFactory", "com.google.cloud.sql.mysql.SocketFactory");
+        config.addDataSourceProperty("cloudSqlInstance", CONNECTION_NAME);
+        config.addDataSourceProperty("ipTypes", "PUBLIC,PRIVATE");
         config.setConnectionTimeout(10000); // 10s
 
         this.connectionPool = new HikariDataSource(config);
     }
 
-    public HikariDataSource getConnectionPool() {
+    public DataSource getConnectionPool() {
         return this.connectionPool;
     }
 }

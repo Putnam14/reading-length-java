@@ -5,12 +5,10 @@ import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn13;
 import io.javalin.http.Handler;
-import io.micronaut.http.annotation.Controller;
 
 import javax.inject.Inject;
 import java.sql.SQLException;
 
-@Controller
 public class Bookshelf {
     private BookshelfDao bookshelfDao;
 

@@ -20,10 +20,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.javalin</groupId>
-            <artifactId>javalin</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.readinglength</groupId>
             <artifactId>readinglength-lib</artifactId>
         </dependency>
@@ -36,9 +32,17 @@
             <artifactId>HikariCP</artifactId>
         </dependency>
         <dependency>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+        </dependency>
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.dagger</groupId>
+            <artifactId>dagger</artifactId>
         </dependency>
     </dependencies>
 

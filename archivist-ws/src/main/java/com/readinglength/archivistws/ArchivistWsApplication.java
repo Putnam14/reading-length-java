@@ -1,13 +1,12 @@
 package com.readinglength.archivistws;
 
 import com.readinglength.archivistws.controller.Bookshelf;
-import com.readinglength.archivistws.dao.BookshelfDao;
-import com.readinglength.archivistws.lib.HikariDataSourceFactory;
 import io.javalin.Javalin;
 
 public class ArchivistWsApplication {
     public static void main(String[] args) {
-        Bookshelf bookshelf = new Bookshelf(new BookshelfDao(new HikariDataSourceFactory()));
+        ArchivistComponent archivistComponent = DaggerArchivistComponent.create();
+        Bookshelf bookshelf = archivistComponent.bookshelf();
         Javalin app = Javalin.create().start(8080);
         app.get("/", bookshelf.index);
         app.get("/books/isbn", bookshelf.queryBookByIsbn);

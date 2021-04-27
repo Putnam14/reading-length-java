@@ -1,12 +1,11 @@
 package com.readinglength.archivistws.dao;
 
-import com.readinglength.archivistws.lib.HikariDataSourceFactory;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn13;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
+import javax.inject.Named;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Date;
@@ -14,13 +13,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-@Singleton
 public class BookshelfDao {
     private DataSource connectionPool;
 
     @Inject
-    public BookshelfDao(HikariDataSourceFactory hikariDataSourceFactory) {
-        this.connectionPool = hikariDataSourceFactory.getConnectionPool();
+    BookshelfDao(@Named("DS_BOOKS") DataSource connectionPool) {
+        this.connectionPool = connectionPool;
     }
 
     public void insertBook(Book book) throws SQLException {

@@ -39,13 +39,16 @@
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-server-netty</artifactId>
             <version>${micronaut.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>io.micronaut</groupId>
             <artifactId>micronaut-http-client</artifactId>
             <version>${micronaut.version}</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.auth</groupId>
+            <artifactId>google-auth-library-appengine</artifactId>
+            <version>0.23.0</version>
         </dependency>
         <dependency>
             <groupId>com.google.cloud</groupId>
@@ -56,11 +59,6 @@
             <groupId>com.google.cloud</groupId>
             <artifactId>google-cloud-storage</artifactId>
             <version>1.113.8</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.auth</groupId>
-            <artifactId>google-auth-library-appengine</artifactId>
-            <version>0.23.0</version>
         </dependency>
         <dependency>
             <groupId>io.projectreactor</groupId>
@@ -86,11 +84,13 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>3.6.28</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.7.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -125,6 +125,11 @@
                 <version>16.3.0</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.google.dagger</groupId>
+                <artifactId>dagger</artifactId>
+                <version>2.16</version>
             </dependency>
             <dependency>
                 <groupId>com.amazon.paapi5</groupId>
@@ -212,6 +217,11 @@
                                 <groupId>io.micronaut</groupId>
                                 <artifactId>micronaut-graal</artifactId>
                                 <version>${micronaut.version}</version>
+                            </path>
+                            <path>
+                                <groupId>com.google.dagger</groupId>
+                                <artifactId>dagger-compiler</artifactId>
+                                <version>2.16</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>

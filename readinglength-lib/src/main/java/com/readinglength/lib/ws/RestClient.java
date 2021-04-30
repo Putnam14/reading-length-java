@@ -1,9 +1,16 @@
 package com.readinglength.lib.ws;
 
-import io.micronaut.http.client.RxHttpClient;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -11,14 +18,14 @@ import java.util.Map;
 
 public class RestClient {
     private String baseUri;
-    private RxHttpClient httpClient;
+    private HttpClient httpClient;
     private static Logger LOG = LoggerFactory.getLogger(RestClient.class);
 
     public RestClient() { }
 
     public void setClient(URL serverBaseUri) {
         this.baseUri = serverBaseUri.toString();
-        this.httpClient = RxHttpClient.create(serverBaseUri);
+        this.httpClient = HttpClientBuilder.create().build();
     }
 
 
@@ -34,7 +41,28 @@ public class RestClient {
 
     private String makeGetRequest(String requestString) {
         LOG.info(String.format("Making GET request to: %s", baseUri + requestString));
-        return httpClient.retrieve(requestString).onErrorReturnItem("{}").blockingSingle();
+        HttpPost httpPost = new HttpPost(baseUri + requestString);
+        HttpResponse response = null;
+        try {
+             response = httpClient.execute(httpPost);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        int statusCode = 0;
+        if (response != null) {
+            statusCode = response.getStatusLine().getStatusCode();
+        }
+        if (statusCode != 200) {
+            return "{}";
+        }
+        HttpEntity entity = response.getEntity();
+        String jsonResponse = null;
+        try {
+            jsonResponse = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return jsonResponse;
 
     }
 

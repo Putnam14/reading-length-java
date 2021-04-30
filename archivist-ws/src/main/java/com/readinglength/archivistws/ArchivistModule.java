@@ -1,6 +1,5 @@
 package com.readinglength.archivistws;
 
-import com.readinglength.archivistws.dao.BookshelfDao;
 import com.readinglength.archivistws.lib.HikariDataSourceFactory;
 import com.readinglength.lib.dao.gcp.SecretsDao;
 import dagger.Provides;
@@ -11,11 +10,11 @@ import javax.inject.Singleton;
 import javax.sql.DataSource;
 
 @Module
-public class ArchivistModule {
+class ArchivistModule {
     @Provides
     @Singleton
     @Named("DS_BOOKS")
-    public DataSource provideDataSource() {
+    DataSource provideDataSource() {
         String connectionName = System.getenv("MYSQL_CONNECTION_NAME");
         String databaseName = System.getenv("MYSQL_DB");
         String userName = System.getenv("MYSQL_USER");

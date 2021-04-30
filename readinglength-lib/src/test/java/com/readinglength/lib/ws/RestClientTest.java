@@ -1,7 +1,5 @@
 package com.readinglength.lib.ws;
 
-
-import io.micronaut.http.MediaType;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,12 +1,5 @@
 package com.readinglength.researcherws.dao.amazon;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.TreeMap;
-
-import com.readinglength.lib.dao.gcp.SecretsDao;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -15,9 +8,12 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
-import javax.inject.Singleton;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.TreeMap;
 
-@Singleton
 public class AmazonDao {
     private static final String HOST = "webservices.amazon.com";
     private static final String REGION = "us-east-1";
@@ -29,15 +25,6 @@ public class AmazonDao {
     public AmazonDao(String accessKey, String secretKey) {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
-    }
-
-    public AmazonDao() {
-        try {
-            this.accessKey = SecretsDao.getSecret("AMAZON_API_KEY");
-            this.secretKey = SecretsDao.getSecret("AMAZON_API_SECRET");
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public String searchItems(String keyword) {

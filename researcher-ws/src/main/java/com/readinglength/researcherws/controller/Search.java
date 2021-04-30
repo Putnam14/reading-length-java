@@ -9,42 +9,32 @@ import com.readinglength.researcherws.dao.amazon.AmazonService;
 import com.readinglength.researcherws.dao.google.GoogleBooksService;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
 import com.readinglength.researcherws.lib.BookNotFoundException;
-import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Produces;
-import io.micronaut.http.annotation.QueryValue;
+import io.javalin.http.Handler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import reactor.core.publisher.Mono;
 
 import javax.inject.Inject;
 import java.util.List;
 
-@Controller
+public
 class Search {
     private static Logger LOG = LoggerFactory.getLogger(Search.class);
 
-    private final OpenLibraryService openLibraryService;
-    private final AmazonService amazonService;
-    private final GoogleBooksService googleBooksService;
+    private OpenLibraryService openLibraryService;
+    private AmazonService amazonService;
+    private GoogleBooksService googleBooksService;
 
     @Inject
-    Search(OpenLibraryService openLibraryService, AmazonService amazonService, GoogleBooksService googleBooksService) {
+    public Search(OpenLibraryService openLibraryService, AmazonService amazonService, GoogleBooksService googleBooksService) {
         this.openLibraryService = openLibraryService;
         this.amazonService = amazonService;
         this.googleBooksService = googleBooksService;
     }
 
-    @Get
-    @Produces(MediaType.TEXT_PLAIN)
-    public String index() {
-        return "Hi";
-    }
+    public Handler index = ctx -> ctx.result("Hi");
 
-
-    @Get("/byTitle")
-    public Mono<Book> byTitle(@QueryValue String title) {
+    public Handler byTitle = ctx -> {
+        String title = ctx.queryParam("title");
         long startTime = System.currentTimeMillis();
         Book book = new Book();
         try {
@@ -80,22 +70,25 @@ class Search {
         long endTime = System.currentTimeMillis();
         LOG.info(String.format("GET took %d ms to process", endTime - startTime));
 
-        return Mono.justOrEmpty(book);
-    }
+        ctx.json(book);
+    };
 
+    public Handler byIsbn = ctx -> {
+        String isbnString = ctx.queryParam("isbn");
+        if (!Isbn.validate(isbnString)) {
+            ctx.status(400);
+            ctx.result("ISBN was invalid");
+        } else {
+            Isbn isbn = Isbn.of(isbnString);
+            LOG.info(String.format("Received query for isbn: %s", isbn.getIsbn()));
+            Book book = new Book();
+            book.setIsbn10(Isbn10.convert(isbn));
 
-    @Get("/byIsbn")
-    public Mono<Book> byIsbn(String isbnString) {
-        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid"));
-        Isbn isbn = Isbn.of(isbnString);
-        LOG.info(String.format("Received query for isbn: %s", isbn.getIsbn()));
-        Book book = new Book();
-        book.setIsbn10(Isbn10.convert(isbn));
+            book.merge(queryByIsbn(book));
 
-        book.merge(queryByIsbn(book));
-
-        return Mono.justOrEmpty(book);
-    }
+            ctx.json(book);
+        }
+    };
 
     private Book queryByIsbn(Book book) {
         // Query database here first?

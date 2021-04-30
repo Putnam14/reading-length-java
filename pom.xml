@@ -12,8 +12,6 @@
         <java.version>11</java.version>
         <!-- If you are building with JDK 9 or higher, you can uncomment the lines below to set the release version -->
         <release.version>11</release.version>
-        <micronaut.version>2.4.0</micronaut.version>
-        <micronaut.runtime>netty</micronaut.runtime>
     </properties>
 
     <repositories>
@@ -36,16 +34,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-http-server-netty</artifactId>
-            <version>${micronaut.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.micronaut</groupId>
-            <artifactId>micronaut-http-client</artifactId>
-            <version>${micronaut.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.google.auth</groupId>
             <artifactId>google-auth-library-appengine</artifactId>
             <version>0.23.0</version>
@@ -61,23 +49,21 @@
             <version>1.113.8</version>
         </dependency>
         <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
-            <version>3.4.3</version>
-        </dependency>
-        <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
+            <version>1.2.3</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -103,18 +89,6 @@
                 <version>3.13.6</version>
             </dependency>
             <dependency>
-                <groupId>io.micronaut</groupId>
-                <artifactId>micronaut-bom</artifactId>
-                <version>${micronaut.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.micronaut.configuration</groupId>
-                <artifactId>micronaut-hibernate-validator</artifactId>
-                <version>1.0.0</version>
-            </dependency>
-            <dependency>
                 <groupId>com.readinglength</groupId>
                 <artifactId>readinglength-lib</artifactId>
                 <version>${revision}</version>
@@ -132,35 +106,9 @@
                 <version>2.16</version>
             </dependency>
             <dependency>
-                <groupId>com.amazon.paapi5</groupId>
-                <artifactId>v1</artifactId>
-                <version>1.0.0</version>
-                <type>jar</type>
-            </dependency>
-            <dependency>
-                <groupId>com.squareup.okhttp</groupId>
-                <artifactId>okhttp</artifactId>
-                <version>2.7.5</version>
-            </dependency>
-            <dependency>
                 <groupId>com.google.cloud.sql</groupId>
                 <artifactId>mysql-socket-factory-connector-j-8</artifactId>
                 <version>1.2.1</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.8.6</version>
-            </dependency>
-            <dependency>
-                <groupId>org.threeten</groupId>
-                <artifactId>threetenbp</artifactId>
-                <version>1.5.0</version>
-            </dependency>
-            <dependency>
-                <groupId>io.gsonfire</groupId>
-                <artifactId>gson-fire</artifactId>
-                <version>1.8.0</version>
             </dependency>
             <dependency>
                 <groupId>com.zaxxer</groupId>
@@ -182,16 +130,27 @@
                 <artifactId>json-path</artifactId>
                 <version>2.5.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.8.0-beta4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.11.4</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.11.4</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>io.micronaut.build</groupId>
-                    <artifactId>micronaut-maven-plugin</artifactId>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -204,57 +163,12 @@
                         </compilerArgs>
                         <annotationProcessorPaths>
                             <path>
-                                <groupId>io.micronaut</groupId>
-                                <artifactId>micronaut-inject-java</artifactId>
-                                <version>${micronaut.version}</version>
-                            </path>
-                            <path>
-                                <groupId>io.micronaut</groupId>
-                                <artifactId>micronaut-validation</artifactId>
-                                <version>${micronaut.version}</version>
-                            </path>
-                            <path>
-                                <groupId>io.micronaut</groupId>
-                                <artifactId>micronaut-graal</artifactId>
-                                <version>${micronaut.version}</version>
-                            </path>
-                            <path>
                                 <groupId>com.google.dagger</groupId>
                                 <artifactId>dagger-compiler</artifactId>
                                 <version>2.16</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
-                    <executions>
-                        <execution>
-                            <id>test-compile</id>
-                            <goals>
-                                <goal>testCompile</goal>
-                            </goals>
-                            <configuration>
-                                <compilerArgs>
-                                    <arg>-parameters</arg>
-                                </compilerArgs>
-                                <annotationProcessorPaths>
-                                    <path>
-                                        <groupId>io.micronaut</groupId>
-                                        <artifactId>micronaut-inject-java</artifactId>
-                                        <version>${micronaut.version}</version>
-                                    </path>
-                                    <path>
-                                        <groupId>io.micronaut</groupId>
-                                        <artifactId>micronaut-validation</artifactId>
-                                        <version>${micronaut.version}</version>
-                                    </path>
-                                    <path>
-                                        <groupId>io.micronaut</groupId>
-                                        <artifactId>micronaut-graal</artifactId>
-                                        <version>${micronaut.version}</version>
-                                    </path>
-                                </annotationProcessorPaths>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
             </plugins>
         </pluginManagement>

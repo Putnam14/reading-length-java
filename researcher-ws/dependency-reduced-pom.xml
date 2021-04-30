@@ -22,16 +22,6 @@
               <goal>shade</goal>
             </goals>
             <configuration>
-              <filters>
-                <filter>
-                  <artifact>*:*</artifact>
-                  <excludes>
-                    <exclude>META-INF/*.SF</exclude>
-                    <exclude>META-INF/*.DSA</exclude>
-                    <exclude>META-INF/*.RSA</exclude>
-                  </excludes>
-                </filter>
-              </filters>
               <transformers>
                 <transformer>
                   <mainClass>${exec.mainClass}</mainClass>
@@ -93,6 +83,10 @@
       <scope>test</scope>
       <exclusions>
         <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+        <exclusion>
           <artifactId>opentest4j</artifactId>
           <groupId>org.opentest4j</groupId>
         </exclusion>
@@ -111,6 +105,42 @@
         <exclusion>
           <artifactId>junit-platform-engine</artifactId>
           <groupId>org.junit.platform</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>apiguardian-api</artifactId>
+          <groupId>org.apiguardian</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <version>3.6.28</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>byte-buddy</artifactId>
+          <groupId>net.bytebuddy</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>byte-buddy-agent</artifactId>
+          <groupId>net.bytebuddy</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>objenesis</artifactId>
+          <groupId>org.objenesis</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>5.7.0</version>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>junit-jupiter-params</artifactId>
+          <groupId>org.junit.jupiter</groupId>
         </exclusion>
       </exclusions>
     </dependency>

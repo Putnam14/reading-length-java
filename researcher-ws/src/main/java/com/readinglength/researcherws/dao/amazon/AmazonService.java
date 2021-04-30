@@ -7,20 +7,14 @@ import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.List;
 
-@Singleton
 public class AmazonService {
     private AmazonDao api;
 
     @Inject
     public AmazonService(AmazonDao amazonDao) {
         this.api = amazonDao;
-    }
-
-    public AmazonService() {
-        this.api = new AmazonDao();
     }
 
     public Book searchKeyword(String keyword) {

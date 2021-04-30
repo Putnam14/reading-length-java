@@ -4,74 +4,75 @@ import com.readinglength.archivistws.dao.BookshelfDao;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn13;
-import io.micronaut.http.HttpResponse;
-import io.micronaut.http.MediaType;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Consumes;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Produces;
-import reactor.core.publisher.Mono;
+import io.javalin.http.Handler;
 
 import javax.inject.Inject;
 import java.sql.SQLException;
 
-@Controller
 public class Bookshelf {
-    private final BookshelfDao bookshelfDao;
+    private BookshelfDao bookshelfDao;
 
     @Inject
-    Bookshelf(BookshelfDao dao) {
+    public Bookshelf(BookshelfDao dao) {
         this.bookshelfDao = dao;
     }
 
+    public Handler index = ctx -> ctx.result("Hello from the bookshelf!");
 
-    @Get
-    @Produces(MediaType.TEXT_PLAIN)
-    public String index() {
-        return "Hello from the bookshelf!";
-    }
-
-    @Post("/insert")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public HttpResponse<String> insert(@Body Book book) {
+    public Handler insertBook = ctx -> {
+        Book book = ctx.bodyAsClass(Book.class);
         try {
             bookshelfDao.insertBook(book);
         } catch (SQLException e) {
-            return HttpResponse.serverError(e.getMessage());
+            ctx.status(500);
+            ctx.result("Something went wrong on our end with the database.");
         }
-        return HttpResponse.ok();
-    }
+        ctx.status(201);
+    };
 
-    @Get("/byIsbn")
-    public Mono<Book> queryBook(String isbnString) {
-        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid."));
-        try {
-            return Mono.justOrEmpty(bookshelfDao.queryBook(Isbn.of(isbnString)));
-        } catch (SQLException e) {
-            return Mono.error(e);
+    public Handler queryBookByIsbn = ctx -> {
+        String isbnString = ctx.queryParam("isbn");
+        if (!Isbn.validate(isbnString)) {
+            ctx.status(400);
+            ctx.result("Invalid ISBN");
+        } else {
+            Book book = bookshelfDao.queryBook(Isbn.of(isbnString));
+            if (book != null) {
+                ctx.json(book);
+            } else {
+                ctx.status(404);
+                ctx.result("Book was not found for ISBN " + isbnString);
+            }
         }
-    }
+    };
 
-    @Get("/byTitle")
-    public Mono<Isbn13> queryIsbn(String titleString) {
-        if (titleString.isEmpty()) return Mono.error(new Throwable("Title was blank."));
-        try {
-            return Mono.justOrEmpty(bookshelfDao.queryIsbn(titleString));
-        } catch (SQLException e) {
-            return Mono.error(e);
+    public Handler queryIsbnByTitle = ctx -> {
+        String title = ctx.queryParam("title");
+        if (title == null || title.isEmpty()) {
+            ctx.status(400);
+        } else {
+            Isbn13 isbn = bookshelfDao.queryIsbn(title);
+            if (isbn != null) {
+                ctx.json(isbn);
+            } else {
+                ctx.status(404);
+                ctx.result("ISBN was not found in database for title " + title);
+            }
         }
-    }
+    };
 
-    @Get("/isbn")
-    public Mono<Isbn13> getIsbn(String isbnString) {
-        if (!Isbn.validate(isbnString)) return Mono.error(new Throwable("ISBN was invalid."));
-        try {
-            return Mono.justOrEmpty(bookshelfDao.queryForIsbn(Isbn.of(isbnString)));
-        } catch (SQLException e) {
-            return Mono.error(e);
+    public Handler isbnExists = ctx -> {
+        String isbnString = ctx.queryParam("isbn");
+        if (!Isbn.validate(isbnString)) {
+            ctx.status(400);
+        } else {
+            if (bookshelfDao.queryForIsbn(Isbn.of(isbnString))) {
+                ctx.status(200);
+                ctx.result(String.format("Entry for %s exists in database.", isbnString));
+            } else {
+                ctx.status(404);
+                ctx.result(String.format("%s was not found in database.", isbnString));
+            }
         }
-    }
+    };
 }

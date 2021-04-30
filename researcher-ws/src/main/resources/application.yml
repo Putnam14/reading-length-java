@@ -1,5 +1,0 @@
-micronaut:
-  application:
-    name: researcher-ws
-  server:
-    port: 8080

@@ -5,14 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.lib.BookNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.List;
 
 public class OpenLibraryService {
-    private static Logger LOG = LoggerFactory.getLogger(OpenLibraryService.class);
     private final OpenLibraryDao openLibraryDao;
     private final ObjectMapper objectMapper;
 
@@ -53,7 +50,6 @@ public class OpenLibraryService {
 
         try {
             edition = objectMapper.readValue(openLibraryResponse, OpenLibraryEdition.class);
-            LOG.info(objectMapper.writeValueAsString(edition));
         } catch(JsonProcessingException e) {
             throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary_Edition_JSON");
         }
@@ -68,7 +64,7 @@ public class OpenLibraryService {
         book.setPublishDate(edition.getPublish_date());
         book.setPublisher(edition.getPublishers().get(0));
         if (book.getIsbn13() != null)
-            book.setCoverImage("http://covers.openlibrary.org/b/isbn/" + book.getIsbn13().getIsbn() + "-L.jpg");
+            book.setCoverImage("https://covers.openlibrary.org/b/isbn/" + book.getIsbn13().getIsbn() + "-L.jpg");
 
         return book;
     }

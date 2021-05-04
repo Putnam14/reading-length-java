@@ -15,7 +15,7 @@ public class OpenLibraryDao {
     @Inject
     public OpenLibraryDao(RestClient restClient) {
         try {
-            restClient.setClient(new URL("http://openlibrary.org/"));
+            restClient.setClient(new URL("https://openlibrary.org/"));
         } catch(MalformedURLException e) {
             e.printStackTrace();
         }

@@ -4,6 +4,9 @@ import com.github.sisyphsu.dateparser.DateParserUtils;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Book {
     private String title;
@@ -100,7 +103,20 @@ public class Book {
     }
 
     public void setPublishDate(String publishDate) {
-        if (publishDate != null) this.publishDate = DateParserUtils.parseDateTime(publishDate).toLocalDate();
+        LocalDate date = null;
+        if (publishDate != null) {
+            try {
+                date = DateParserUtils.parseDateTime(publishDate).toLocalDate();
+            } catch (DateTimeParseException e) {
+                Matcher m = Pattern.compile("(\\d{4})").matcher(publishDate);
+                if (m.find()) {
+                    date = DateParserUtils.parseDateTime(m.group(0)).toLocalDate();
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        }
+        this.publishDate = date;
     }
 
     public Wordcount getWordcount() {

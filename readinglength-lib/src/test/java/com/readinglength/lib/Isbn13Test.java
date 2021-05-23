@@ -41,7 +41,7 @@ class Isbn13Test {
 
         Isbn13 isbn = new Isbn13(input);
 
-        assertEquals(input, isbn.getIsbn());
+        assertEquals(input, isbn.toString());
     }
 
     @Test
@@ -52,7 +52,7 @@ class Isbn13Test {
     @Test
     void testConvert() {
         Isbn13 isbn = Isbn13.convert(new Isbn10("123456789X"));
-        assertTrue(Isbn13.validate(isbn.getIsbn()));
+        assertTrue(Isbn13.validate(isbn.toString()));
     }
 
 }

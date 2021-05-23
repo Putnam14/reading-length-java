@@ -29,10 +29,10 @@ class SearchTest {
     static void setUp() throws IOException {
         OpenLibraryDao openLibraryDaoMock = mock(OpenLibraryDao.class);
         AmazonDao amazonDao = mock(AmazonDao.class);
-        OpenLibraryService openLibraryService = new OpenLibraryService(openLibraryDaoMock, new ObjectMapper());
+        OpenLibraryService openLibraryService = new OpenLibraryService(openLibraryDaoMock);
         AmazonService amazonService = new AmazonService(amazonDao);
         GoogleBooksDao googleBooksDao = mock(GoogleBooksDao.class);
-        GoogleBooksService googleBooksService = new GoogleBooksService(googleBooksDao, new ObjectMapper());
+        GoogleBooksService googleBooksService = new GoogleBooksService(googleBooksDao);
         instance = new Search(openLibraryService, amazonService, googleBooksService);
 
         when(openLibraryDaoMock.queryTitle("War and peace")).thenReturn(loadJson("json/work.json"));

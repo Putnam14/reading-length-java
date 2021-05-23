@@ -21,17 +21,17 @@ class GoogleBooksServiceTest {
     @BeforeEach
     void setUp() {
         dao = mock(GoogleBooksDao.class);
-        instance = new GoogleBooksService(dao, new ObjectMapper());
+        instance = new GoogleBooksService(dao);
     }
 
     @Test
     void queryTitle() throws IOException, BookNotFoundException {
         when(dao.queryTitle("invisible man")).thenReturn(Files.readString(Path.of(
-                this.getClass().getResource("/src/test/resources/json/googleBooksResponse.json").getPath())));
+                this.getClass().getResource("/json/googleBooksResponse.json").getPath())));
 
         Book book = instance.queryTitle("invisible man");
 
-        assertEquals("1473216842", book.getIsbn10().getIsbn());
+        assertEquals("1473216842", book.getIsbn10().toString());
 
     }
 }

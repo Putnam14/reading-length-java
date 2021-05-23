@@ -4,7 +4,7 @@ package com.readinglength.lib.ws;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
@@ -41,10 +41,10 @@ public class RestClient {
 
     private String makeGetRequest(String requestString) {
         LOG.info(String.format("Making GET request to: %s", baseUri + requestString));
-        HttpPost httpPost = new HttpPost(baseUri + requestString);
+        HttpGet httpGet = new HttpGet(baseUri + requestString);
         HttpResponse response = null;
         try {
-             response = httpClient.execute(httpPost);
+             response = httpClient.execute(httpGet);
         } catch (IOException e) {
             e.printStackTrace();
         }

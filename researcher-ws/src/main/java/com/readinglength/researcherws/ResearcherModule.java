@@ -14,11 +14,6 @@ import java.net.URL;
 
 @Module
 class ResearcherModule {
-    @Provides
-    @Singleton
-    ObjectMapper providesObjectMapper() {
-        return new ObjectMapper();
-    }
 
     @Provides
     @Singleton

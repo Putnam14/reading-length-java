@@ -8,12 +8,12 @@ class IsbnTest {
 
     @Test
     void ofIsbn10() {
-        assertEquals(new Isbn10("0132350882").getIsbn(), Isbn.of("0-13-235088-2").getIsbn());
+        assertEquals(new Isbn10("0132350882").toString(), Isbn.of("0-13-235088-2").toString());
     }
 
     @Test
     void ofIsbn13() {
-        assertEquals(new Isbn13("9789911457714").getIsbn(), Isbn.of("978-9911457714").getIsbn());
+        assertEquals(new Isbn13("9789911457714").toString(), Isbn.of("978-9911457714").toString());
     }
 
     @Test

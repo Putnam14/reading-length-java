@@ -26,7 +26,7 @@ class AmazonServiceTest {
                 () -> assertEquals("9781631494536", result.getIsbn13().toString()),
                 () -> assertEquals(368, result.getPagecount()),
                 () -> assertEquals("Liveright Publishing Corporation", result.getPublisher()),
-                () -> assertEquals("2018-04-30", result.getPublishDate())
+                () -> assertEquals("2018-04-30", result.getPublishDate().toString())
         );
     }
 

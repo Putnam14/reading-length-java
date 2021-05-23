@@ -23,12 +23,15 @@ class Search {
     private OpenLibraryService openLibraryService;
     private AmazonService amazonService;
     private GoogleBooksService googleBooksService;
+    private ObjectMapper objectMapper;
 
     @Inject
     public Search(OpenLibraryService openLibraryService, AmazonService amazonService, GoogleBooksService googleBooksService) {
         this.openLibraryService = openLibraryService;
         this.amazonService = amazonService;
         this.googleBooksService = googleBooksService;
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.findAndRegisterModules();
     }
 
     public Handler index = ctx -> ctx.result("Hi");
@@ -36,12 +39,12 @@ class Search {
     public Handler byTitle = ctx -> {
         String title = ctx.queryParam("title");
         long startTime = System.currentTimeMillis();
-        Book book = new Book();
+        Book book = new Book.Builder().build();
         try {
             LOG.info(String.format("Querying OL for %s", title));
             List<Isbn> isbns = openLibraryService.queryTitle(title);
             if (isbns.size() == 1) {
-                book.merge(openLibraryService.queryIsbn(isbns.get(0)));
+                book = openLibraryService.queryIsbn(isbns.get(0));
             }
         } catch (BookNotFoundException e) {
             LOG.warn(String.format("OL search failed: %s", e.getMessage()));
@@ -63,7 +66,7 @@ class Search {
         }
 
         try {
-            LOG.info(new ObjectMapper().writeValueAsString(book));
+            LOG.info(objectMapper.writeValueAsString(book));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -80,9 +83,10 @@ class Search {
             ctx.result("ISBN was invalid");
         } else {
             Isbn isbn = Isbn.of(isbnString);
-            LOG.info(String.format("Received query for isbn: %s", isbn.getIsbn()));
-            Book book = new Book();
-            book.setIsbn10(Isbn10.convert(isbn));
+            LOG.info(String.format("Received query for isbn: %s", isbn.toString()));
+            Book book = new Book.Builder()
+                    .withIsbn10(Isbn10.convert(isbn))
+                    .build();
 
             book.merge(queryByIsbn(book));
 

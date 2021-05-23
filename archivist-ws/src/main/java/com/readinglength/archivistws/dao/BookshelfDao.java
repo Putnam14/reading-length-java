@@ -2,6 +2,7 @@ package com.readinglength.archivistws.dao;
 
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
+import com.readinglength.lib.Isbn10;
 import com.readinglength.lib.Isbn13;
 
 import javax.inject.Inject;
@@ -50,16 +51,16 @@ public class BookshelfDao {
                 queryStmt.setString(1, Isbn13.convert(isbn).toString());
                 ResultSet rs = queryStmt.executeQuery();
                 if (rs.next()) {
-                    Book result = new Book();
-                    result.setIsbn13(new Isbn13(rs.getString("isbn")));
-                    result.setTitle(rs.getString("title"));
-                    result.setAuthor(rs.getString("author"));
-                    result.setDescription(rs.getString("description"));
-                    result.setPagecount(rs.getInt("pagecount"));
-                    result.setCoverImage(rs.getString("coverImage"));
-                    result.setPublisher(rs.getString("publisher"));
-                    result.setPublishDate(rs.getDate("publishDate").toString());
-                    return result;
+                    return new Book.Builder()
+                            .withIsbn10(Isbn10.convert(isbn))
+                            .withTitle(rs.getString("title"))
+                            .withAuthor(rs.getString("author"))
+                            .withDescription(rs.getString("description"))
+                            .withPagecount(rs.getInt("pagecount"))
+                            .withCoverImage(rs.getString("coverImage"))
+                            .withPublisher(rs.getString("publisher"))
+                            .withPublishDate((rs.getDate("publishDate").toString()))
+                            .build();
                 }
             }
         }

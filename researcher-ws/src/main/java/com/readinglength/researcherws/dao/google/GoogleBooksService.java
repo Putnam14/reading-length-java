@@ -6,8 +6,6 @@ import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 import com.readinglength.researcherws.lib.BookNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,7 +14,6 @@ import java.util.stream.Collectors;
 
 @Singleton
 public class GoogleBooksService {
-    private static Logger LOG = LoggerFactory.getLogger(GoogleBooksService.class);
     private final GoogleBooksDao googleBooksDao;
     private final ObjectMapper objectMapper;
 
@@ -46,7 +43,6 @@ public class GoogleBooksService {
                 throw new BookNotFoundException(title, "Google");
 
             GoogleBooksEdition edition = response.getItems().get(0).getVolumeInfo();
-            LOG.info(objectMapper.writeValueAsString(edition));
             List<String> ids = edition.getIndustryIdentifiers().stream()
                     .filter((id -> id.containsValue("ISBN_13") || id.containsValue("ISBN_10")))
                     .map(id -> id.get("identifier"))

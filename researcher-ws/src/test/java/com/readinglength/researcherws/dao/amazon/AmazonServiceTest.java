@@ -1,7 +1,7 @@
 package com.readinglength.researcherws.dao.amazon;
 
 import com.readinglength.lib.Book;
-import org.junit.jupiter.api.BeforeAll;
+import com.readinglength.lib.dao.gcp.SecretsDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,5 +46,14 @@ class AmazonServiceTest {
             e.printStackTrace();
         }
         return null;
+    }
+
+    //@Test
+    void helper() throws Exception {
+        String accessKey = SecretsDao.getSecret("AMAZON_API_KEY");
+        String privateKey = SecretsDao.getSecret("AMAZON_API_SECRET");
+        AmazonDao instance = new AmazonDao(accessKey, privateKey);
+        String result = instance.searchItems("a walk in the woods");
+        assertNotNull(result);
     }
 }

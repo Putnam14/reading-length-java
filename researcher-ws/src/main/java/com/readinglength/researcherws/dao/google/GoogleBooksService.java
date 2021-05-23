@@ -46,7 +46,7 @@ public class GoogleBooksService {
                 throw new BookNotFoundException(title, "Google");
 
             GoogleBooksEdition edition = response.getItems().get(0).getVolumeInfo();
-            LOG.info(new ObjectMapper().writeValueAsString(edition));
+            LOG.info(objectMapper.writeValueAsString(edition));
             List<String> ids = edition.getIndustryIdentifiers().stream()
                     .filter((id -> id.containsValue("ISBN_13") || id.containsValue("ISBN_10")))
                     .map(id -> id.get("identifier"))

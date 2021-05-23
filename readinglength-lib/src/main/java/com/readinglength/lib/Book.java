@@ -6,7 +6,10 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.github.sisyphsu.dateparser.DateParserUtils;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @JsonDeserialize(builder = Book.Builder.class)
 public class Book {
@@ -110,10 +113,26 @@ public class Book {
         public Builder withCoverImage(String coverImage)        { this.coverImage = coverImage; return this; }
         public Builder withPublisher(String publisher)          { this.publisher = publisher; return this; }
         public Builder withPublishDate(LocalDate publishDate)   { this.publishDate = publishDate; return this; }
-        public Builder withPublishDate(String publishDate)      { this.publishDate = DateParserUtils.parseDateTime(publishDate).toLocalDate(); return this; }
+        public Builder withPublishDate(String publishDate)      { this.publishDate = stringToDateHelper(publishDate); return this; }
         public Builder withWordcount(Wordcount wordcount)       { this.wordcount = wordcount; return this; }
 
         public Book build() { return new Book(title, author, description, isbn10, isbn13, pagecount, coverImage, publisher, publishDate, wordcount); }
+    }
+
+    private static LocalDate stringToDateHelper(String dateString) {
+        if (dateString != null) {
+            try {
+                return DateParserUtils.parseDateTime(dateString).toLocalDate();
+            } catch (DateTimeParseException e) {
+                Matcher m = Pattern.compile("(\\d{4})").matcher(dateString);
+                if (m.find()) {
+                    return DateParserUtils.parseDateTime(m.group(0)).toLocalDate();
+                } else {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
     }
 
     @Override

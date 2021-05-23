@@ -1,6 +1,5 @@
 package com.readinglength.lib.ws;
 
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -53,6 +52,7 @@ public class RestClient {
             statusCode = response.getStatusLine().getStatusCode();
         }
         if (statusCode != 200) {
+            LOG.debug("Non-200 response: " + response);
             return "{}";
         }
         HttpEntity entity = response.getEntity();

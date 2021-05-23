@@ -103,7 +103,6 @@ public class Book {
         private LocalDate publishDate;
         private Wordcount wordcount;
 
-        public Builder() {}
         public Builder withTitle(String title)                  { this.title = title; return this; }
         public Builder withAuthor(String author)                { this.author = author; return this; }
         public Builder withDescription(String description)      { this.description = description; return this; }

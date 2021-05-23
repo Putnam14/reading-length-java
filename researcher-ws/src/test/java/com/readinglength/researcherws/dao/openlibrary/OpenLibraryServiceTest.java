@@ -2,19 +2,16 @@ package com.readinglength.researcherws.dao.openlibrary;
 
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
-import com.readinglength.lib.ws.RestClient;
 import com.readinglength.researcherws.lib.BookNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

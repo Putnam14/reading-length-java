@@ -1,7 +1,6 @@
 package com.readinglength.archivistws.dao;
 
 import com.readinglength.lib.Book;
-import com.readinglength.lib.Isbn10;
 import com.readinglength.lib.Isbn13;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,6 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import static org.mockito.ArgumentMatchers.any;

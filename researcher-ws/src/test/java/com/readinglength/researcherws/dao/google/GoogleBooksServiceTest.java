@@ -1,6 +1,5 @@
 package com.readinglength.researcherws.dao.google;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Book;
 import com.readinglength.researcherws.lib.BookNotFoundException;
 import org.junit.jupiter.api.BeforeEach;

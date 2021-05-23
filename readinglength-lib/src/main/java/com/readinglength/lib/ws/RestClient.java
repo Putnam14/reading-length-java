@@ -20,13 +20,10 @@ public class RestClient {
     private HttpClient httpClient;
     private static Logger LOG = LoggerFactory.getLogger(RestClient.class);
 
-    public RestClient() { }
-
     public void setClient(URL serverBaseUri) {
         this.baseUri = serverBaseUri.toString();
         this.httpClient = HttpClientBuilder.create().build();
     }
-
 
     public String get(String endpoint, Map<String, String> queryParams) {
         String requestString = queryParamsToRequestString(endpoint, queryParams);
@@ -70,5 +67,4 @@ public class RestClient {
 
         return queryString.toString();
     }
-
 }

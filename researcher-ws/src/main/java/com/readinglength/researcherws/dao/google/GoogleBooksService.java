@@ -43,27 +43,31 @@ public class GoogleBooksService {
                 throw new BookNotFoundException(title, "Google");
 
             GoogleBooksEdition edition = response.getItems().get(0).getVolumeInfo();
-            List<String> ids = edition.getIndustryIdentifiers().stream()
-                    .filter((id -> id.containsValue("ISBN_13") || id.containsValue("ISBN_10")))
-                    .map(id -> id.get("identifier"))
-                    .collect(Collectors.toList());
 
-            Book.Builder book = new Book.Builder()
-                    .withTitle(edition.getTitle());
-
-            if (ids.size() > 0)
-                book = book.withIsbn10(Isbn10.convert(Isbn.of(ids.get(0))));
-            if (edition.getAuthors().size() > 0)
-                book = book.withAuthor(edition.getAuthors().get(0));
-            if (edition.getDescription() != null && !edition.getDescription().isEmpty())
-                book = book.withDescription(edition.getDescription());
-            if (edition.getImageLinks() != null && edition.getImageLinks().get("thumbnail") != null)
-                book = book.withCoverImage(edition.getImageLinks().get("thumbnail"));
-
-            return book.build();
-
+            return editionToBook(edition);
         } catch(JsonProcessingException e) {
             throw new BookNotFoundException(title, "Google_JSON");
         }
+    }
+
+    private Book editionToBook(GoogleBooksEdition edition) {
+        List<String> ids = edition.getIndustryIdentifiers().stream()
+                .filter((id -> id.containsValue("ISBN_13") || id.containsValue("ISBN_10")))
+                .map(id -> id.get("identifier"))
+                .collect(Collectors.toList());
+
+        Book.Builder book = new Book.Builder()
+                .withTitle(edition.getTitle());
+
+        if (ids.size() > 0)
+            book = book.withIsbn10(Isbn10.convert(Isbn.of(ids.get(0))));
+        if (edition.getAuthors().size() > 0)
+            book = book.withAuthor(edition.getAuthors().get(0));
+        if (edition.getDescription() != null && !edition.getDescription().isEmpty())
+            book = book.withDescription(edition.getDescription());
+        if (edition.getImageLinks() != null && edition.getImageLinks().get("thumbnail") != null)
+            book = book.withCoverImage(edition.getImageLinks().get("thumbnail"));
+
+        return book.build();
     }
 }

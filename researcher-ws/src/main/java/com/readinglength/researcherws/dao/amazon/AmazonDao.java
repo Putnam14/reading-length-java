@@ -1,5 +1,6 @@
 package com.readinglength.researcherws.dao.amazon;
 
+import com.readinglength.researcherws.lib.BookNotFoundException;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -8,6 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 
+import javax.swing.text.html.parser.Entity;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -53,7 +55,7 @@ public class AmazonDao {
         return result;
     }
 
-    private String makeRequest(String requestPayload, String amzTarget, String path) throws Exception{
+    private String makeRequest(String requestPayload, String amzTarget, String path) throws IOException {
         TreeMap<String, String> headers = new TreeMap<>();
         headers.put("host", HOST);
         headers.put("content-type", "application/json; charset=utf-8");
@@ -74,23 +76,16 @@ public class AmazonDao {
         for (Map.Entry<String, String> entrySet : header.entrySet()) {
             httpPost.addHeader(entrySet.getKey(), entrySet.getValue());
         }
-
-        HttpResponse response = null;
         try {
-            response = client.execute(httpPost);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        int statusCode = 0;
-        if (response != null) {
-            statusCode = response.getStatusLine().getStatusCode();
-        }
-        if (statusCode != 200) {
-            throw new Exception("Something went wrong with Amazon request.");
-        }
-        HttpEntity entity = response.getEntity();
-        try {
-            return EntityUtils.toString(entity, StandardCharsets.UTF_8);
+            HttpResponse response = client.execute(httpPost);
+            if (response != null) {
+                String body = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode != 200) {
+                    throw new IOException(String.format("Something went wrong with Amazon request. Response code %d, message: %s", statusCode, body));
+                }
+                return body;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

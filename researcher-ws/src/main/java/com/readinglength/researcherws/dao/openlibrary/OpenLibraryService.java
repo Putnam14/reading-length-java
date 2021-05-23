@@ -33,10 +33,10 @@ public class OpenLibraryService {
         try {
             OpenLibraryTitleResponse response = objectMapper.readValue(openLibraryResponse, OpenLibraryTitleResponse.class);
             if (response.getDocs().size() == 0)
-                throw new BookNotFoundException(title, "OpenLibrary_NotFound");
+                throw new BookNotFoundException(title, "OpenLibrary");
             work = response.getDocs().get(0);
         } catch(JsonProcessingException e) {
-            throw new BookNotFoundException(title, "OpenLibrary_JSON");
+            throw new BookNotFoundException(title, "OpenLibrary (JSON Error)");
         }
 
         return work.getIsbn();
@@ -53,7 +53,7 @@ public class OpenLibraryService {
         try {
             edition = objectMapper.readValue(openLibraryResponse, OpenLibraryEdition.class);
         } catch(JsonProcessingException e) {
-            throw new BookNotFoundException(isbn.toString(), "OpenLibrary_Edition_JSON");
+            throw new BookNotFoundException(isbn.toString(), "OpenLibrary (JSON Error, Edition)");
         }
 
         return new Book.Builder()

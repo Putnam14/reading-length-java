@@ -6,9 +6,8 @@ import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GoogleBooksVolumesResult {
-
-    List<GoogleBooksItem> items;
-    Integer totalItems;
+    private List<GoogleBooksItem> items;
+    private Integer totalItems;
 
     public List<GoogleBooksItem> getItems() {
         return items;

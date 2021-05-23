@@ -1,7 +1,6 @@
 package com.readinglength.researcherws.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.researcherws.dao.amazon.AmazonDao;
 import com.readinglength.researcherws.dao.amazon.AmazonService;
@@ -9,15 +8,12 @@ import com.readinglength.researcherws.dao.google.GoogleBooksDao;
 import com.readinglength.researcherws.dao.google.GoogleBooksService;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryDao;
 import com.readinglength.researcherws.dao.openlibrary.OpenLibraryService;
-import io.javalin.http.Context;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 

@@ -12,11 +12,6 @@ import java.sql.SQLException;
 public class Bookshelf {
     private BookshelfDao bookshelfDao;
 
-    @Inject
-    public Bookshelf(BookshelfDao dao) {
-        this.bookshelfDao = dao;
-    }
-
     public Handler index = ctx -> ctx.result("Hello from the bookshelf!");
 
     public Handler insertBook = ctx -> {
@@ -75,4 +70,9 @@ public class Bookshelf {
             }
         }
     };
+
+    @Inject
+    public Bookshelf(BookshelfDao dao) {
+        this.bookshelfDao = dao;
+    }
 }

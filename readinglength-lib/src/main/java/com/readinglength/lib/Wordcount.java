@@ -1,6 +1,11 @@
 package com.readinglength.lib;
 
 public class Wordcount {
+    private String id;
+    private Integer words;
+    private String type;
+    private String source;
+
     public Wordcount(String id, Integer words, String type, String source) {
         this.id = id;
         this.words = words;
@@ -23,9 +28,4 @@ public class Wordcount {
     public String getSource() {
         return source;
     }
-
-    private String id;
-    private Integer words;
-    private String type;
-    private String source;
 }

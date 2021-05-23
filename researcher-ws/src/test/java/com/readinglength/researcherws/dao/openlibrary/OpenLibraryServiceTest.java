@@ -20,7 +20,7 @@ class OpenLibraryServiceTest {
     private OpenLibraryService instance;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         dao = mock(OpenLibraryDao.class);
         instance = new OpenLibraryService(dao);
     }

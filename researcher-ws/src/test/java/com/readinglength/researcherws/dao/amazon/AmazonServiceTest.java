@@ -1,6 +1,8 @@
 package com.readinglength.researcherws.dao.amazon;
 
 import com.readinglength.lib.Book;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -12,8 +14,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AmazonServiceTest {
-    AmazonDao mockDao = mock(AmazonDao.class);
-    AmazonService instance = new AmazonService(mockDao);
+    private AmazonDao mockDao;
+    private AmazonService instance;
+
+    @BeforeEach
+    void setUp() {
+        mockDao = mock(AmazonDao.class);
+        instance = new AmazonService(mockDao);
+    }
 
     @Test
     void searchKeyword() {

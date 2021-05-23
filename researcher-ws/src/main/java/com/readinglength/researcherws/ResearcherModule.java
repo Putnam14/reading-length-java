@@ -1,6 +1,5 @@
 package com.readinglength.researcherws;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.dao.gcp.SecretsDao;
 import com.readinglength.lib.ws.RestClient;
 import com.readinglength.researcherws.dao.amazon.AmazonDao;
@@ -14,11 +13,6 @@ import java.net.URL;
 
 @Module
 class ResearcherModule {
-    @Provides
-    @Singleton
-    ObjectMapper providesObjectMapper() {
-        return new ObjectMapper();
-    }
 
     @Provides
     @Singleton

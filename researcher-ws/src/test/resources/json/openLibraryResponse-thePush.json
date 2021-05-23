@@ -1,0 +1,133 @@
+{
+  "numFound": 429,
+  "start": 0,
+  "docs": [
+    {
+      "has_fulltext": false,
+      "title": "The push",
+      "title_suggest": "The push",
+      "type": "work",
+      "ebook_count_i": 0,
+      "edition_count": 4,
+      "key": "/works/OL19710906W",
+      "last_modified_i": 1596667255,
+      "cover_edition_key": "OL27409099M",
+      "first_publish_year": 2017,
+      "author_name": [
+        "Tommy Caldwell"
+      ],
+      "publish_year": [
+        2017,
+        2018
+      ],
+      "ddc": [
+        "796.522092"
+      ],
+      "author_key": [
+        "OL7521032A"
+      ],
+      "id_amazon": [
+        "1524778125"
+      ],
+      "seed": [
+        "/books/OL28634656M",
+        "/books/OL27409099M",
+        "/books/OL26924048M",
+        "/books/OL28646222M",
+        "/works/OL19710906W",
+        "/subjects/rock_climbing",
+        "/subjects/mountaineers",
+        "/subjects/biography",
+        "/subjects/anecdotes",
+        "/subjects/person:tommy_caldwell",
+        "/subjects/place:united_states",
+        "/authors/OL7521032A"
+      ],
+      "subject": [
+        "Rock climbing",
+        "Mountaineers",
+        "Biography",
+        "Anecdotes"
+      ],
+      "isbn": [
+        "9781524778125",
+        "0718183398",
+        "0399562702",
+        "9781405924740",
+        "1524778125",
+        "9780718183394",
+        "1405924748",
+        "9780399562709"
+      ],
+      "edition_key": [
+        "OL28634656M",
+        "OL27409099M",
+        "OL26924048M",
+        "OL28646222M"
+      ],
+      "language": [
+        "eng"
+      ],
+      "lcc": [
+        "GV-0199.42000000",
+        "GV-0199.92000000.C243 A3 2017"
+      ],
+      "lccn": [
+        "2017009017"
+      ],
+      "person": [
+        "Tommy Caldwell"
+      ],
+      "oclc": [
+        "964293253"
+      ],
+      "publisher": [
+        "Penguin Books, Limited",
+        "Penguin Audio"
+      ],
+      "text": [
+        "OL28634656M",
+        "OL27409099M",
+        "OL26924048M",
+        "OL28646222M",
+        "9781524778125",
+        "0718183398",
+        "0399562702",
+        "9781405924740",
+        "1524778125",
+        "9780718183394",
+        "1405924748",
+        "9780399562709",
+        "Tommy Caldwell",
+        "964293253",
+        "OL7521032A",
+        "Rock climbing",
+        "Mountaineers",
+        "Biography",
+        "Anecdotes",
+        "A Climber's Journey of Endurance, Risk and Going Beyond Limits",
+        "A Climber's Journey of Endurance, Risk, and Going Beyond Limits",
+        "a climber's journey of endurance, risk, and going beyond limits",
+        "The push",
+        "/works/OL19710906W",
+        "Tommy Caldwell",
+        "Penguin Books, Limited",
+        "Penguin Audio",
+        "Push",
+        "The Push",
+        "2017009017",
+        "Tommy Caldwell",
+        "United States"
+      ],
+      "place": [
+        "United States"
+      ],
+      "publish_date": [
+        "2017",
+        "2018",
+        "May 16, 2017"
+      ]
+    }
+  ],
+  "num_found": 429
+}

@@ -32,7 +32,7 @@ public class OpenLibraryDao {
     }
 
     public String queryIsbn(Isbn isbn) {
-        String requestString = String.format("%s.json", isbn.getIsbn());
+        String requestString = String.format("%s.json", isbn.toString());
         synchronized (restClient) {
             return restClient.get("isbn/", requestString);
         }

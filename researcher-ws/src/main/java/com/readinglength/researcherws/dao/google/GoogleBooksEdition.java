@@ -7,6 +7,15 @@ import java.util.Map;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GoogleBooksEdition {
+    private String title;
+    private List<String> authors;
+    private String publisher;
+    private String publishedDate;
+    private String description;
+    private List<Map<String, String>> industryIdentifiers;
+    private Integer pageCount;
+    private Map<String, String> imageLinks;
+
     public String getTitle() {
         return title;
     }
@@ -62,15 +71,6 @@ public class GoogleBooksEdition {
     public void setImageLinks(Map<String, String> imageLinks) {
         this.imageLinks = imageLinks;
     }
-
-    private String title;
-    private List<String> authors;
-    private String publisher;
-    private String publishedDate;
-    private String description;
-    private List<Map<String, String>> industryIdentifiers;
-    private Integer pageCount;
-    private Map<String, String> imageLinks;
 
 
     public List<Map<String, String>> getIndustryIdentifiers() {

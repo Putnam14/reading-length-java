@@ -17,10 +17,6 @@ public class Isbn13 extends Isbn {
         }
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
     public static Isbn13 convert(Isbn isbn) {
         if (isbn instanceof Isbn13) return (Isbn13) isbn;
         return convert((Isbn10) isbn);

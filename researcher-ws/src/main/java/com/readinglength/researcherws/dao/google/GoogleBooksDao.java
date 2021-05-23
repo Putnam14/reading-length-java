@@ -2,15 +2,12 @@ package com.readinglength.researcherws.dao.google;
 
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.ws.RestClient;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class GoogleBooksDao {
-    private static Logger LOG = LoggerFactory.getLogger(GoogleBooksDao.class);
     private final String apiKey;
     private final RestClient restClient;
 

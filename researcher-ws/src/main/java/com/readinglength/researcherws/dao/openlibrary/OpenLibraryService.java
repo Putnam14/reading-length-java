@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
+import com.readinglength.lib.Isbn10;
+import com.readinglength.lib.Isbn13;
 import com.readinglength.researcherws.lib.BookNotFoundException;
 
 import javax.inject.Inject;
@@ -14,9 +16,10 @@ public class OpenLibraryService {
     private final ObjectMapper objectMapper;
 
     @Inject
-    public OpenLibraryService(OpenLibraryDao openLibraryDao, ObjectMapper objectMapper) {
+    public OpenLibraryService(OpenLibraryDao openLibraryDao) {
         this.openLibraryDao = openLibraryDao;
-        this.objectMapper = objectMapper;
+        this.objectMapper = new ObjectMapper();
+        this.objectMapper.findAndRegisterModules();
     }
 
     public List<Isbn> queryTitle(String title) throws BookNotFoundException {
@@ -41,31 +44,26 @@ public class OpenLibraryService {
 
     public Book queryIsbn(Isbn isbn) throws BookNotFoundException {
         OpenLibraryEdition edition;
-        Book book = new Book();
 
         String openLibraryResponse = openLibraryDao.queryIsbn(isbn);
 
         if (openLibraryResponse == null || "{}".equals(openLibraryResponse))
-            throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary");
+            throw new BookNotFoundException(isbn.toString(), "OpenLibrary");
 
         try {
             edition = objectMapper.readValue(openLibraryResponse, OpenLibraryEdition.class);
         } catch(JsonProcessingException e) {
-            throw new BookNotFoundException(isbn.getIsbn(), "OpenLibrary_Edition_JSON");
+            throw new BookNotFoundException(isbn.toString(), "OpenLibrary_Edition_JSON");
         }
 
-        if (edition.getIsbn_10() != null && edition.getIsbn_10().size() > 0)
-            book.setIsbn10(edition.getIsbn_10().get(0));
-        else if (edition.getIsbn_13() != null && edition.getIsbn_13().size() > 0)
-            book.setIsbn13(edition.getIsbn_13().get(0));
-        book.setTitle(edition.getTitle());
-        book.setPagecount(edition.getNumber_of_pages());
-        book.setDescription(edition.getDescription());
-        book.setPublishDate(edition.getPublish_date());
-        book.setPublisher(edition.getPublishers().get(0));
-        if (book.getIsbn13() != null)
-            book.setCoverImage("https://covers.openlibrary.org/b/isbn/" + book.getIsbn13().getIsbn() + "-L.jpg");
-
-        return book;
+        return new Book.Builder()
+                .withIsbn10(Isbn10.convert(isbn))
+                .withCoverImage("https://covers.openlibrary.org/b/isbn/" + Isbn13.convert(isbn).toString() + "-L.jpg")
+                .withTitle(edition.getTitle())
+                .withPagecount(edition.getNumber_of_pages())
+                .withDescription(edition.getDescription())
+                .withPublishDate(edition.getPublish_date())
+                .withPublisher(edition.getPublishers().get(0))
+                .build();
     }
 }

@@ -1,6 +1,5 @@
 package com.readinglength.researcherws.dao.amazon;
 
-
 /*
  * Copyright 2019 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -32,56 +31,7 @@ import javax.crypto.spec.SecretKeySpec;
 class AWSV4Auth {
     private static final String HMAC_ALGORITHM = "AWS4-HMAC-SHA256";
     private static final String AWS_4_REQUEST = "aws4_request";
-
-    static class Builder {
-        private String awsAccessKey;
-        private String awsSecretKey;
-        private String path;
-        private String region;
-        private String service;
-        private String httpMethodName;
-        private TreeMap<String, String> headers;
-        private String payload;
-
-        Builder(String awsAccessKey, String awsSecretKey) {
-            this.awsAccessKey = awsAccessKey;
-            this.awsSecretKey = awsSecretKey;
-        }
-
-        Builder path(String path) {
-            this.path = path;
-            return this;
-        }
-
-        Builder region(String region) {
-            this.region = region;
-            return this;
-        }
-
-        Builder service(String service) {
-            this.service = service;
-            return this;
-        }
-
-        Builder httpMethodName(String httpMethodName) {
-            this.httpMethodName = httpMethodName;
-            return this;
-        }
-
-        Builder headers(TreeMap<String, String> headers) {
-            this.headers = headers;
-            return this;
-        }
-
-        Builder payload(String payload) {
-            this.payload = payload;
-            return this;
-        }
-
-        AWSV4Auth build() {
-            return new AWSV4Auth(this);
-        }
-    }
+    private static final char[] HEX_ARRAY = "0123456789ABCDEF".toCharArray();
 
     private String awsAccessKey;
     private String awsSecretKey;
@@ -192,7 +142,57 @@ class AWSV4Auth {
                 signature);
     }
 
-    private String toHex(String data) {
+    static class Builder {
+        private String awsAccessKey;
+        private String awsSecretKey;
+        private String path;
+        private String region;
+        private String service;
+        private String httpMethodName;
+        private TreeMap<String, String> headers;
+        private String payload;
+
+        Builder(String awsAccessKey, String awsSecretKey) {
+            this.awsAccessKey = awsAccessKey;
+            this.awsSecretKey = awsSecretKey;
+        }
+
+        Builder path(String path) {
+            this.path = path;
+            return this;
+        }
+
+        Builder region(String region) {
+            this.region = region;
+            return this;
+        }
+
+        Builder service(String service) {
+            this.service = service;
+            return this;
+        }
+
+        Builder httpMethodName(String httpMethodName) {
+            this.httpMethodName = httpMethodName;
+            return this;
+        }
+
+        Builder headers(TreeMap<String, String> headers) {
+            this.headers = headers;
+            return this;
+        }
+
+        Builder payload(String payload) {
+            this.payload = payload;
+            return this;
+        }
+
+        AWSV4Auth build() {
+            return new AWSV4Auth(this);
+        }
+    }
+
+    private static String toHex(String data) {
         MessageDigest messageDigest;
         try {
             messageDigest = MessageDigest.getInstance("SHA-256");
@@ -205,14 +205,14 @@ class AWSV4Auth {
         return null;
     }
 
-    private byte[] hmacSha256(byte[] key, String data) throws Exception {
+    private static byte[] hmacSha256(byte[] key, String data) throws Exception {
         String algorithm = "HmacSHA256";
         Mac mac = Mac.getInstance(algorithm);
         mac.init(new SecretKeySpec(key, algorithm));
         return mac.doFinal(data.getBytes(StandardCharsets.UTF_8));
     }
 
-    private byte[] getSignatureKey(String key, String date, String regionName, String serviceName) throws Exception {
+    private static byte[] getSignatureKey(String key, String date, String regionName, String serviceName) throws Exception {
         byte[] kSecret = ("AWS4" + key).getBytes(StandardCharsets.UTF_8);
         byte[] kDate = hmacSha256(kSecret, date);
         byte[] kRegion = hmacSha256(kDate, regionName);
@@ -220,25 +220,23 @@ class AWSV4Auth {
         return hmacSha256(kService, AWS_4_REQUEST);
     }
 
-    private final char[] hexArray = "0123456789ABCDEF".toCharArray();
-
-    private String bytesToHex(byte[] bytes) {
+    private static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
         for (int j = 0; j < bytes.length; j++) {
             int v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+            hexChars[j * 2] = HEX_ARRAY[v >>> 4];
+            hexChars[j * 2 + 1] = HEX_ARRAY[v & 0x0F];
         }
         return new String(hexChars).toLowerCase();
     }
 
-    private String getTimeStamp() {
+    private static String getTimeStamp() {
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(new Date());
     }
 
-    private String getDate() {
+    private static String getDate() {
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat.format(new Date());

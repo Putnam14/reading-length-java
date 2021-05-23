@@ -1,6 +1,8 @@
 package com.readinglength.researcherws.dao.amazon;
 
 import com.readinglength.lib.Book;
+import com.readinglength.lib.dao.gcp.SecretsDao;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -12,8 +14,14 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AmazonServiceTest {
-    AmazonDao mockDao = mock(AmazonDao.class);
-    AmazonService instance = new AmazonService(mockDao);
+    private AmazonDao mockDao;
+    private AmazonService instance;
+
+    @BeforeEach
+    void setUp() {
+        mockDao = mock(AmazonDao.class);
+        instance = new AmazonService(mockDao);
+    }
 
     @Test
     void searchKeyword() {
@@ -26,7 +34,7 @@ class AmazonServiceTest {
                 () -> assertEquals("9781631494536", result.getIsbn13().toString()),
                 () -> assertEquals(368, result.getPagecount()),
                 () -> assertEquals("Liveright Publishing Corporation", result.getPublisher()),
-                () -> assertEquals("2018-04-30", result.getPublishDate())
+                () -> assertEquals("2018-04-30", result.getPublishDate().toString())
         );
     }
 
@@ -38,5 +46,14 @@ class AmazonServiceTest {
             e.printStackTrace();
         }
         return null;
+    }
+
+    //@Test
+    void helper() throws Exception {
+        String accessKey = SecretsDao.getSecret("AMAZON_API_KEY");
+        String privateKey = SecretsDao.getSecret("AMAZON_API_SECRET");
+        AmazonDao instance = new AmazonDao(accessKey, privateKey);
+        String result = instance.searchItems("a walk in the woods");
+        assertNotNull(result);
     }
 }

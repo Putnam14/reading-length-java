@@ -1,0 +1,55 @@
+{
+  "publishers": [
+    "Penguin Audio"
+  ],
+  "subtitle": "A Climber's Journey of Endurance, Risk, and Going Beyond Limits",
+  "covers": [
+    8871024
+  ],
+  "physical_format": "audio cd",
+  "full_title": "The Push A Climber's Journey of Endurance, Risk, and Going Beyond Limits",
+  "last_modified": {
+    "type": "/type/datetime",
+    "value": "2019-10-10T15:54:01.528495"
+  },
+  "latest_revision": 1,
+  "key": "/books/OL27409099M",
+  "authors": [
+    {
+      "key": "/authors/OL7521032A"
+    }
+  ],
+  "source_records": [
+    "amazon:1524778125"
+  ],
+  "title": "The Push",
+  "notes": {
+    "type": "/type/text",
+    "value": "Source title: The Push: A Climber's Journey of Endurance, Risk, and Going Beyond Limits"
+  },
+  "identifiers": {
+    "amazon": [
+      "1524778125"
+    ]
+  },
+  "created": {
+    "type": "/type/datetime",
+    "value": "2019-10-10T15:54:01.528495"
+  },
+  "isbn_13": [
+    "9781524778125"
+  ],
+  "isbn_10": [
+    "1524778125"
+  ],
+  "publish_date": "May 16, 2017",
+  "works": [
+    {
+      "key": "/works/OL19710906W"
+    }
+  ],
+  "type": {
+    "key": "/type/edition"
+  },
+  "revision": 1
+}

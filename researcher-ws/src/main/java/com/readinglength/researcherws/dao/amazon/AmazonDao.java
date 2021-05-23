@@ -89,14 +89,12 @@ public class AmazonDao {
             throw new Exception("Something went wrong with Amazon request.");
         }
         HttpEntity entity = response.getEntity();
-        String jsonResponse = null;
         try {
-            jsonResponse = EntityUtils.toString(entity, StandardCharsets.UTF_8);
+            return EntityUtils.toString(entity, StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(jsonResponse);
-        return jsonResponse;
+        return null;
     }
 
     private AWSV4Auth auth(TreeMap<String, String> headers, String requestPayload, String path) {

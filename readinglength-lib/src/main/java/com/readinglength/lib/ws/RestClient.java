@@ -1,6 +1,5 @@
 package com.readinglength.lib.ws;
 
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -40,31 +39,22 @@ public class RestClient {
     }
 
     private String makeGetRequest(String requestString) {
-        LOG.info(String.format("Making GET request to: %s", baseUri + requestString));
-        HttpGet httpPost = new HttpGet(baseUri + requestString);
-        HttpResponse response = null;
+        HttpGet httpGet = new HttpGet(baseUri + requestString);
         try {
-             response = httpClient.execute(httpPost);
+            HttpResponse response = httpClient.execute(httpGet);
+            if (response != null) {
+                HttpEntity entity = response.getEntity();
+                int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode != 200) {
+                    LOG.info("Non-200 response: " + EntityUtils.toString(entity, StandardCharsets.UTF_8));
+                    return "{}";
+                }
+                return EntityUtils.toString(entity, StandardCharsets.UTF_8);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int statusCode = 0;
-        if (response != null) {
-            statusCode = response.getStatusLine().getStatusCode();
-        }
-        if (statusCode != 200) {
-            LOG.debug("Non-200 response: " + response);
-            return "{}";
-        }
-        HttpEntity entity = response.getEntity();
-        String jsonResponse = null;
-        try {
-            jsonResponse = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return jsonResponse;
-
+        return "{}";
     }
 
     private String queryParamsToRequestString(String endpoint, Map<String, String> queryParams) {

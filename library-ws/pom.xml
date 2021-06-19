@@ -23,6 +23,12 @@
             <groupId>com.readinglength</groupId>
             <artifactId>readinglength-lib</artifactId>
         </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

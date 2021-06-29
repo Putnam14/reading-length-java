@@ -98,14 +98,7 @@
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
-                <version>2.7.1</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.google.cloud.tools</groupId>
-                        <artifactId>jib-native-image-extension-maven</artifactId>
-                        <version>0.1.0</version>
-                    </dependency>
-                </dependencies>
+                <version>2.8.0</version>
                 <configuration>
                     <container>
                         <mainClass>${exec.mainClass}</mainClass>
@@ -113,11 +106,15 @@
                     <to>
                         <image>gcr.io/reading-length/archivist-ws</image>
                     </to>
-                    <pluginExtensions>
-                        <pluginExtension>
-                            <implementation>com.google.cloud.tools.jib.maven.extension.nativeimage.JibNativeImageExtension</implementation>
-                        </pluginExtension>
-                    </pluginExtensions>
+                    <container>
+                        <environment>
+                            <MYSQL_CONNECTION_NAME>reading-length:us-central1:rl-test</MYSQL_CONNECTION_NAME>
+                            <MYSQL_DB>bookshelf</MYSQL_DB>
+                            <MYSQL_USER>archivist</MYSQL_USER>
+                            <MYSQL_PASS_SECRET>MYSQL_ARCHIVIST_PASS</MYSQL_PASS_SECRET>
+                        </environment>
+                    </container>
+
                 </configuration>
             </plugin>
         </plugins>

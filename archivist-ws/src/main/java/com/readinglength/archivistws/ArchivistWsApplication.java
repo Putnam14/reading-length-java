@@ -1,13 +1,21 @@
 package com.readinglength.archivistws;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.archivistws.controller.Bookshelf;
 import io.javalin.Javalin;
+import io.javalin.plugin.json.JavalinJackson;
 
 public class ArchivistWsApplication {
     public static void main(String[] args) {
         ArchivistComponent archivistComponent = DaggerArchivistComponent.create();
         Bookshelf bookshelf = archivistComponent.bookshelf();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.findAndRegisterModules();
+        JavalinJackson.configure(objectMapper);
+
         Javalin app = Javalin.create().start(getPort());
+
         app.get("/", bookshelf.index);
         app.get("/books/isbn", bookshelf.queryBookByIsbn);
         app.post("/books/insert", bookshelf.insertBook);

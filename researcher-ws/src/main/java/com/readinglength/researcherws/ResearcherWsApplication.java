@@ -18,12 +18,20 @@ public class ResearcherWsApplication {
 		objectMapper.findAndRegisterModules();
 		JavalinJackson.configure(objectMapper);
 
-		Javalin app = Javalin.create().start(8080);
+		Javalin app = Javalin.create().start(getPort());
 
 		app.routes(() -> {
 			path("/", () -> get(search::index));
 			path("/byTitle", () -> get(search::byTitle));
 			path("/byIsbn", () -> get(search::byIsbn));
 		});
+	}
+
+	private static int getPort() {
+		String port = System.getenv("PORT");
+		if (port == null) {
+			return 8080;
+		}
+		return Integer.valueOf(port);
 	}
 }

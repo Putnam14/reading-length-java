@@ -114,7 +114,6 @@
                             <MYSQL_PASS_SECRET>MYSQL_ARCHIVIST_PASS</MYSQL_PASS_SECRET>
                         </environment>
                     </container>
-
                 </configuration>
             </plugin>
         </plugins>

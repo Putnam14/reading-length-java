@@ -108,15 +108,7 @@
 			<plugin>
 				<groupId>com.google.cloud.tools</groupId>
 				<artifactId>jib-maven-plugin</artifactId>
-				<version>3.0.0</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.google.cloud.tools</groupId>
-						<artifactId>jib-native-image-extension-maven</artifactId>
-						<version>0.1.0</version>
-					</dependency>
-				</dependencies>
-
+				<version>2.8.0</version>
 				<configuration>
 					<container>
 						<mainClass>${exec.mainClass}</mainClass>
@@ -124,11 +116,6 @@
 					<to>
 						<image>gcr.io/reading-length/researcher-ws</image>
 					</to>
-					<pluginExtensions>
-						<pluginExtension>
-							<implementation>com.google.cloud.tools.jib.maven.extension.nativeimage.JibNativeImageExtension</implementation>
-						</pluginExtension>
-					</pluginExtensions>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -5,24 +5,22 @@ import com.jayway.jsonpath.JsonPath;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.libraryws.auth.Authentication;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
 
 public class ArchivistDao {
-    private static Logger LOG = LoggerFactory.getLogger(ArchivistDao.class);
-    private Authentication auth;
-    private HttpClient httpClient;
-    private String url;
+    private static final Logger LOG = LoggerFactory.getLogger(ArchivistDao.class);
+    private final Authentication auth;
+    private final HttpClient httpClient;
+    private final String url;
 
     @Inject
     public ArchivistDao(Authentication auth) {
@@ -33,53 +31,50 @@ public class ArchivistDao {
             LOG.error(msg);
             throw new IllegalStateException(msg);
         }
-        this.httpClient = HttpClientBuilder.create().build();
+        this.httpClient = java.net.http.HttpClient.newHttpClient();
     }
 
     public Isbn getIsbnFromTitle(String title) {
-        String requestUrl = url + "/isbns/title/?title=" + title;
-        HttpGet getRequest = new HttpGet(requestUrl);
-        getRequest.setHeader("Authorization", "Bearer " + auth.getToken(requestUrl));
-        try {
-            HttpResponse response = httpClient.execute(getRequest);
-            if (response != null) {
-                HttpEntity entity = response.getEntity();
-                int statusCode = response.getStatusLine().getStatusCode();
-                if (statusCode != 200) {
-                    LOG.info("Non-200 response: " + EntityUtils.toString(entity, StandardCharsets.UTF_8));
-                    return null;
-                }
-                String res = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-                return Isbn.of(JsonPath.read(res, "$.isbn"));
-            }
-        } catch (IOException e) {
-            LOG.error(e.getLocalizedMessage());
-            e.printStackTrace();
+        HttpResponse<String> response = executeAuthenticatedGetRequest(url + "/isbns/title?title=" + title);
+        if (response != null && response.statusCode() == 200) {
+            String entity = response.body();
+            return Isbn.of(JsonPath.read(entity, "$.isbn"));
         }
         return null;
     }
 
     public Book getBookFromIsbn(Isbn isbn) {
-        String requestUrl = url + "/books/isbn/?isbn=" + isbn;
-        LOG.info(requestUrl);
-        HttpGet getRequest = new HttpGet(requestUrl);
-        getRequest.setHeader("Authorization", "Bearer " + auth.getToken(requestUrl));
-        try {
-            HttpResponse response = httpClient.execute(getRequest);
-            if (response != null) {
-                HttpEntity entity = response.getEntity();
-                int statusCode = response.getStatusLine().getStatusCode();
-                if (statusCode != 200) {
-                    LOG.info("Non-200 response: " + EntityUtils.toString(entity, StandardCharsets.UTF_8));
-                    return null;
-                }
-                String res = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-                LOG.info(res);
-                return new ObjectMapper().readValue(res, Book.class);
+        HttpResponse<String> response = executeAuthenticatedGetRequest(url + "/books/isbn?isbn=" + isbn);
+        if (response != null && response.statusCode() == 200) {
+            try {
+                return new ObjectMapper().readValue(response.body(), Book.class);
+            } catch (IOException e) {
+                // JSON processing exception
+                LOG.error(e.getLocalizedMessage());
             }
+        }
+        return null;
+    }
+
+    public boolean isbnExistsInDatabase(Isbn isbn) {
+        HttpResponse response = executeAuthenticatedGetRequest(url + "/isbns?isbn=" + isbn);
+        return response != null && response.statusCode() == 200;
+    }
+
+    private HttpResponse<String> executeAuthenticatedGetRequest(String requestUrl) {
+        HttpRequest getRequest = HttpRequest.newBuilder()
+                .uri(URI.create(requestUrl))
+                .setHeader("Authorization", "Bearer " + auth.getToken(requestUrl))
+                .timeout(Duration.ofSeconds(30))
+                .GET()
+                .build();
+        try {
+            return httpClient.send(getRequest, HttpResponse.BodyHandlers.ofString());
         } catch (IOException e) {
             LOG.error(e.getLocalizedMessage());
-            e.printStackTrace();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LOG.error(e.getLocalizedMessage());
         }
         return null;
     }

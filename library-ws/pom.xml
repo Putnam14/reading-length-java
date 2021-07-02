@@ -111,6 +111,7 @@
                         <mainClass>${exec.mainClass}</mainClass>
                         <environment>
                             <ARCHIVIST_WS>https://archivist-ws-wgmwkbgj2a-uc.a.run.app</ARCHIVIST_WS>
+                            <RESEARCHER_WS>https://researcher-ws-wgmwkbgj2a-uc.a.run.app</RESEARCHER_WS>
                         </environment>
                     </container>
                     <to>

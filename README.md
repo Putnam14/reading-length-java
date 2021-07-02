@@ -18,8 +18,20 @@ You can run the webservices locally by using maven goals.
 ## Deploying to GCP
 Reading Length is built to run on Google Cloud Platform.
 
-To deploy the webservices to Google Cloud Run, run the following command in the webservice's folder:
-`mvn com.google.cloud.tools:jib-maven-plugin:1.8.0:build \
-     -Dimage=gcr.io/<PROJECT>/<IMAGE>`
+To deploy the webservices to Google Cloud Run, follow this example for deploying archivist-ws:
+
+1. Upload image to GCP:
+`mvn clean install jib:build`
+
+1. Deploy image to Cloud Run instance
+`gcloud run deploy archivist-ws \
+--image gcr.io/reading-length/archivist-ws \
+--service-account archivist-identity \
+--no-allow-unauthenticated`
+
+1. Get a bearer token for testing
+`TOKEN=$(gcloud auth print-identity-token)`
+
+1. Make a test request
+`curl -H "Authorization: Bearer $TOKEN" "https://archivist-ws-wgmwkbgj2a-uc.a.run.app/isbns/title?title=invisible+man"`
      
-The above command will package the webservice using JIB and push it to your GCP image repository. Run it on Cloud Run by creating a new service referencing that image.

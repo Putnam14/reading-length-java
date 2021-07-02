@@ -81,7 +81,6 @@ class Search {
 
     private Book queryByIsbn(Book book) {
         Book result = new Book.Builder().build();
-        // Query database here first?
         try {
             result.merge(openLibraryService.queryIsbn(book.getIsbn10()));
         } catch (BookNotFoundException e) {

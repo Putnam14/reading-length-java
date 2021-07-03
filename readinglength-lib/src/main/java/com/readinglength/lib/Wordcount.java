@@ -1,12 +1,16 @@
 package com.readinglength.lib;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
+@JsonDeserialize(builder = Wordcount.Builder.class)
 public class Wordcount {
-    private Isbn isbn;
+    private Isbn13 isbn;
     private int words;
     private Integer userId;
     private WordcountType type;
 
-    public Wordcount(Isbn isbn, int words, Integer userId, WordcountType type) {
+    private Wordcount(Isbn13 isbn, int words, Integer userId, WordcountType type) {
         this.isbn = isbn;
         this.words = words;
         this.userId = userId;
@@ -17,6 +21,11 @@ public class Wordcount {
         return isbn;
     }
 
+    @JsonGetter("isbn")
+    public String getIsbnString() {
+        return isbn.toString();
+    }
+
     public int getWords() {
         return words;
     }
@@ -25,8 +34,40 @@ public class Wordcount {
         return type;
     }
 
+    @JsonGetter("type")
+    public int getTypeId() {
+        return type.getId();
+    }
+
     public Integer getUserId() {
         return userId;
+    }
+
+
+    public Builder toBuilder() {
+        return new Builder(this);
+    }
+
+    public static class Builder {
+        private Isbn13 isbn;
+        private int userId;
+        private int words;
+        private int type;
+
+        public Builder() {}
+        public Builder(Wordcount wordcount) {
+            this.isbn = wordcount.isbn;
+            this.userId = wordcount.userId;
+            this.words = wordcount.words;
+            this.type = wordcount.getTypeId();
+        }
+
+        public Builder withIsbn(Isbn13 isbn)    { this.isbn = isbn; return this; }
+        public Builder withUserId(int userId)   { this.userId = userId; return this; }
+        public Builder withWords(int words)     { this.words = words; return this; }
+        public Builder withType(int type)       { this.type = type; return this; }
+
+        public Wordcount build() { return new Wordcount(isbn, words, userId, WordcountType.byId(type)); }
     }
 
     public enum WordcountType {

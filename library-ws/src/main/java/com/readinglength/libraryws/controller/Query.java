@@ -44,6 +44,28 @@ public class Query {
         }
     };
 
+    public Handler queryBookByIsbn = ctx -> {
+        String isbnString = ctx.queryParam("isbn");
+        if (isbnString != null && Isbn.validate(isbnString)) {
+            Isbn isbn = Isbn.of(isbnString);
+            Book book = findBook(isbn);
+            if (book != null) {
+                Wordcount wordcount = findWordcount(book);
+                book = book.toBuilder()
+                        .withWordcount(wordcount)
+                        .build();
+                ctx.status(200);
+                ctx.json(book);
+            } else {
+                ctx.status(404);
+                ctx.result("Book was not found in database for isbn " + isbn);
+            }
+        } else {
+            ctx.status(400);
+            ctx.result("Invalid isbn: " + isbnString);
+        }
+    };
+
     private Book findBook(String title) {
         LOG.info("Received query for: " + title);
         String encodedTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
@@ -51,14 +73,7 @@ public class Query {
         Isbn isbnFromTitle = archivistDao.getIsbnFromTitle(encodedTitle);
         if (isbnFromTitle != null) {
             // Query database for book from ISBN
-            Book bookFromDatabase = archivistDao.getBookFromIsbn(isbnFromTitle);
-            if (bookFromDatabase != null) {
-                LOG.info("Book found in database: " + bookFromDatabase.getTitle());
-                return bookFromDatabase;
-            } else {
-                // For some reason the ISBN and title exist in the database, but the book entry isn't there
-                LOG.error("Book not found in database for ISBN " + isbnFromTitle);
-            }
+            return findBook(isbnFromTitle);
         } else {
             // Query researcher for book from title
             LOG.info("Looking externally for: " + title);
@@ -76,15 +91,31 @@ public class Query {
         return null;
     }
 
+    private Book findBook(Isbn isbn) {
+        Book bookFromDatabase = archivistDao.getBookFromIsbn(isbn);
+        if (bookFromDatabase != null) {
+            LOG.info("Book found in database: " + bookFromDatabase.getTitle());
+            return bookFromDatabase;
+        }
+        Book bookFromExternal = researcherDao.getBookFromIsbn(isbn);
+        if (bookFromExternal != null) {
+            LOG.info("Book found externally: " + bookFromExternal.getTitle());
+            return bookFromExternal;
+        }
+        LOG.error("Book not found in database for ISBN " + isbn);
+        return null;
+    }
+
     private Wordcount findWordcount(Book book) {
         LOG.info("Querying wordcount for ISBN: " + book.getIsbn13());
         Wordcount wordcount = archivistDao.getWordcountFromIsbn(book.getIsbn13());
         if (wordcount == null) {
-            wordcount = new Wordcount(
-                    book.getIsbn13(),
-                    book.getPagecount() * 350,
-                    -1,
-                    Wordcount.WordcountType.GUESS);
+            wordcount = new Wordcount.Builder()
+                    .withIsbn(book.getIsbn13())
+                    .withWords(book.getPagecount() * 350)
+                    .withUserId(-1)
+                    .withType(Wordcount.WordcountType.GUESS.getId())
+                    .build();
         }
         return wordcount;
     }

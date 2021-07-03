@@ -125,7 +125,12 @@ public class BookshelfDao {
                 queryStmt.setString(1, Isbn13.convert(isbn).toString());
                 ResultSet rs = queryStmt.executeQuery();
                 if (rs.next()) {
-                    return new Wordcount(isbn, rs.getInt("wordcount"), rs.getInt("userId"), Wordcount.WordcountType.byId(rs.getInt("wordcountType")));
+                    return new Wordcount.Builder()
+                            .withIsbn(Isbn13.convert(isbn))
+                            .withWords(rs.getInt("wordcount"))
+                            .withUserId(rs.getInt("userId"))
+                            .withType(rs.getInt("wordcountType"))
+                            .build();
                 }
             }
         }

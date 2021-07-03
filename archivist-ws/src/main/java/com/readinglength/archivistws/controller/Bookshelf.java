@@ -6,7 +6,6 @@ import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn13;
 import com.readinglength.lib.Wordcount;
 import io.javalin.http.Handler;
-import jnr.ffi.annotations.In;
 
 import javax.inject.Inject;
 import java.sql.SQLException;
@@ -36,7 +35,12 @@ public class Bookshelf {
             ctx.status(400);
             ctx.result("Invalid ISBN");
         } else {
-            Wordcount wordcount = new Wordcount(Isbn.of(isbnString), userId, count, type);
+            Wordcount wordcount = new Wordcount.Builder()
+                    .withIsbn(new Isbn13(isbnString))
+                    .withUserId(userId)
+                    .withWords(count)
+                    .withType(type.getId())
+                    .build();
             try {
                 bookshelfDao.insertWordcount(wordcount);
             } catch (SQLException e) {

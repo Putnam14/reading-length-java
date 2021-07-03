@@ -4,6 +4,7 @@ import com.readinglength.archivistws.dao.BookshelfDao;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn13;
+import com.readinglength.lib.Wordcount;
 import io.javalin.http.Handler;
 
 import javax.inject.Inject;
@@ -67,6 +68,22 @@ public class Bookshelf {
             } else {
                 ctx.status(404);
                 ctx.result(String.format("%s was not found in database.", isbnString));
+            }
+        }
+    };
+
+    public Handler wordcountByIsbn = ctx -> {
+        String isbnString = ctx.queryParam("isbn");
+        if (!Isbn.validate(isbnString)) {
+            ctx.status(400);
+        } else {
+            Wordcount wordcount = bookshelfDao.queryForWordcount(Isbn13.of(isbnString));
+            if (wordcount != null) {
+                ctx.status(200);
+                ctx.json(wordcount);
+            } else {
+                ctx.status(404);
+                ctx.result(String.format("Wordcount for %s was not found in database.", isbnString));
             }
         }
     };

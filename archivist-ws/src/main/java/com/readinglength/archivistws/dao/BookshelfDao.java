@@ -4,6 +4,7 @@ import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 import com.readinglength.lib.Isbn13;
+import com.readinglength.lib.Wordcount;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -95,5 +96,21 @@ public class BookshelfDao {
             }
         }
         return false;
+    }
+
+    public Wordcount queryForWordcount(Isbn isbn) throws SQLException {
+        try (Connection conn = connectionPool.getConnection()) {
+            String stmt = "SELECT userId, wordcount, wordcountType FROM wordcounts WHERE isbn = ? LIMIT 1";
+            try (PreparedStatement queryStmt = conn.prepareStatement(stmt)) {
+                queryStmt.setQueryTimeout(10);
+                queryStmt.setString(1, Isbn13.convert(isbn).toString());
+                ResultSet rs = queryStmt.executeQuery();
+                if (rs.next()) {
+                    return new Wordcount(isbn, rs.getInt("wordcount"), rs.getInt("userId"), Wordcount.WordcountType.byId(rs.getInt("wordcountType")));
+                }
+            }
+        }
+        return null;
+
     }
 }

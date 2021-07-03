@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
+import com.readinglength.lib.Wordcount;
 import com.readinglength.libraryws.auth.Authentication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +49,19 @@ public class ArchivistDao {
         if (response != null && response.statusCode() == 200) {
             try {
                 return new ObjectMapper().readValue(response.body(), Book.class);
+            } catch (IOException e) {
+                // JSON processing exception
+                LOG.error(e.getLocalizedMessage());
+            }
+        }
+        return null;
+    }
+
+    public Wordcount getWordcountFromIsbn(Isbn isbn) {
+        HttpResponse<String> response = executeAuthenticatedGetRequest(url + "/wordcounts?isbn=" + isbn);
+        if (response != null && response.statusCode() == 200) {
+            try {
+                return new ObjectMapper().readValue(response.body(), Wordcount.class);
             } catch (IOException e) {
                 // JSON processing exception
                 LOG.error(e.getLocalizedMessage());

@@ -91,6 +91,10 @@ public class Book {
         return wordcount;
     }
 
+    public Builder toBuilder() {
+        return new Builder(this);
+    }
+
     public static class Builder {
         private String title;
         private String author;
@@ -102,6 +106,20 @@ public class Book {
         private String publisher;
         private LocalDate publishDate;
         private Wordcount wordcount;
+
+        public Builder() {}
+        public Builder(Book book) {
+            this.title =        book.title;
+            this.author =       book.author;
+            this.description =  book.description;
+            this.isbn10 =       book.isbn10;
+            this.isbn13 =       book.isbn13;
+            this.pagecount =    book.pagecount;
+            this.coverImage =   book.coverImage;
+            this.publisher =    book.publisher;
+            this.publishDate =  book.publishDate;
+            this.wordcount =    book.wordcount;
+        }
 
         public Builder withTitle(String title)                  { this.title = title; return this; }
         public Builder withAuthor(String author)                { this.author = author; return this; }

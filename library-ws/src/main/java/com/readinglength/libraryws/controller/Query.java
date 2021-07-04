@@ -47,18 +47,13 @@ public class Query {
     public Handler queryBookByIsbn = ctx -> {
         String isbnString = ctx.queryParam("isbn");
         if (isbnString != null && Isbn.validate(isbnString)) {
-            Isbn isbn = Isbn.of(isbnString);
-            Book book = findBook(isbn);
+            Book book = findBookByIsbnString(isbnString);
             if (book != null) {
-                Wordcount wordcount = findWordcount(book);
-                book = book.toBuilder()
-                        .withWordcount(wordcount)
-                        .build();
                 ctx.status(200);
                 ctx.json(book);
             } else {
                 ctx.status(404);
-                ctx.result("Book was not found in database for isbn " + isbn);
+                ctx.result("Book was not found in database for isbn " + isbnString);
             }
         } else {
             ctx.status(400);
@@ -66,14 +61,33 @@ public class Query {
         }
     };
 
+    private Book findBookByIsbnString(String isbnString) {
+        if (isbnString != null && Isbn.validate(isbnString)) {
+            Isbn isbn = Isbn.of(isbnString);
+            Book book = findBookByIsbn(isbn);
+            if (book != null) {
+                Wordcount wordcount = findWordcount(book);
+                book = book.toBuilder()
+                        .withWordcount(wordcount)
+                        .build();
+                return book;
+            }
+        }
+        return null;
+    }
+
     private Book findBook(String title) {
         LOG.info("Received query for: " + title);
+        if (Isbn.validate(title)) {
+            LOG.info(title + " is an ISBN.");
+            return findBookByIsbnString(title);
+        }
         String encodedTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
         // Check if title exists in our database index for isbn:title
         Isbn isbnFromTitle = archivistDao.getIsbnFromTitle(encodedTitle);
         if (isbnFromTitle != null) {
             // Query database for book from ISBN
-            return findBook(isbnFromTitle);
+            return findBookByIsbn(isbnFromTitle);
         } else {
             // Query researcher for book from title
             LOG.info("Looking externally for: " + title);
@@ -91,7 +105,7 @@ public class Query {
         return null;
     }
 
-    private Book findBook(Isbn isbn) {
+    private Book findBookByIsbn(Isbn isbn) {
         Book bookFromDatabase = archivistDao.getBookFromIsbn(isbn);
         if (bookFromDatabase != null) {
             LOG.info("Book found in database: " + bookFromDatabase.getTitle());

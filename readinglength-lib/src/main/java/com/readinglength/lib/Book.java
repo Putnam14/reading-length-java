@@ -1,6 +1,8 @@
 package com.readinglength.lib;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.github.sisyphsu.dateparser.DateParserUtils;
@@ -67,8 +69,18 @@ public class Book {
         return isbn10;
     }
 
+    @JsonGetter("isbn10")
+    public String getIsbn10String() {
+        return isbn10.toString();
+    }
+
     public Isbn13 getIsbn13() {
         return isbn13;
+    }
+
+    @JsonGetter("isbn13")
+    public String getIsbn13String() {
+        return isbn13.toString();
     }
 
     public Integer getPagecount() {
@@ -125,7 +137,11 @@ public class Book {
         public Builder withAuthor(String author)                { this.author = author; return this; }
         public Builder withDescription(String description)      { this.description = description; return this; }
         public Builder withIsbn10(Isbn10 isbn10)                { this.isbn10 = isbn10; this.isbn13 = Isbn13.convert(isbn10); return this; }
+        @JsonSetter("isbn10")
+        public Builder withIsbn10(String isbn10)                { this.isbn10 = new Isbn10(isbn10); this.isbn13 = Isbn13.convert(this.isbn10); return this; }
         public Builder withIsbn13(Isbn13 isbn13)                { this.isbn13 = isbn13; this.isbn10 = Isbn10.convert(isbn13); return this; }
+        @JsonSetter("isbn13")
+        public Builder withIsbn13(String isbn13)                { this.isbn13 = new Isbn13(isbn13); this.isbn10 = Isbn10.convert(this.isbn13); return this; }
         public Builder withPagecount(Integer pagecount)         { this.pagecount = pagecount; return this; }
         public Builder withCoverImage(String coverImage)        { this.coverImage = coverImage; return this; }
         public Builder withPublisher(String publisher)          { this.publisher = publisher; return this; }

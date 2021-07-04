@@ -94,11 +94,7 @@ public class Query {
             Book bookFromExternal = researcherDao.getBookFromTitle(encodedTitle);
             if (bookFromExternal != null) {
                 LOG.info("Book found externally: " + bookFromExternal.getTitle());
-                boolean isbnInDatabase = archivistDao.isbnExistsInDatabase(bookFromExternal.getIsbn13());
-                if (!isbnInDatabase) {
-                    LOG.info(bookFromExternal.getTitle() + " is a new book!");
-                    // Give book to archivist
-                }
+                archivistDao.handleExternalBook(bookFromExternal);
                 return bookFromExternal;
             }
         }

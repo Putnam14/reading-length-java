@@ -7,6 +7,7 @@ import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 import com.readinglength.lib.Isbn13;
 import com.readinglength.researcherws.lib.BookNotFoundException;
+import io.javalin.plugin.json.JavalinJackson;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -18,8 +19,7 @@ public class OpenLibraryService {
     @Inject
     public OpenLibraryService(OpenLibraryDao openLibraryDao) {
         this.openLibraryDao = openLibraryDao;
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.findAndRegisterModules();
+        this.objectMapper = JavalinJackson.getObjectMapper();
     }
 
     public List<Isbn> queryTitle(String title) throws BookNotFoundException {

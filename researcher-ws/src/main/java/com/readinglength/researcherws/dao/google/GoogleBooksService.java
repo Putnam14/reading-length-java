@@ -6,6 +6,7 @@ import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 import com.readinglength.researcherws.lib.BookNotFoundException;
+import io.javalin.plugin.json.JavalinJackson;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,8 +21,7 @@ public class GoogleBooksService {
     @Inject
     public GoogleBooksService(GoogleBooksDao googleBooksDao) {
         this.googleBooksDao = googleBooksDao;
-        this.objectMapper = new ObjectMapper();
-        this.objectMapper.findAndRegisterModules();
+        this.objectMapper = JavalinJackson.getObjectMapper();
     }
 
     public Book queryTitle(String title) throws BookNotFoundException {

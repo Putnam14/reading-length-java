@@ -1,9 +1,9 @@
 package com.readinglength.libraryws.dao;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.libraryws.auth.Authentication;
+import io.javalin.plugin.json.JavalinJackson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,7 +37,7 @@ public class ResearcherDao {
         HttpResponse<String> response = executeAuthenticatedGetRequest(url + "/byTitle?title=" + title);
         if (response != null && response.statusCode() == 200) {
             try {
-                return new ObjectMapper().readValue(response.body(), Book.class);
+                return JavalinJackson.getObjectMapper().readValue(response.body(), Book.class);
             } catch (IOException e) {
                 LOG.error(e.getLocalizedMessage());
             }
@@ -49,7 +49,7 @@ public class ResearcherDao {
         HttpResponse<String> response = executeAuthenticatedGetRequest(url + "/byIsbn?isbn=" + isbn);
         if (response != null && response.statusCode() == 200) {
             try {
-                return new ObjectMapper().readValue(response.body(), Book.class);
+                return JavalinJackson.getObjectMapper().readValue(response.body(), Book.class);
             } catch (IOException e) {
                 LOG.error(e.getLocalizedMessage());
             }

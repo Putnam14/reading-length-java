@@ -21,6 +21,8 @@ public class ArchivistWsApplication {
         app.post("/books/insert", bookshelf.insertBook);
         app.get("/isbns/title", bookshelf.queryIsbnByTitle);
         app.get("/isbns", bookshelf.isbnExists);
+        app.get("/wordcounts", bookshelf.wordcountByIsbn);
+        app.put("/wordcounts", bookshelf.insertWordcount);
     }
 
     private static int getPort() {

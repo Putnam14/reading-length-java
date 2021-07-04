@@ -4,6 +4,7 @@ import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 import com.readinglength.lib.Isbn13;
+import com.readinglength.lib.Wordcount;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,7 +24,6 @@ public class BookshelfDao {
     }
 
     public void insertBook(Book book) throws SQLException {
-
         try (Connection conn = connectionPool.getConnection()) {
             String stmt = "INSERT INTO books " +
                     "(isbn, title, author, description, pagecount, coverImage, publisher, publishDate) " +
@@ -39,6 +39,26 @@ public class BookshelfDao {
                 insertStmt.setString(7, book.getPublisher());
                 insertStmt.setDate(8, Date.valueOf(book.getPublishDate()));
                 insertStmt.execute();
+            }
+        }
+    }
+
+    public void insertWordcount(Wordcount wordcount) throws SQLException {
+        if (queryForWordcount(wordcount.getIsbn()) != null) {
+            upsertWordcount(wordcount);
+        } else {
+            try (Connection conn = connectionPool.getConnection()) {
+                String stmt = "INSERT INTO wordcounts " +
+                        "(isbn, userId, wordcount, wordcountType) " +
+                        "VALUES (?, ?, ?, ?)";
+                try (PreparedStatement insertStmt = conn.prepareStatement(stmt)) {
+                    insertStmt.setQueryTimeout(10);
+                    insertStmt.setString(1, Isbn13.convert(wordcount.getIsbn()).toString());
+                    insertStmt.setInt(2, wordcount.getUserId());
+                    insertStmt.setInt(3, wordcount.getWords());
+                    insertStmt.setInt(4, wordcount.getType().getId());
+                    insertStmt.execute();
+                }
             }
         }
     }
@@ -95,5 +115,43 @@ public class BookshelfDao {
             }
         }
         return false;
+    }
+
+    public Wordcount queryForWordcount(Isbn isbn) throws SQLException {
+        try (Connection conn = connectionPool.getConnection()) {
+            String stmt = "SELECT userId, wordcount, wordcountType FROM wordcounts WHERE isbn = ? LIMIT 1";
+            try (PreparedStatement queryStmt = conn.prepareStatement(stmt)) {
+                queryStmt.setQueryTimeout(10);
+                queryStmt.setString(1, Isbn13.convert(isbn).toString());
+                ResultSet rs = queryStmt.executeQuery();
+                if (rs.next()) {
+                    return new Wordcount.Builder()
+                            .withIsbn(Isbn13.convert(isbn))
+                            .withWords(rs.getInt("wordcount"))
+                            .withUserId(rs.getInt("userId"))
+                            .withType(rs.getInt("wordcountType"))
+                            .build();
+                }
+            }
+        }
+        return null;
+    }
+
+    private void upsertWordcount(Wordcount wordcount) throws SQLException {
+        try (Connection conn = connectionPool.getConnection()) {
+            String stmt = "UPDATE wordcounts " +
+                    "SET userId = ?, " +
+                    "wordcount = ?, " +
+                    "wordcountType = ? " +
+                    "WHERE isbn = ?";
+            try (PreparedStatement insertStmt = conn.prepareStatement(stmt)) {
+                insertStmt.setQueryTimeout(10);
+                insertStmt.setInt(1, wordcount.getUserId());
+                insertStmt.setInt(2, wordcount.getWords());
+                insertStmt.setInt(3, wordcount.getType().getId());
+                insertStmt.setString(4, Isbn13.convert(wordcount.getIsbn()).toString());
+                insertStmt.execute();
+            }
+        }
     }
 }

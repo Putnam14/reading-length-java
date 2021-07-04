@@ -17,6 +17,7 @@ public class LibraryWsApplication {
         Javalin app = Javalin.create().start(getPort());
 
         app.get("/byTitle", query.queryBookByTitle);
+        app.get("/byIsbn", query.queryBookByIsbn);
     }
 
     private static int getPort() {

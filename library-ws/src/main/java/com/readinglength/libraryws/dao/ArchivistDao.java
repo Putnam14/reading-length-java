@@ -1,7 +1,6 @@
 package com.readinglength.libraryws.dao;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;

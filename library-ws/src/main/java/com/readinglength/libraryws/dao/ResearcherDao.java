@@ -1,6 +1,5 @@
 package com.readinglength.libraryws.dao;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.libraryws.auth.Authentication;

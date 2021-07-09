@@ -36,20 +36,10 @@
             <artifactId>json-path</artifactId>
         </dependency>
         <dependency>
-            <groupId>io.javalin</groupId>
-            <artifactId>javalin</artifactId>
-        </dependency>
-        <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
-        </dependency>
-        <!-- Java 8 Time API serialization -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-            <scope>runtime</scope>
         </dependency>
     </dependencies>
 

@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -55,7 +56,7 @@ class BookshelfDaoTest {
         verify(preparedStatement).setString(2, book.getTitle());
         verify(preparedStatement).setString(3, book.getAuthor());
         verify(preparedStatement).setString(4, book.getDescription());
-        verify(preparedStatement).setInt(5, book.getPagecount());
+        verify(preparedStatement).setObject(5, book.getPagecount(), Types.INTEGER);
         verify(preparedStatement).setString(6, book.getCoverImage());
         verify(preparedStatement).setString(7, book.getPublisher());
         verify(preparedStatement).setDate(8, Date.valueOf(book.getPublishDate()));

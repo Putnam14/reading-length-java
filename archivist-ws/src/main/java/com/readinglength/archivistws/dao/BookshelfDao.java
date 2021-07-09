@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 public class BookshelfDao {
     private DataSource connectionPool;
@@ -34,10 +35,14 @@ public class BookshelfDao {
                 insertStmt.setString(2, book.getTitle());
                 insertStmt.setString(3, book.getAuthor());
                 insertStmt.setString(4, book.getDescription());
-                insertStmt.setInt(5, book.getPagecount());
+                insertStmt.setObject(5, book.getPagecount(), Types.INTEGER);
                 insertStmt.setString(6, book.getCoverImage());
                 insertStmt.setString(7, book.getPublisher());
-                insertStmt.setDate(8, Date.valueOf(book.getPublishDate()));
+                if (book.getPublishDate() != null) {
+                    insertStmt.setDate(8, Date.valueOf(book.getPublishDate()));
+                } else {
+                    insertStmt.setNull(8, Types.DATE);
+                }
                 insertStmt.execute();
             }
         }

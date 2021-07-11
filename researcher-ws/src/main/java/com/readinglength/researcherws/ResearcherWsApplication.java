@@ -1,6 +1,5 @@
 package com.readinglength.researcherws;
 
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.readinglength.researcherws.controller.Search;
 import io.javalin.Javalin;

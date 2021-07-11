@@ -100,14 +100,17 @@ public class ArchivistDao {
                     .timeout(Duration.ofSeconds(30))
                     .POST(HttpRequest.BodyPublishers.ofString(JavalinJackson.getObjectMapper().writeValueAsString(book)))
                     .build();
-            httpClient.send(postRequest, HttpResponse.BodyHandlers.discarding());
+            HttpResponse<String> response = httpClient.send(postRequest, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 201) {
+                LOG.warn("Received " + response.statusCode() + " status with body " + response.body());
+            }
         } catch (JsonProcessingException e) {
             LOG.error("Issue writing book to JSON", e);
         } catch (IOException e) {
             LOG.error(e.getLocalizedMessage());
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
             LOG.error(e.getLocalizedMessage());
+            Thread.currentThread().interrupt();
         }
     }
 

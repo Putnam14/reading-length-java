@@ -1,27 +1,24 @@
 package com.readinglength.researcherws.dao.google;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jayway.jsonpath.Configuration;
+import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.JsonPath;
 import com.readinglength.lib.Book;
 import com.readinglength.lib.Isbn;
 import com.readinglength.lib.Isbn10;
 import com.readinglength.researcherws.lib.BookNotFoundException;
-import io.javalin.plugin.json.JavalinJackson;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Singleton
 public class GoogleBooksService {
     private final GoogleBooksDao googleBooksDao;
-    private final ObjectMapper objectMapper;
 
     @Inject
     public GoogleBooksService(GoogleBooksDao googleBooksDao) {
         this.googleBooksDao = googleBooksDao;
-        this.objectMapper = JavalinJackson.getObjectMapper();
     }
 
     public Book queryTitle(String title) throws BookNotFoundException {
@@ -36,37 +33,34 @@ public class GoogleBooksService {
         if (googleBooksResponse == null || "{}".equals(googleBooksResponse))
             throw new BookNotFoundException(title, "Google");
 
-        try {
-            GoogleBooksVolumesResult response = objectMapper.readValue(googleBooksResponse, GoogleBooksVolumesResult.class);
+        Object document = Configuration.defaultConfiguration().jsonProvider().parse(googleBooksResponse);
+        List<Object> items = JsonPath.read(document, "$.items");
+        if (items.size() == 0)
+            throw new BookNotFoundException(title, "Google");
 
-            if (response.getTotalItems() == 0)
-                throw new BookNotFoundException(title, "Google");
-
-            GoogleBooksEdition edition = response.getItems().get(0).getVolumeInfo();
-
-            return editionToBook(edition);
-        } catch(JsonProcessingException e) {
-            throw new BookNotFoundException(title, "Google_JSON");
-        }
+        return editionToBook(items.get(0));
     }
 
-    private Book editionToBook(GoogleBooksEdition edition) {
-        List<String> ids = edition.getIndustryIdentifiers().stream()
-                .filter((id -> id.containsValue("ISBN_13") || id.containsValue("ISBN_10")))
-                .map(id -> id.get("identifier"))
-                .collect(Collectors.toList());
+    private Book editionToBook(Object edition) {
+        Book.Builder book = new Book.Builder();
+        DocumentContext json = JsonPath.parse(edition);
 
-        Book.Builder book = new Book.Builder()
-                .withTitle(edition.getTitle());
-
-        if (ids.size() > 0)
-            book = book.withIsbn10(Isbn10.convert(Isbn.of(ids.get(0))));
-        if (edition.getAuthors().size() > 0)
-            book = book.withAuthor(edition.getAuthors().get(0));
-        if (edition.getDescription() != null && !edition.getDescription().isEmpty())
-            book = book.withDescription(edition.getDescription());
-        if (edition.getImageLinks() != null && edition.getImageLinks().get("thumbnail") != null)
-            book = book.withCoverImage(edition.getImageLinks().get("thumbnail"));
+        List<String> title = json.read("$.volumeInfo[?(@.title)].title");
+        if (title.size() > 0) book = book.withTitle(title.get(0));
+        List<String> isbn = json.limit(1).read("$.volumeInfo.industryIdentifiers[?(@.type in ['ISBN_10', 'ISBN_13'])].identifier");
+        if (isbn.size() > 0) book = book.withIsbn10(Isbn10.convert(Isbn.of(isbn.get(0))));
+        List<String> author = json.read("$.volumeInfo[?(@.authors)].authors[0]");
+        if (author.size() > 0) book = book.withAuthor(author.get(0));
+        List<String> description = json.read("$.volumeInfo[?(@.description)].description");
+        if (description.size() > 0) book = book.withDescription(description.get(0));
+        List<String> publisher = json.read("$.volumeInfo[?(@.publisher)].publisher");
+        if (publisher.size() > 0) book = book.withPublisher(publisher.get(0));
+        List<String> publishDate = json.read("$.volumeInfo[?(@.publishedDate)].publishedDate");
+        if (publishDate.size() > 0) book = book.withPublishDate(publishDate.get(0));
+        List<Integer> pagecount = json.read("$.volumeInfo[?(@.pageCount)].pageCount");
+        if (pagecount.size() > 0) book = book.withPagecount(pagecount.get(0));
+        List<String> imageLink = json.read("$.volumeInfo[?(@.imageLinks.thumbnail)].imageLinks.thumbnail");
+        if (imageLink.size() > 0) book = book.withCoverImage(imageLink.get(0));
 
         return book.build();
     }

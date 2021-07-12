@@ -25,11 +25,11 @@ public class AmazonService {
         if (candidates.size() > 0) {
             Object result = candidates.get(0);
             Isbn isbn = Isbn.of(JsonPath.read(result, "$.ItemInfo.ExternalIds.ISBNs.DisplayValues[0]"));
-            List<String> title = JsonPath.read(result, "$.[?(@.ItemInfo.Title)].ItemInfo.Title.DisplayValue");
-            List<String> author = JsonPath.read(result, "$.[?(@.ItemInfo.ByLineInfo.Contributors[?(@.RoleType =~ /.author/i)])].ItemInfo.ByLineInfo.Contributors[0].Name");
-            List<String> publishDate = JsonPath.read(result, "$.[?(@.ItemInfo.ContentInfo.PublicationDate)].ItemInfo.ContentInfo.PublicationDate.DisplayValue");
-            List<String> publisher = JsonPath.read(result, "$.[?(@.ItemInfo.ByLineInfo.Brand)].ItemInfo.ByLineInfo.Brand.DisplayValue");
-            List<Integer> pagesCount = JsonPath.read(result, "$.[?(@.ItemInfo.ContentInfo.PagesCount)].ItemInfo.ContentInfo.PagesCount.DisplayValue");
+            List<String> title = JsonPath.read(result, "$.ItemInfo[?(@.Title)].Title.DisplayValue");
+            List<String> author = JsonPath.read(result, "$.ItemInfo.ByLineInfo.Contributors[?(@.RoleType in ['author'])].Name");
+            List<String> publishDate = JsonPath.read(result, "$.ItemInfo[?(@.ContentInfo.PublicationDate)].ContentInfo.PublicationDate.DisplayValue");
+            List<String> publisher = JsonPath.read(result, "$.ItemInfo[?(@.ByLineInfo.Brand)].ByLineInfo.Brand.DisplayValue");
+            List<Integer> pagesCount = JsonPath.read(result, "$.ItemInfo[?(@.ContentInfo.PagesCount)].ContentInfo.PagesCount.DisplayValue");
 
             book = book.withIsbn10(Isbn10.convert(isbn));
             if (title.size() > 0) book = book.withTitle(title.get(0));

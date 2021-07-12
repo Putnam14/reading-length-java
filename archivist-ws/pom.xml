@@ -7,11 +7,11 @@
     <parent>
         <artifactId>readinglength</artifactId>
         <groupId>com.readinglength</groupId>
-        <version>0.1.2</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>archivist-ws</artifactId>
-    <version>0.1.2</version>
+    <version>${revision}</version>
     <name>archivist-ws</name>
     <description>Webservice for talking with the bookshelf database</description>
     <properties>
@@ -111,6 +111,10 @@
                     </container>
                     <to>
                         <image>gcr.io/reading-length/archivist-ws</image>
+                        <tags>
+                            <tag>${version}</tag>
+                            <tag>latest</tag>
+                        </tags>
                     </to>
                 </configuration>
             </plugin>

@@ -7,11 +7,11 @@
     <parent>
         <artifactId>readinglength</artifactId>
         <groupId>com.readinglength</groupId>
-        <version>0.1.2</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>library-ws</artifactId>
-    <version>0.1.2</version>
+    <version>${revision}</version>
     <name>library-ws</name>
     <description>Readinglength backend coordination webservice and main entry.</description>
     <properties>
@@ -106,6 +106,10 @@
                     </container>
                     <to>
                         <image>gcr.io/reading-length/library-ws</image>
+                        <tags>
+                            <tag>${version}</tag>
+                            <tag>latest</tag>
+                        </tags>
                     </to>
                 </configuration>
             </plugin>

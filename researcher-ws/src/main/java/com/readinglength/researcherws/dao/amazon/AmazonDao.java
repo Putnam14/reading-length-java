@@ -20,10 +20,12 @@ public class AmazonDao {
 
     private String accessKey;
     private String secretKey;
+    private final java.net.http.HttpClient httpClient;
 
     public AmazonDao(String accessKey, String secretKey) {
         this.accessKey = accessKey;
         this.secretKey = secretKey;
+        this.httpClient = java.net.http.HttpClient.newHttpClient();
     }
 
     public String searchItems(String keyword) {

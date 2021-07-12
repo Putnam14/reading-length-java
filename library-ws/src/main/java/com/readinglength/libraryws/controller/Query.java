@@ -39,7 +39,7 @@ public class Query {
                 ctx.json(book);
             } else {
                 ctx.status(404);
-                ctx.result("Book was not found in database for title " + title);
+                ctx.result("Book not found for search term: " + title);
             }
         }
     };
@@ -53,7 +53,7 @@ public class Query {
                 ctx.json(book);
             } else {
                 ctx.status(404);
-                ctx.result("Book was not found in database for isbn " + isbnString);
+                ctx.result("Book not found for ISBN: " + isbnString);
             }
         } else {
             ctx.status(400);
@@ -110,6 +110,7 @@ public class Query {
         Book bookFromExternal = researcherDao.getBookFromIsbn(isbn);
         if (bookFromExternal != null) {
             LOG.info("Book found externally: " + bookFromExternal.getTitle());
+            archivistDao.handleExternalBook(bookFromExternal);
             return bookFromExternal;
         }
         LOG.error("Book not found in database for ISBN " + isbn);
@@ -119,7 +120,7 @@ public class Query {
     private Wordcount findWordcount(Book book) {
         LOG.info("Querying wordcount for ISBN: " + book.getIsbn13());
         Wordcount wordcount = archivistDao.getWordcountFromIsbn(book.getIsbn13());
-        if (wordcount == null) {
+        if (wordcount == null && book.getPagecount() != null) {
             wordcount = new Wordcount.Builder()
                     .withIsbn(book.getIsbn13())
                     .withWords(book.getPagecount() * 350)

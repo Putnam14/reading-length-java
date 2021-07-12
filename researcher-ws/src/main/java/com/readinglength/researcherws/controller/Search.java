@@ -12,6 +12,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 public
@@ -37,26 +39,29 @@ class Search {
         long startTime = System.currentTimeMillis();
         String title = ctx.queryParam("title");
         Book book = new Book.Builder().build();
-        try {
-            List<Isbn> isbns = openLibraryService.queryTitle(title);
-            if (isbns.size() == 1 || isbns.size() == 2) {
-                book = openLibraryService.queryIsbn(isbns.get(0));
-            }
-        } catch (BookNotFoundException e) {
-            LOG.warn(String.format("OL search for '%s' failed: %s", title, e.getMessage()));
-        }
-        if (book.getIsbn10() == null) {
-            book.merge(amazonService.searchKeyword(title));
-        }
-        if (book.getIsbn10() == null) {
+        if (title != null) {
+            String encodedTitle = URLEncoder.encode(title, StandardCharsets.UTF_8);
             try {
-                book.merge(googleBooksService.queryTitle(title));
+                List<Isbn> isbns = openLibraryService.queryTitle(encodedTitle);
+                if (isbns.size() == 1 || isbns.size() == 2) {
+                    book = openLibraryService.queryIsbn(isbns.get(0));
+                }
             } catch (BookNotFoundException e) {
-                LOG.warn(String.format("Google search for '%s' failed: %s", title, e.getMessage()));
+                LOG.warn(String.format("OL search for '%s' failed: %s", title, e.getMessage()));
             }
-        }
-        if (bookIsMissingInfo(book)) {
-            book = queryByIsbn(book);
+            if (book.getIsbn10() == null) {
+                book.merge(amazonService.searchKeyword(encodedTitle));
+            }
+            if (book.getIsbn10() == null) {
+                try {
+                    book.merge(googleBooksService.queryTitle(encodedTitle));
+                } catch (BookNotFoundException e) {
+                    LOG.warn(String.format("Google search for '%s' failed: %s", title, e.getMessage()));
+                }
+            }
+            if (bookIsMissingInfo(book)) {
+                book = queryByIsbn(book);
+            }
         }
         ctx.json(book);
         long endTime = System.currentTimeMillis();

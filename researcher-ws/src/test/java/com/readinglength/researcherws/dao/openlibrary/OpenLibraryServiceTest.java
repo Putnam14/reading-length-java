@@ -33,7 +33,6 @@ class OpenLibraryServiceTest {
         List<Isbn> isbns = instance.queryTitle(keyword);
 
         assertEquals(Isbn.of("9781524778125"), isbns.get(0));
-
     }
 
     @Test

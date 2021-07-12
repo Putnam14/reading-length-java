@@ -3,12 +3,12 @@
   <parent>
     <artifactId>readinglength</artifactId>
     <groupId>com.readinglength</groupId>
-    <version>0.1.2</version>
+    <version>${revision}</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>researcher-ws</artifactId>
   <name>researcher-ws</name>
-  <version>0.1.2</version>
+  <version>${revision}</version>
   <description>Webservice for finding books</description>
   <build>
     <plugins>
@@ -66,6 +66,10 @@
           </container>
           <to>
             <image>gcr.io/reading-length/researcher-ws</image>
+            <tags>
+              <tag>${version}</tag>
+              <tag>latest</tag>
+            </tags>
           </to>
         </configuration>
       </plugin>

@@ -7,11 +7,11 @@
     <parent>
         <groupId>com.readinglength</groupId>
         <artifactId>readinglength</artifactId>
-        <version>0.1.2</version>
+        <version>${revision}</version>
     </parent>
 
     <artifactId>readinglength-lib</artifactId>
-    <version>0.1.2</version>
+    <version>${revision}</version>
     <name>readinglength-lib</name>
     <description>Common classes for Reading Length projects</description>
 

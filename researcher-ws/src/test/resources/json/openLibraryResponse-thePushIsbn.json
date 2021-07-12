@@ -1,55 +1,51 @@
 {
-  "publishers": [
-    "Penguin Audio"
-  ],
-  "subtitle": "A Climber's Journey of Endurance, Risk, and Going Beyond Limits",
-  "covers": [
-    8871024
-  ],
-  "physical_format": "audio cd",
-  "full_title": "The Push A Climber's Journey of Endurance, Risk, and Going Beyond Limits",
-  "last_modified": {
-    "type": "/type/datetime",
-    "value": "2019-10-10T15:54:01.528495"
+  "type": {
+    "key": "/type/edition"
   },
-  "latest_revision": 1,
-  "key": "/books/OL27409099M",
+  "title": "The Push",
   "authors": [
     {
       "key": "/authors/OL7521032A"
     }
   ],
+  "publish_date": "May 15, 2018",
   "source_records": [
-    "amazon:1524778125"
+    "amazon:0399562710"
   ],
-  "title": "The Push",
-  "notes": {
-    "type": "/type/text",
-    "value": "Source title: The Push: A Climber's Journey of Endurance, Risk, and Going Beyond Limits"
-  },
-  "identifiers": {
-    "amazon": [
-      "1524778125"
-    ]
-  },
-  "created": {
-    "type": "/type/datetime",
-    "value": "2019-10-10T15:54:01.528495"
-  },
-  "isbn_13": [
-    "9781524778125"
+  "number_of_pages": 352,
+  "publishers": [
+    "Penguin Books"
   ],
   "isbn_10": [
-    "1524778125"
+    "0399562710"
   ],
-  "publish_date": "May 16, 2017",
+  "isbn_13": [
+    "9780399562716"
+  ],
+  "physical_format": "paperback",
+  "full_title": "The Push A Climber's Search for the Path",
+  "subtitle": "A Climber's Search for the Path",
+  "notes": {
+    "type": "/type/text",
+    "value": "Source title: The Push: A Climber's Search for the Path"
+  },
+  "covers": [
+    11148756
+  ],
   "works": [
     {
       "key": "/works/OL19710906W"
     }
   ],
-  "type": {
-    "key": "/type/edition"
+  "key": "/books/OL32495013M",
+  "latest_revision": 1,
+  "revision": 1,
+  "created": {
+    "type": "/type/datetime",
+    "value": "2021-05-23T06:07:22.981749"
   },
-  "revision": 1
+  "last_modified": {
+    "type": "/type/datetime",
+    "value": "2021-05-23T06:07:22.981749"
+  }
 }

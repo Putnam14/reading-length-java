@@ -37,16 +37,17 @@ class OpenLibraryServiceTest {
 
     @Test
     void queryIsbn() throws IOException, BookNotFoundException {
-        Isbn isbn = Isbn.of("9781524778125");
+        Isbn isbn = Isbn.of("9780399562716");
         when(dao.queryIsbn(isbn)).thenReturn(Files.readString(Path.of(this.getClass().getResource("/json/openLibraryResponse-thePushIsbn.json").getPath())));
 
         Book result = instance.queryIsbn(isbn);
 
         assertEquals("The Push", result.getTitle());
-        assertEquals("9781524778125", result.getIsbn13().toString());
-        assertEquals("1524778125", result.getIsbn10().toString());
-        assertEquals("2017-05-16", result.getPublishDate().toString());
-        assertEquals("https://covers.openlibrary.org/b/isbn/9781524778125-L.jpg", result.getCoverImage());
-        assertEquals("Penguin Audio", result.getPublisher());
+        assertEquals("9780399562716", result.getIsbn13().toString());
+        assertEquals("0399562710", result.getIsbn10().toString());
+        assertEquals("2018-05-15", result.getPublishDate().toString());
+        assertEquals("https://covers.openlibrary.org/b/isbn/9780399562716-L.jpg", result.getCoverImage());
+        assertEquals("Penguin Books", result.getPublisher());
+        assertEquals(352, result.getPagecount());
     }
 }

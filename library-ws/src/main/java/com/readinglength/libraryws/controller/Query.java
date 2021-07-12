@@ -39,7 +39,7 @@ public class Query {
                 ctx.json(book);
             } else {
                 ctx.status(404);
-                ctx.result("Book was not found in database for title " + title);
+                ctx.result("Book not found for search term: " + title);
             }
         }
     };
@@ -53,7 +53,7 @@ public class Query {
                 ctx.json(book);
             } else {
                 ctx.status(404);
-                ctx.result("Book was not found in database for isbn " + isbnString);
+                ctx.result("Book not found for ISBN: " + isbnString);
             }
         } else {
             ctx.status(400);

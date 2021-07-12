@@ -13,7 +13,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.mockito.Mockito.mock;
@@ -44,7 +45,7 @@ class SearchTest {
     }
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() {
         openLibraryService = mock(OpenLibraryService.class);
         amazonService = mock(AmazonService.class);
         googleBooksService = mock(GoogleBooksService.class);
@@ -54,10 +55,12 @@ class SearchTest {
     @Test
     void byTitle() throws BookNotFoundException {
         String keyword = "a walk in the woods";
+        String encodedKeyword = URLEncoder.encode(keyword, StandardCharsets.UTF_8);
+
         Isbn isbn = Isbn.of("0307279464");
         ctx = mock(Context.class);
         when(ctx.queryParam("title")).thenReturn(keyword);
-        when(openLibraryService.queryTitle(keyword)).thenReturn(List.of(isbn, Isbn.of("1400025117"), Isbn.of("9780767902526")));
+        when(openLibraryService.queryTitle(encodedKeyword)).thenReturn(List.of(isbn, Isbn.of("1400025117"), Isbn.of("9780767902526")));
         when(openLibraryService.queryIsbn(isbn)).thenReturn(new Book.Builder()
                 .withTitle("A Walk in the Woods")
                 .withIsbn10(Isbn10.convert(isbn))
@@ -67,7 +70,7 @@ class SearchTest {
                 .withCoverImage("https://covers.openlibrary.org/b/isbn/9780307279460-L.jpg")
                 .withPagecount(416)
                 .build());
-        when(amazonService.searchKeyword(keyword)).thenReturn(new Book.Builder()
+        when(amazonService.searchKeyword(encodedKeyword)).thenReturn(new Book.Builder()
                 .withIsbn10(Isbn10.convert(isbn))
                 .withTitle("A Walk in the Woods: Rediscovering America on the Appalachian Trail")
                 .withAuthor("Bryson, Bill")
